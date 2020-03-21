@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import ExampleComponent from 'react-scheduler-calendar'
+import ExampleComponent from 'react-scheduler-calendar';
 
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <ExampleComponent text="Modern React component module" />
       </div>
-    )
+    );
   }
 }
