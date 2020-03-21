@@ -9,7 +9,7 @@ class BodyView extends Component {
 
     static propTypes = {
         schedulerData: PropTypes.object.isRequired,
-    }
+    };
 
     render() {
 

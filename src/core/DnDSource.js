@@ -98,7 +98,7 @@ export default class DnDSource {
                 return config.movable && (resourceEvents === undefined || !resourceEvents.groupOnly) && (item.movable === undefined || item.movable !== false);
             }
         }
-    }
+    };
 
     getDragCollect = (connect, monitor) => {
         return {
@@ -106,7 +106,7 @@ export default class DnDSource {
             isDragging: monitor.isDragging(),
             connectDragPreview: connect.dragPreview()
         };
-    }
+    };
 
     getDragSource = () => {
         return this.dragSource;

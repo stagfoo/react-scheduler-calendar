@@ -31,7 +31,7 @@ class AddMorePopover extends Component {
         viewEvent2Click: PropTypes.func,
         viewEvent2Text: PropTypes.string,
         eventItemTemplateResolver: PropTypes.func,
-    }
+    };
 
     render() {
         const {headerItem, left, top, height, closeAction, schedulerData} = this.props;
@@ -65,7 +65,7 @@ class AddMorePopover extends Component {
                                    left={eventItemLeft}
                                    width={eventItemWidth}
                                    top={eventItemTop}
-                                   />
+                                   />;
                 eventList.push(eventItem);
             }
         });

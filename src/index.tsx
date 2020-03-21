@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 
 import config from './config';
 import Scheduler, {DnDSource, SchedulerData, ViewTypes} from './core';
-import './core/css/style.scss';
+import './core/css/style.css';
 import styles from './index.module.scss';
 import withDragDropContext from './lib/withDnDContext';
 import CustomDragLayer from './lib/CustomDragLayer';
@@ -97,21 +97,21 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   nextClick = (schedulerData: any) => {
     schedulerData.next();
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
 
   handleTodayClick = (schedulerData: any) => {
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   onViewChange = (schedulerData: any, view: any) => {
     schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
     schedulerData.config.creatable = !view.isEventPerspective;
@@ -119,26 +119,26 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   onSelectDate = (schedulerData: any, date: any) => {
     schedulerData.setDate(date);
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   eventClicked = (schedulerData: any, event: any) => {
     alert(`You just clicked an event: {id: ${event.id}, title: ${event.title}}`);
-  }
+  };
   ops1 = (schedulerData: any, event: any) => {
     schedulerData.removeEventById(event.id);
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   ops2 = (schedulerData: any, event: any) => {
     alert(`You just executed ops2 to event: {id: ${event.id}, title: ${event.title}}`);
-  }
+  };
   newEvent = (schedulerData: any, slotId: any, slotName: any, start: any, end: any, type: string, item: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to create a new event? {slotId: ${slotId}, slotName: ${slotName}, start: ${start}, end: ${end}, type: ${type}, item: ${item}}`)) {
@@ -177,7 +177,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         viewModel: schedulerData,
       });
     }
-  }
+  };
   updateEventStart = (schedulerData: any, event: any, newStart: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to adjust the start of the event? {eventId: ${event.id}, eventTitle: ${event.title}, newStart: ${newStart}}`)) {
@@ -186,7 +186,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   updateEventEnd = (schedulerData: any, event: any, newEnd: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to adjust the end of the event? {eventId: ${event.id}, eventTitle: ${event.title}, newEnd: ${newEnd}}`)) {
@@ -195,7 +195,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
   moveEvent = (schedulerData: any, event: any, slotId: any, slotName: any, start: any, end: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
@@ -204,15 +204,15 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         viewModel: schedulerData,
       });
     }
-  }
+  };
   movingEvent = (schedulerData: any, slotId: any, slotName: any, newStart: any, newEnd: any,
                  action: any, type: any, item: any) => {
     console.log('moving event', newStart, newEnd, action, type, item);
-  }
+  };
 
   subtitleGetter = (schedulerData: any, event: { resourceId: any; groupName: any }) => {
     return schedulerData.isEventPerspective ? schedulerData.getResourceById(event.resourceId).name : event.groupName;
-  }
+  };
   toggleExpandFunc = (schedulerData: any, slotId: any) => {
     schedulerData.toggleExpandStatus(slotId);
     this.setState({

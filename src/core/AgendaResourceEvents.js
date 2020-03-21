@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {PropTypes} from 'prop-types'
 import AgendaEventItem from './AgendaEventItem'
 import {DATE_FORMAT} from './index'
 
-class AgendaResourceEvents extends Component {
+class AgendaResourceEvents extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -19,30 +19,30 @@ class AgendaResourceEvents extends Component {
         viewEvent2Text: PropTypes.string,
         slotClickedFunc: PropTypes.func,
         slotItemTemplateResolver: PropTypes.func
-    }
+    };
 
     render(){
         const {schedulerData, resourceEvents, slotClickedFunc, slotItemTemplateResolver} = this.props;
         const {startDate, endDate, config, localeMoment} = schedulerData;
-        let agendaResourceTableWidth = schedulerData.getResourceTableWidth();
-        let width = agendaResourceTableWidth - 2;
+        const agendaResourceTableWidth = schedulerData.getResourceTableWidth();
+        const width = agendaResourceTableWidth - 2;
 
-        let events = [];
+        const events = [];
         resourceEvents.headerItems.forEach((item) => {
-            let start = localeMoment(startDate).format(DATE_FORMAT),
+            const start = localeMoment(startDate).format(DATE_FORMAT),
                 end = localeMoment(endDate).add(1, 'days').format(DATE_FORMAT),
                 headerStart = localeMoment(item.start).format(DATE_FORMAT),
                 headerEnd = localeMoment(item.end).format(DATE_FORMAT);
 
             if(start === headerStart && end === headerEnd) {
                 item.events.forEach((evt) => {
-                    let durationStart = localeMoment(startDate);
-                    let durationEnd = localeMoment(endDate).add(1, 'days');
-                    let eventStart = localeMoment(evt.eventItem.start);
-                    let eventEnd = localeMoment(evt.eventItem.end);
-                    let isStart = eventStart >= durationStart;
-                    let isEnd = eventEnd < durationEnd;
-                    let eventItem = <AgendaEventItem
+                    const durationStart = localeMoment(startDate);
+                    const durationEnd = localeMoment(endDate).add(1, 'days');
+                    const eventStart = localeMoment(evt.eventItem.start);
+                    const eventEnd = localeMoment(evt.eventItem.end);
+                    const isStart = eventStart >= durationStart;
+                    const isEnd = eventEnd < durationEnd;
+                    const eventItem = <AgendaEventItem
                                         {...this.props}
                                         key={evt.eventItem.id}
                                         eventItem={evt.eventItem}
@@ -54,7 +54,7 @@ class AgendaResourceEvents extends Component {
             }
         });
 
-        let a = slotClickedFunc ? <a onClick={() => {
+        const a = slotClickedFunc ? <a onClick={() => {
             slotClickedFunc(schedulerData, resourceEvents);
         }}>{resourceEvents.slotName}</a>
             : <span>{resourceEvents.slotName}</span>;
@@ -63,9 +63,9 @@ class AgendaResourceEvents extends Component {
                 {a}
             </div>
         );
-        if(!!slotItemTemplateResolver) {
-            let temp = slotItemTemplateResolver(schedulerData, resourceEvents, slotClickedFunc, width, "overflow-text header2-text");
-            if(!!temp)
+        if(slotItemTemplateResolver) {
+            const temp = slotItemTemplateResolver(schedulerData, resourceEvents, slotClickedFunc, width, "overflow-text header2-text");
+            if(temp)
                 slotItem = temp;
         }
 

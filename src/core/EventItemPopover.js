@@ -27,14 +27,14 @@ class EventItemPopover extends Component {
     render(){
         const {schedulerData, eventItem, title, startTime, endTime, statusColor,subtitleGetter, viewEventClick, viewEventText, viewEvent2Click, viewEvent2Text, eventItemPopoverTemplateResolver} = this.props;
         const {localeMoment, config} = schedulerData;
-        let start = localeMoment(startTime), end = localeMoment(endTime);
+        const start = localeMoment(startTime), end = localeMoment(endTime);
 
         if (eventItemPopoverTemplateResolver) {
             return eventItemPopoverTemplateResolver(schedulerData, eventItem, title, start, end, statusColor);
         } else {
             let subtitleRow = <div />;
             if(subtitleGetter){
-                let subtitle = subtitleGetter(schedulerData, eventItem);
+                const subtitle = subtitleGetter(schedulerData, eventItem);
                 if(subtitle){
                     subtitleRow = (
                         <Row type="flex" align="middle">
@@ -62,7 +62,7 @@ class EventItemPopover extends Component {
                             <span className="header2-text" style={{color: '#108EE9', cursor: 'pointer'}} onClick={() => {viewEventClick(schedulerData, eventItem);}}>{viewEventText}</span><span className="header2-text" style={{color: '#108EE9', cursor: 'pointer', marginLeft: '16px'}} onClick={() => {viewEvent2Click(schedulerData, eventItem);}}>{viewEvent2Text}</span>
                         </Col>
                     )
-                };
+                }
                 opsRow = (
                     <Row type="flex" align="middle">
                         <Col span={2}>
@@ -73,7 +73,7 @@ class EventItemPopover extends Component {
                 );
             }
             else if(viewEvent2Text && viewEvent2Click && (eventItem.clickable2 === undefined || eventItem.clickable2)) {
-                let col = (
+                const col = (
                     <Col span={22}>
                         <span className="header2-text" style={{color: '#108EE9', cursor: 'pointer'}} onClick={() => {viewEvent2Click(schedulerData, eventItem);}}>{viewEvent2Text}</span>
                     </Col>
@@ -88,7 +88,7 @@ class EventItemPopover extends Component {
                 );
             }
 
-            let dateFormat = config.eventItemPopoverDateFormat;
+            const dateFormat = config.eventItemPopoverDateFormat;
             return (
                 <div style={{width: '300px'}}>
                     <Row type="flex" align="middle">

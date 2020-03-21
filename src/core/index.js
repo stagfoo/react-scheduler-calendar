@@ -97,7 +97,7 @@ class Scheduler extends Component {
       documentWidth: document.documentElement.clientWidth,
       documentHeight: document.documentElement.clientHeight,
     });
-  }
+  };
 
   static propTypes = {
     schedulerData: PropTypes.object.isRequired,
@@ -131,7 +131,7 @@ class Scheduler extends Component {
     onScrollRight: PropTypes.func,
     onScrollTop: PropTypes.func,
     onScrollBottom: PropTypes.func,
-  }
+  };
 
   componentDidMount(props, state) {
     this.resolveScrollbarSize();
@@ -179,7 +179,7 @@ class Scheduler extends Component {
       return (<RadioButton key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
                            value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}><span
         style={{ margin: "0px 8px" }}>{item.viewName}</span></RadioButton>)
-    })
+    });
 
     let tbodyContent = <tr/>;
     if (showAgenda) {
@@ -408,57 +408,57 @@ class Scheduler extends Component {
     }
     if (needSet)
       this.setState(tmpState);
-  }
+  };
 
   schedulerHeadRef = (element) => {
     this.schedulerHead = element;
-  }
+  };
 
   onSchedulerHeadMouseOver = () => {
     this.currentArea = 2;
-  }
+  };
 
   onSchedulerHeadMouseOut = () => {
     this.currentArea = -1;
-  }
+  };
 
   onSchedulerHeadScroll = (proxy, event) => {
     if ((this.currentArea === 2 || this.currentArea === -1) && this.schedulerContent.scrollLeft !== this.schedulerHead.scrollLeft)
       this.schedulerContent.scrollLeft = this.schedulerHead.scrollLeft;
-  }
+  };
 
   schedulerResourceRef = (element) => {
     this.schedulerResource = element;
-  }
+  };
 
   onSchedulerResourceMouseOver = () => {
     this.currentArea = 1;
-  }
+  };
 
   onSchedulerResourceMouseOut = () => {
     this.currentArea = -1;
-  }
+  };
 
   onSchedulerResourceScroll = (proxy, event) => {
     if ((this.currentArea === 1 || this.currentArea === -1) && this.schedulerContent.scrollTop !== this.schedulerResource.scrollTop)
       this.schedulerContent.scrollTop = this.schedulerResource.scrollTop;
-  }
+  };
 
   schedulerContentRef = (element) => {
     this.schedulerContent = element;
-  }
+  };
 
   schedulerContentBgTableRef = (element) => {
     this.schedulerContentBgTable = element;
-  }
+  };
 
   onSchedulerContentMouseOver = () => {
     this.currentArea = 0;
-  }
+  };
 
   onSchedulerContentMouseOut = () => {
     this.currentArea = -1;
-  }
+  };
 
   onSchedulerContentScroll = (proxy, event) => {
     if (this.currentArea === 0 || this.currentArea === -1) {
@@ -489,7 +489,7 @@ class Scheduler extends Component {
       scrollLeft: this.schedulerContent.scrollLeft,
       scrollTop: this.schedulerContent.scrollTop,
     });
-  }
+  };
 
   onViewChange = (e) => {
     const { onViewChange, schedulerData } = this.props;
@@ -497,7 +497,7 @@ class Scheduler extends Component {
     const showAgenda = e.target.value.charAt(1) === '1';
     const isEventPerspective = e.target.value.charAt(2) === '1';
     onViewChange(schedulerData, { viewType: viewType, showAgenda: showAgenda, isEventPerspective: isEventPerspective });
-  }
+  };
 
   goToToday = () => {
     const { onTodayClick, schedulerData } = this.props;
@@ -508,16 +508,16 @@ class Scheduler extends Component {
   goNext = () => {
     const { nextClick, schedulerData } = this.props;
     nextClick(schedulerData);
-  }
+  };
 
   goBack = () => {
     const { prevClick, schedulerData } = this.props;
     prevClick(schedulerData);
-  }
+  };
 
   handleVisibleChange = (visible) => {
     this.setState({ visible });
-  }
+  };
 
   onSelect = (date) => {
     this.setState({

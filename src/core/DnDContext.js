@@ -9,7 +9,7 @@ export default class DnDContext {
     this.sourceMap = new Map();
     sources.forEach((item) => {
       this.sourceMap.set(item.dndType, item);
-    })
+    });
     this.DecoratedComponent = DecoratedComponent;
   }
 
@@ -116,7 +116,7 @@ export default class DnDContext {
         return config.movable && !resourceEvents.groupOnly && (item.movable === undefined || item.movable !== false);
       },
     }
-  }
+  };
 
   getDropCollect = (connect, monitor) => {
     return {
@@ -124,11 +124,11 @@ export default class DnDContext {
       isOver: monitor.isOver(),
       clientOffset: monitor.getClientOffset(),
     };
-  }
+  };
 
   getDropTarget = () => {
     return DropTarget([...this.sourceMap.keys()], this.getDropSpec(), this.getDropCollect)(this.DecoratedComponent);
-  }
+  };
 
   getDndSource = (dndType = DnDTypes.EVENT) => {
     return this.sourceMap.get(dndType);

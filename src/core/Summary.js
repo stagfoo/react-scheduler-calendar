@@ -13,7 +13,7 @@ class Summary extends Component {
         left: PropTypes.number.isRequired,
         width: PropTypes.number.isRequired,
         top: PropTypes.number.isRequired,
-    }
+    };
 
     render() {
         const {summary, left, width, top, schedulerData} = this.props;

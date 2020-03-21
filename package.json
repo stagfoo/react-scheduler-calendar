@@ -5,8 +5,9 @@
   "author": "geekeren",
   "license": "MIT",
   "repository": "geekeren/react-scheduler-calendar",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"

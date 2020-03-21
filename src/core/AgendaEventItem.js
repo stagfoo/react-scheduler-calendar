@@ -21,18 +21,18 @@ class AgendaEventItem extends Component {
         viewEvent2Click: PropTypes.func,
         viewEvent2Text: PropTypes.string,
         eventItemTemplateResolver: PropTypes.func,
-    }
+    };
 
     render() {
         const {eventItem, isStart, isEnd, eventItemClick, schedulerData, eventItemTemplateResolver} = this.props;
         const {config} = schedulerData;
-        let roundCls = isStart ? (isEnd ? 'round-all' : 'round-head') : (isEnd ? 'round-tail' : 'round-none');
+        const roundCls = isStart ? (isEnd ? 'round-all' : 'round-head') : (isEnd ? 'round-tail' : 'round-none');
         let bgColor = config.defaultEventBgColor;
-        if(!!eventItem.bgColor)
+        if(eventItem.bgColor)
             bgColor = eventItem.bgColor;
 
-        let titleText = schedulerData.behaviors.getEventTextFunc(schedulerData, eventItem);
-        let content = (
+        const titleText = schedulerData.behaviors.getEventTextFunc(schedulerData, eventItem);
+        const content = (
             <EventItemPopover
                 {...this.props}
                 title={eventItem.title}
@@ -53,12 +53,12 @@ class AgendaEventItem extends Component {
 
         return ( config.eventItemPopoverEnabled ?
                 <Popover placement="bottomLeft" content={content} trigger="hover">
-                    <a className="day-event" onClick={() => { if(!!eventItemClick) eventItemClick(schedulerData, eventItem);}}>
+                    <a className="day-event" onClick={() => { if(eventItemClick) eventItemClick(schedulerData, eventItem);}}>
                         {eventItemTemplate}
                     </a>
                 </Popover> :
                 <span>
-                    <a className="day-event" onClick={() => { if(!!eventItemClick) eventItemClick(schedulerData, eventItem);}}>
+                    <a className="day-event" onClick={() => { if(eventItemClick) eventItemClick(schedulerData, eventItem);}}>
                         {eventItemTemplate}
                     </a>
                 </span>

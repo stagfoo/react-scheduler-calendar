@@ -17,12 +17,12 @@ export const getCustomDate = (schedulerData, num, date = undefined) => {
         endDate = schedulerData.localeMoment(startDate).add(1, 'days').format(DATE_FORMAT),
         cellUnit = CellUnits.Hour;
     if(viewType === ViewTypes.Custom1) {
-        let monday = schedulerData.localeMoment(selectDate).startOf('week').format(DATE_FORMAT);
+        const monday = schedulerData.localeMoment(selectDate).startOf('week').format(DATE_FORMAT);
         startDate = num === 0 ? monday : schedulerData.localeMoment(monday).add(2*num, 'weeks').format(DATE_FORMAT);
         endDate = schedulerData.localeMoment(startDate).add(1, 'weeks').endOf('week').format(DATE_FORMAT);
         cellUnit = CellUnits.Day;
     } else if(viewType === ViewTypes.Custom2) {
-        let firstDayOfMonth = schedulerData.localeMoment(selectDate).startOf('month').format(DATE_FORMAT);
+        const firstDayOfMonth = schedulerData.localeMoment(selectDate).startOf('month').format(DATE_FORMAT);
         startDate = num === 0 ? firstDayOfMonth : schedulerData.localeMoment(firstDayOfMonth).add(2*num, 'months').format(DATE_FORMAT);
         endDate = schedulerData.localeMoment(startDate).add(1, 'months').endOf('month').format(DATE_FORMAT);
         cellUnit = CellUnits.Day;
@@ -46,8 +46,8 @@ export const getNonAgendaViewBodyCellBgColor = (schedulerData, slotId, header) =
 
 //getDateLabel func example
 export const getDateLabel = (schedulerData, viewType, startDate, endDate) => {
-    let start = schedulerData.localeMoment(startDate);
-    let end = schedulerData.localeMoment(endDate);
+    const start = schedulerData.localeMoment(startDate);
+    const end = schedulerData.localeMoment(endDate);
     let dateLabel = start.format('MMM D, YYYY');
 
     if(viewType === ViewTypes.Week || (start !== end && (
@@ -94,12 +94,12 @@ export const getScrollSpecialMoment = (schedulerData, startMoment, endMoment) =>
 export const isNonWorkingTime = (schedulerData, time) => {
     const { localeMoment } = schedulerData;
     if(schedulerData.cellUnit === CellUnits.Hour){
-        let hour = localeMoment(time).hour();
+        const hour = localeMoment(time).hour();
         if(hour < 9 || hour > 18)
             return true;
     }
     else {
-        let dayOfWeek = localeMoment(time).weekday();
+        const dayOfWeek = localeMoment(time).weekday();
         if (dayOfWeek === 0 || dayOfWeek === 6)
             return true;
     }

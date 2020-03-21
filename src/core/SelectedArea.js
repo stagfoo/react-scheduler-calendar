@@ -10,7 +10,7 @@ class SelectedArea extends Component {
         schedulerData: PropTypes.object.isRequired,
         left: PropTypes.number.isRequired,
         width: PropTypes.number.isRequired,
-    }
+    };
 
     render() {
         const {left, width, schedulerData} = this.props;

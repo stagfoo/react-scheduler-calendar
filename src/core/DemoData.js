@@ -375,6 +375,6 @@ const DemoData = {
             type: 3
         },
     ],
-}
+};
 
 export default DemoData
