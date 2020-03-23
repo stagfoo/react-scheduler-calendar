@@ -62,10 +62,10 @@ class EventItem extends Component {
   }
 
   componentDidMount() {
-    const { connectDragPreview } = this.props;
-    connectDragPreview(getEmptyImage(), {
-      captureDraggingState: false,
-    });
+    // const { connectDragPreview } = this.props;
+    // connectDragPreview(getEmptyImage(), {
+    //   captureDraggingState: false,
+    // });
     this.subscribeResizeEvent(this.props);
   }
 
@@ -520,7 +520,7 @@ class EventItem extends Component {
     </div>;
 
     return (
-      (schedulerData._isResizing() || config.eventItemPopoverEnabled === false || eventItem.showPopover === false ?
+      (schedulerData._isResizing() || config.eventItemPopoverEnabled === false || eventItem.showPopover === false || isDragging ?
           <div style={{ position: 'relative' }}>
             {
               connectDragSource(a)

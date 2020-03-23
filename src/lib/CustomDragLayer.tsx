@@ -41,12 +41,12 @@ const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   const { item, itemType, isDragging } = props;
 
   function renderItem() {
-    // if (itemType === 'task') {
+    if (itemType === 'task') {
       return item &&
         <div style={{ display: 'inline-block', transform: 'scale(0.8)', background: '#a0a0f0' }}>
           <JobCard name={item.name} />
         </div>;
-    // }
+    }
   }
 
   if (!isDragging) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import Col from 'antd/lib/col'
 import Row from 'antd/lib/row'
-import Icon from 'antd/lib/icon'
+import { LeftOutlined, RightOutlined, CalendarOutlined } from '@ant-design/icons';
 import 'antd/lib/select/style/index.css'
 import 'antd/lib/grid/style/index.css'
 import Radio from 'antd/lib/radio'
@@ -301,10 +301,9 @@ class Scheduler extends Component {
           <Col>
             <div className='header2-text calendar-action-header'>
               <Button style={{ marginRight: "24px" }} onClick={this.goToToday}>Today</Button>
-              <Icon type="left" style={{ marginRight: "4px" }} className="icon-nav"
-                    onClick={this.goBack}/>
-              <Icon type="right" style={{ marginLeft: "4px" }} className="icon-nav"
-                    onClick={this.goNext}/>
+              <LeftOutlined style={{ marginRight: "4px" }} className="icon-nav" onClick={this.goBack}/>
+              <RightOutlined style={{ marginLeft: "4px" }} className="icon-nav"
+                             onClick={this.goNext}/>
               {
                 calendarPopoverEnabled
                   ?
@@ -312,7 +311,7 @@ class Scheduler extends Component {
                            visible={this.state.visible}
                            onVisibleChange={this.handleVisibleChange}>
                     <span className={'header2-text-label'} style={{ cursor: 'pointer', marginLeft: "16px" }}>
-                       <Icon type="calendar" style={{ marginRight: "8px" }} className="icon-nav"/>
+                       <CalendarOutlined style={{ marginRight: "8px" }} className="icon-nav"/>
                       {dateLabel}
                     </span>
                   </Popover>

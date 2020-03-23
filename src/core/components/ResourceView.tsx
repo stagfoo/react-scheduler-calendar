@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Icon from "antd/lib/icon";
+import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import TechnicianCard from "../../technicianCard";
 
 interface ResourceViewProps {
@@ -29,21 +29,15 @@ class ResourceView extends Component<ResourceViewProps, {}> {
       let indent = <span key={`es${item.indent}`} className="expander-space"/>;
       if (item.hasChildren) {
         indent = item.expanded ? (
-          <Icon
-            type="minus-square"
+          <MinusSquareOutlined
             key={`es${item.indent}`}
-            style={{}}
-            className=""
             onClick={() => {
               if (toggleExpandFunc) toggleExpandFunc(schedulerData, item.slotId);
             }}
           />
         ) : (
-          <Icon
-            type="plus-square"
+          <PlusSquareOutlined
             key={`es${item.indent}`}
-            style={{}}
-            className=""
             onClick={() => {
               if (toggleExpandFunc) toggleExpandFunc(schedulerData, item.slotId);
             }}
