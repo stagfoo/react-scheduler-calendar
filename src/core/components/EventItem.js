@@ -3,8 +3,8 @@ import { PropTypes } from 'prop-types'
 import Popover from 'antd/lib/popover'
 import 'antd/lib/popover/style/index.css'
 import EventItemPopover from './EventItemPopover'
-import { CellUnits, DATETIME_FORMAT } from './index'
-import { DnDTypes } from './DnDTypes'
+import { CellUnits, DATETIME_FORMAT } from '../index'
+import { DnDTypes } from '../constants/DnDTypes'
 import { getEmptyImage } from 'react-dnd-html5-backend';
 
 const supportTouch = 'ontouchstart' in window;

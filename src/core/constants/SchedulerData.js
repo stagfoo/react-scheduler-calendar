@@ -1,8 +1,8 @@
 import moment from 'moment'
 import { RRuleSet, rrulestr } from 'rrule'
 import config from './config'
-import behaviors from './behaviors'
-import { ViewTypes, CellUnits, DATE_FORMAT, DATETIME_FORMAT } from './index'
+import behaviors from '../utils/behaviors'
+import { ViewTypes, CellUnits, DATE_FORMAT, DATETIME_FORMAT } from '../index'
 
 export default class SchedulerData {
   constructor(date = moment().format(DATE_FORMAT), viewType = ViewTypes.Week,

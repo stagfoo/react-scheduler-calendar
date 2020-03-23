@@ -1,5 +1,5 @@
-import SummaryPos from './core/SummaryPos';
-import ViewTypes from './core/ViewTypes';
+import SummaryPos from './core/constants/SummaryPos';
+import ViewTypes from './core/constants/ViewTypes';
 
 export default {
   schedulerWidth: '80%',

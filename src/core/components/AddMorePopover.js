@@ -5,7 +5,7 @@ import Row from 'antd/lib/row'
 import Icon from 'antd/lib/icon'
 import 'antd/lib/grid/style/index.css'
 import EventItem from './EventItem'
-import DnDSource from './DnDSource'
+import DnDSource from '../DnDSource'
 
 class AddMorePopover extends Component {
     constructor(props) {

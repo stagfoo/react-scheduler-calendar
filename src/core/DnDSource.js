@@ -1,6 +1,6 @@
 import { DragSource } from 'react-dnd'
 import {ViewTypes, DATETIME_FORMAT} from './index'
-import {DnDTypes} from './DnDTypes'
+import {DnDTypes} from './constants/DnDTypes'
 
 export default class DnDSource {
     constructor(resolveDragObjFunc, DecoratedComponent, dndType = DnDTypes.EVENT) {

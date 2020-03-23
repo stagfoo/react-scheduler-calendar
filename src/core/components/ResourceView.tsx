@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Icon from "antd/lib/icon";
-import TechnicianCard from "../technicianCard";
+import TechnicianCard from "../../technicianCard";
 
 interface ResourceViewProps {
   schedulerData: any;

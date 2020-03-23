@@ -3,9 +3,9 @@ import { PropTypes } from 'prop-types'
 import AddMore from './AddMore'
 import Summary from './Summary'
 import SelectedArea from './SelectedArea'
-import { CellUnits, DATETIME_FORMAT, SummaryPos } from './index'
-import { getPos } from './Util'
-import { DnDTypes } from './DnDTypes'
+import { CellUnits, DATETIME_FORMAT, SummaryPos } from '../index'
+import { getPos } from '../utils/Util'
+import { DnDTypes } from '../constants/DnDTypes'
 
 const supportTouch = 'ontouchstart' in window;
 
