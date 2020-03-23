@@ -251,11 +251,11 @@ class ResourceEvents extends Component {
     const cellMaxEvents = schedulerData.getCellMaxEvents();
     const rowWidth = schedulerData.getContentTableWidth();
     const DnDEventItem = dndSource.getDragSource();
-    const selectedArea = isSelecting ? <SelectedArea {...this.props} left={left} width={width} /> : <div />;
-    const hoverArea = isOver ? <div style={{
-      width: cellWidth, top: 0, bottom: 0, position: 'absolute',
-      left: this.state.leftIndex && this.state.leftIndex * cellWidth, background: '#aacfb4',
-    }} /> : null;
+    const selectedArea = isSelecting ? <SelectedArea {...this.props} left={left} width={width}/> : <div/>;
+    const hoverArea = isOver && this.state.hover ? <div style={{
+      width: this.state.hover.width, top: 0, bottom: 0, position: 'absolute',
+      left: this.state.hover.leftIndex * cellWidth, background: '#aacfb4',
+    }}/> : null;
 
     const eventList = [];
     resourceEvents.headerItems.forEach((headerItem, index) => {
@@ -278,6 +278,7 @@ class ResourceEvents extends Component {
             const eventEnd = localeMoment(evt.eventItem.end);
             const isStart = eventStart >= durationStart;
             const isEnd = eventEnd <= durationEnd;
+
             const left = index * cellWidth + (index > 0 ? 2 : 3);
             const width = (evt.span * cellWidth - (index > 0 ? 5 : 6)) > 0 ? (evt.span * cellWidth - (index > 0 ? 5 : 6)) : 0;
             const top = marginTop + idx * config.eventItemLineHeight;
@@ -321,7 +322,7 @@ class ResourceEvents extends Component {
           const width = cellWidth - (index > 0 ? 5 : 6);
           const key = `${resourceEvents.slotId}_${headerItem.time}`;
           const summary = <Summary key={key} schedulerData={schedulerData} summary={headerItem.summary} left={left}
-                                 width={width} top={top} />;
+                                   width={width} top={top}/>;
           eventList.push(summary);
         }
       }

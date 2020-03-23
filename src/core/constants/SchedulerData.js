@@ -766,24 +766,17 @@ export default class SchedulerData {
     return initRenderData;
   }
 
-  _getSpan(startTime, endTime, headers) {
+  getSpan(startTime, endTime, headers) {
     if (this.showAgenda) return 1;
 
-    const start = this.localeMoment(startTime),
-      end = this.localeMoment(endTime);
-    let span = 0;
-
-    for (const header of headers) {
-      const spanStart = this.localeMoment(header.time),
-        spanEnd = this.cellUnit === CellUnits.Hour ? this.localeMoment(header.time).add(this.config.minuteStep, 'minutes')
-          : this.localeMoment(header.time).add(1, 'days');
-
-      if (spanStart < end && spanEnd > start) {
-        span++;
-      }
+    const start = this.localeMoment(startTime), end = this.localeMoment(endTime);
+    let span;
+    if (this.cellUnit === CellUnits.Hour ) {
+      span = end.diff(start, 'minutes') / this.config.minuteStep;
+    } else {
+      span = end.diff(start, 'days');
     }
-
-    return span;
+    return Math.min(span, headers.length);
   }
 
   _validateResource(resources) {
@@ -864,7 +857,7 @@ export default class SchedulerData {
       const resourceEventsList = initRenderData.filter(x => x.slotId === this._getEventSlotId(item));
       if (resourceEventsList.length > 0) {
         const resourceEvents = resourceEventsList[0];
-        const span = this._getSpan(item.start, item.end, this.headers);
+        const span = this.getSpan(item.start, item.end, this.headers);
         const eventStart = this.localeMoment(item.start), eventEnd = this.localeMoment(item.end);
         let pos = -1;
 

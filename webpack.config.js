@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  mode: "development",
   output: {
     library: 'react-scheduler-calendar',
     libraryTarget: 'commonjs2',
@@ -64,6 +65,6 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6'],
   },
   optimization: {
-    minimize: true,
+    minimize: false,
   }
 };

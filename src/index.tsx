@@ -198,16 +198,17 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
   moveEvent = (schedulerData: any, event: any, slotId: any, slotName: any, start: any, end: any) => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
+    // if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
+    console.log(`{eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`);
       schedulerData.moveEvent(event, slotId, slotName, start, end);
       this.setState({
         viewModel: schedulerData,
       });
-    }
+    // }
   };
   movingEvent = (schedulerData: any, slotId: any, slotName: any, newStart: any, newEnd: any,
                  action: any, type: any, item: any) => {
-    console.log('moving event', newStart, newEnd, action, type, item);
+    // console.log('moving event', newStart, newEnd, action, type, item);
   };
 
   subtitleGetter = (schedulerData: any, event: { resourceId: any; groupName: any }) => {

@@ -5,11 +5,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "antd": "^4.0.4",
     "prop-types": "^15.6.2",
     "react": "^16.10.12",
     "react-dom": "^16.10.12",
-    "react-scripts": "^1.1.4",
-    "react-scheduler-calendar": "link:.."
+    "react-scheduler-calendar": "link:..",
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -20,19 +20,19 @@ export default class DnDContext {
         const { cellUnit, localeMoment } = schedulerData;
         const type = monitor.getItemType();
         const pos = getPos(component.eventContainer);
-        let cellWidth = schedulerData.getContentCellWidth();
+        const cellWidth = schedulerData.getContentCellWidth();
         let initialStartTime = null, initialEndTime = null;
         if (type === DnDTypes.EVENT) {
-          const initialPoint = monitor.getInitialClientOffset();
-          let initialLeftIndex = Math.floor((initialPoint.x - pos.x) / cellWidth);
+          const initialPoint = monitor.getInitialSourceClientOffset();
+          const initialLeftIndex = Math.floor((initialPoint.x - pos.x) / cellWidth);
           initialStartTime = resourceEvents.headerItems[initialLeftIndex].start;
           initialEndTime = resourceEvents.headerItems[initialLeftIndex].end;
           if (cellUnit !== CellUnits.Hour)
             initialEndTime = localeMoment(resourceEvents.headerItems[initialLeftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
         }
-        const point = monitor.getClientOffset();
-        let leftIndex = Math.floor((point.x - pos.x) / cellWidth);
-        let startTime = resourceEvents.headerItems[leftIndex].start;
+        const point = monitor.getSourceClientOffset();
+        const leftIndex = Math.floor((point.x - pos.x) / cellWidth);
+        const startTime = resourceEvents.headerItems[leftIndex].start;
         let endTime = resourceEvents.headerItems[leftIndex].end;
         if (cellUnit !== CellUnits.Hour)
           endTime = localeMoment(resourceEvents.headerItems[leftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
@@ -53,18 +53,18 @@ export default class DnDContext {
         const item = monitor.getItem();
         const type = monitor.getItemType();
         const pos = getPos(component.eventContainer);
-        let cellWidth = schedulerData.getContentCellWidth();
+        const cellWidth = schedulerData.getContentCellWidth();
         let initialStart = null, initialEnd = null;
         if (type === DnDTypes.EVENT) {
           const initialPoint = monitor.getInitialClientOffset();
-          let initialLeftIndex = Math.floor((initialPoint.x - pos.x) / cellWidth);
+          const initialLeftIndex = Math.floor((initialPoint.x - pos.x) / cellWidth);
           initialStart = resourceEvents.headerItems[initialLeftIndex].start;
           initialEnd = resourceEvents.headerItems[initialLeftIndex].end;
           if (cellUnit !== CellUnits.Hour)
             initialEnd = localeMoment(resourceEvents.headerItems[initialLeftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
         }
         const point = monitor.getClientOffset();
-        let leftIndex = Math.floor((point.x - pos.x) / cellWidth);
+        const leftIndex = Math.floor((point.x - pos.x) / cellWidth);
         if (!resourceEvents.headerItems[leftIndex]) {
           return;
         }
@@ -74,14 +74,14 @@ export default class DnDContext {
           newEnd = localeMoment(resourceEvents.headerItems[leftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
         let slotId = resourceEvents.slotId, slotName = resourceEvents.slotName;
         let action = 'New';
-        let isEvent = type === DnDTypes.EVENT;
+        const isEvent = type === DnDTypes.EVENT;
         if (isEvent) {
           const event = item;
           if (config.relativeMove) {
             newStart = localeMoment(event.start).add(localeMoment(newStart).diff(localeMoment(initialStart)), 'ms').format(DATETIME_FORMAT);
           } else {
             if (viewType !== ViewTypes.Day) {
-              let tmpMoment = localeMoment(newStart);
+              const tmpMoment = localeMoment(newStart);
               newStart = localeMoment(event.start).year(tmpMoment.year()).month(tmpMoment.month()).date(tmpMoment.date()).format(DATETIME_FORMAT);
             }
           }
@@ -91,8 +91,8 @@ export default class DnDContext {
           if (config.crossResourceMove === false) {
             slotId = schedulerData._getEventSlotId(item);
             slotName = undefined;
-            let slot = schedulerData.getSlotById(slotId);
-            if (!!slot)
+            const slot = schedulerData.getSlotById(slotId);
+            if (slot)
               slotName = slot.name;
           }
 
@@ -100,10 +100,13 @@ export default class DnDContext {
         }
 
         component.setState({
-          leftIndex,
+          hover: {
+            leftIndex: Math.floor((monitor.getSourceClientOffset().x - pos.x) / cellWidth),
+            width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
+          }
         });
 
-        if (!!movingEvent) {
+        if (movingEvent) {
           movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, type, item);
         }
       },
