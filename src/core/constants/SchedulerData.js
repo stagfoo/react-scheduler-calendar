@@ -769,14 +769,18 @@ export default class SchedulerData {
   getSpan(startTime, endTime, headers) {
     if (this.showAgenda) return 1;
 
-    const start = this.localeMoment(startTime), end = this.localeMoment(endTime);
+    const start = this.localeMoment(startTime);
+    const end = this.localeMoment.min(this.localeMoment(endTime), this.localeMoment(headers[headers.length - 1].time));
     let span;
-    if (this.cellUnit === CellUnits.Hour ) {
-      span = end.diff(start, 'minutes') / this.config.minuteStep;
+    if (this.cellUnit === CellUnits.Hour) {
+      span = Math.ceil(end.diff(start, 'minutes') / this.config.minuteStep);
     } else {
       span = end.diff(start, 'days');
     }
-    return Math.min(span, headers.length);
+    if (this.localeMoment(endTime).isAfter(this.localeMoment(headers[headers.length - 1].time))) {
+      span++;
+    }
+    return span;
   }
 
   _validateResource(resources) {

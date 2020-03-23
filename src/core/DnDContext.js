@@ -31,7 +31,7 @@ export default class DnDContext {
             initialEndTime = localeMoment(resourceEvents.headerItems[initialLeftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
         }
         const point = monitor.getSourceClientOffset();
-        const leftIndex = Math.floor((point.x - pos.x) / cellWidth);
+        const leftIndex = Math.max(Math.floor((point.x - pos.x) / cellWidth), 0);
         const startTime = resourceEvents.headerItems[leftIndex].start;
         let endTime = resourceEvents.headerItems[leftIndex].end;
         if (cellUnit !== CellUnits.Hour)
