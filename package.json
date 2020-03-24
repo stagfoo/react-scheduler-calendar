@@ -2,9 +2,9 @@
   "name": "react-scheduler-calendar",
   "version": "0.0.2",
   "description": "React component for scheduling/planing in calendar",
-  "author": "geekeren",
+  "author": "NGC-AB",
   "license": "MIT",
-  "repository": "geekeren/react-scheduler-calendar",
+  "repository": "NGC-AB/react-scheduler-calendar",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -18,8 +18,7 @@
     "build": "webpack",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "cd example && yarn deploy"
   },
   "dependencies": {
     "react-dnd": "^7.5.0",
