@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { UserOutlined } from '@ant-design/icons';
 
 interface Props {
   name: string;
@@ -7,6 +7,7 @@ interface Props {
 
 export const TechnicianCard: React.FC<Props> = (props) => (
   <div>
+    <UserOutlined />
     { props.name }
   </div>
 );

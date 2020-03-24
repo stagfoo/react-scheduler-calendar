@@ -254,7 +254,7 @@ class ResourceEvents extends Component {
     const selectedArea = isSelecting ? <SelectedArea {...this.props} left={left} width={width}/> : <div/>;
     const hoverArea = isOver && this.state.hover ? <div style={{
       width: this.state.hover.width, top: 0, bottom: 0, position: 'absolute',
-      left: this.state.hover.leftIndex * cellWidth, background: '#aacfb4',
+      left: this.state.hover.leftIndex * cellWidth, background: '#79cbcf',
     }}/> : null;
 
     const eventList = [];

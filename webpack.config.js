@@ -56,7 +56,7 @@ module.exports = {
           },
         ],
       },
-      { test: /\.(jpe?g|png|gif)$/i, loader: 'url?limit=10000!img?progressive=true' },
+      { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader' },
       { test: /\.json/i, type: 'javascript/auto', loader: 'json-loader' }
     ],
   },
