@@ -2,15 +2,12 @@
 
 > React component for scheduling/planing in calendar
 
-[![NPM](https://img.shields.io/npm/v/react-scheduler-calendar.svg)](https://www.npmjs.com/package/react-scheduler-calendar) [!
-
+[![NPM](https://img.shields.io/npm/v/react-scheduler-calendar.svg)](https://www.npmjs.com/package/react-scheduler-calendar)
 [![Github Release](https://img.shields.io/github/release/NGC-AB/react-scheduler-calendar.svg)](https://github.com/geekeren/Magpie-LuckyDraw/releases)
-
 [![Github Release Downloads](https://img.shields.io/github/downloads/NGC-AB/react-scheduler-calendar/total.svg)](https://github.com/geekeren/Magpie-LuckyDraw/releases)
-
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![License](https://img.shields.io/github/license/NGC-AB/react-scheduler-calendar.svg)](https://github.com/NGC-AB/react-scheduler-calendar/blob/master/LICENSE)
 
-[JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
