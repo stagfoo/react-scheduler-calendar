@@ -1,8 +1,16 @@
 # react-scheduler-calendar
 
-> React component for scheduling/planing in caleandar
+> React component for scheduling/planing in calendar
 
-[![NPM](https://img.shields.io/npm/v/react-scheduler-calendar.svg)](https://www.npmjs.com/package/react-scheduler-calendar) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-scheduler-calendar.svg)](https://www.npmjs.com/package/react-scheduler-calendar) [!
+
+[![Github Release](https://img.shields.io/github/release/NGC-AB/react-scheduler-calendar.svg)](https://github.com/geekeren/Magpie-LuckyDraw/releases)
+
+[![Github Release Downloads](https://img.shields.io/github/downloads/NGC-AB/react-scheduler-calendar/total.svg)](https://github.com/geekeren/Magpie-LuckyDraw/releases)
+
+[![License](https://img.shields.io/github/license/NGC-AB/react-scheduler-calendar.svg)](https://github.com/NGC-AB/react-scheduler-calendar/blob/master/LICENSE)
+
+[JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
@@ -13,14 +21,14 @@ npm install --save react-scheduler-calendar
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import React from 'react'
 
-import MyComponent from 'react-scheduler-calendar'
+import Scheduler from 'react-scheduler-calendar'
 
 class Example extends React.Component {
   render () {
     return (
-      <MyComponent />
+      <Scheduler />
     )
   }
 }
@@ -28,4 +36,4 @@ class Example extends React.Component {
 
 ## License
 
-MIT © [geekeren](https://github.com/geekeren)
+MIT © [NGC-AB](https://github.com/NGC-AB)
