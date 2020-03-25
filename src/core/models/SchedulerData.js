@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { RRuleSet, rrulestr } from 'rrule'
-import config from './config'
+import config from '../constants/config'
 import behaviors from '../utils/behaviors'
 import { ViewTypes, CellUnits, DATE_FORMAT, DATETIME_FORMAT } from '../index'
 

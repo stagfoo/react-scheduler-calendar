@@ -15,7 +15,7 @@ import AddMorePopover from './components/AddMorePopover'
 import ViewTypes from './constants/ViewTypes'
 import CellUnits from './constants/CellUnits'
 import SummaryPos from './constants/SummaryPos'
-import SchedulerData from './constants/SchedulerData'
+import SchedulerData from './models/SchedulerData'
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;

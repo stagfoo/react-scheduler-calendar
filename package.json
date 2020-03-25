@@ -23,7 +23,8 @@
   "dependencies": {
     "react-dnd": "^7.5.0",
     "react-dnd-html5-backend": "^7.5.0",
-    "rrule": "^2.6.0"
+    "rrule": "^2.6.0",
+    "moment": "^2.24.0"
   },
   "peerDependencies": {
     "antd": "^4.0.0",
@@ -51,7 +52,6 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^6.0.0",
     "gh-pages": "^1.2.0",
-    "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -61,10 +61,10 @@
     "react-scripts-ts": "^2.16.0",
     "rrule": "^2.6.0",
     "sass-loader": "^8.0.2",
-    "terser-webpack-plugin": "^2.3.5",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
     "webpack": "^4.42.0",
+    "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11"
   },
   "files": [

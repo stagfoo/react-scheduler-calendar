@@ -1,8 +1,8 @@
-const webpack = require('webpack');
 const path = require('path');
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const root = path.resolve(__dirname);
 module.exports = {
-  mode: "development",
+  mode: "production",
   output: {
     library: 'react-scheduler-calendar',
     libraryTarget: 'commonjs2',
@@ -10,16 +10,11 @@ module.exports = {
     filename: 'index.js'
   },
   externals: {
-    'antd': 'antd',
     'react': 'react',
-    'moment': 'moment',
     'react-dom': 'react-dom',
-    "react-dnd": "react-dnd",
-    "react-dnd-html5-backend": "react-dnd-html5-backend",
-    "rrule": "rrule",
+    'moment': 'moment',
   },
   entry: './src/index.tsx',
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -61,10 +56,10 @@ module.exports = {
     ],
   },
   resolve: {
-    modules: ['node_modules', path.resolve(__dirname)],
+    modules: ['node_modules', root],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6'],
   },
   optimization: {
-    minimize: false,
+    minimize: true,
   }
 };
