@@ -1,6 +1,4 @@
-import Col from 'antd/lib/col';
-import 'antd/lib/grid/style/index.css';
-import Row from 'antd/lib/row';
+import { Col, Row } from 'antd'
 import React, {Component} from 'react';
 
 import config from './config';

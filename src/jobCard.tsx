@@ -1,5 +1,4 @@
-import Card from 'antd/lib/card';
-import 'antd/lib/card/style/css';
+import { Card } from 'antd';
 import React from 'react';
 
 interface Props {

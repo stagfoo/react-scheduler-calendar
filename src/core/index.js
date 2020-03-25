@@ -1,16 +1,7 @@
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
-import Col from 'antd/lib/col'
-import Row from 'antd/lib/row'
+import { Col, Row, Popover, Calendar, Radio, Button } from 'antd';
 import { LeftOutlined, RightOutlined, CalendarOutlined } from '@ant-design/icons';
-import 'antd/lib/select/style/index.css'
-import 'antd/lib/grid/style/index.css'
-import Radio from 'antd/lib/radio'
-import 'antd/lib/radio/style/index.css'
-import Popover from 'antd/lib/popover'
-import 'antd/lib/popover/style/index.css'
-import Calendar from 'antd/lib/calendar'
-import 'antd/lib/calendar/style/css'
 import TimeLine from '../lib/TimeLine'
 import EventItem from './components/EventItem'
 import DnDSource from './DnDSource'
@@ -25,8 +16,6 @@ import ViewTypes from './constants/ViewTypes'
 import CellUnits from './constants/CellUnits'
 import SummaryPos from './constants/SummaryPos'
 import SchedulerData from './constants/SchedulerData'
-import DemoData from './DemoData'
-import { Button } from 'antd';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -506,5 +495,5 @@ class Scheduler extends Component {
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 export const DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
-export { SchedulerData, ViewTypes, CellUnits, SummaryPos, DnDSource, DnDContext, AddMorePopover, DemoData }
+export { SchedulerData, ViewTypes, CellUnits, SummaryPos, DnDSource, DnDContext, AddMorePopover }
 export default Scheduler

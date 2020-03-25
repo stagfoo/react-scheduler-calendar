@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-scheduler-calendar.svg)](https://www.npmjs.com/package/react-scheduler-calendar)
 [![NPM Downloads](https://img.shields.io/npm/dw/react-scheduler-calendar)](https://www.npmjs.com/package/react-scheduler-calendar)
+
+![Node.js Package](https://github.com/NGC-AB/react-scheduler-calendar/workflows/Node.js%20Package/badge.svg)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![License](https://img.shields.io/github/license/NGC-AB/react-scheduler-calendar.svg)](https://github.com/NGC-AB/react-scheduler-calendar/blob/master/LICENSE)
 
