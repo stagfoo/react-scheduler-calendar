@@ -21,10 +21,10 @@
     "deploy": "cd example && yarn deploy"
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "react-dnd": "^7.5.0",
     "react-dnd-html5-backend": "^7.5.0",
-    "rrule": "^2.6.0",
-    "moment": "^2.24.0"
+    "rrule": "^2.6.0"
   },
   "peerDependencies": {
     "antd": "^4.0.0",
@@ -51,7 +51,6 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^6.0.0",
-    "gh-pages": "^1.2.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

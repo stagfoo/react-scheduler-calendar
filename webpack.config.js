@@ -59,6 +59,9 @@ module.exports = {
     modules: ['node_modules', root],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6'],
   },
+  plugins: [
+    new BundleAnalyzerPlugin(),
+  ],
   optimization: {
     minimize: true,
   }
