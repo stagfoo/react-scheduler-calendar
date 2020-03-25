@@ -18,6 +18,18 @@ npm install --save react-scheduler-calendar
 
 ## Usage
 
+- Import antDesign style file
+
+```tsx
+import 'antd/dist/antd.css';
+```
+or you can use less file to support customizing the theme: https://ant.design/docs/react/customize-theme:
+
+```tsx
+import 'antd/dist/antd.less';
+```
+
+- Using in your component
 ```tsx
 import React from 'react'
 
