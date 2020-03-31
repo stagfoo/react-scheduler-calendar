@@ -14,8 +14,8 @@ class TaskList extends Component<any, {}> {
         const tasks = schedulerData.eventGroups;
         const taskList = tasks.map((item: any) => {
             return (
-              <div style={{marginTop: 20 }}>
-                <DnDTaskItem key={item.id} task={item} newEvent={newEvent} schedulerData={schedulerData} />
+              <div key={item.id} style={{marginTop: 20 }}>
+                <DnDTaskItem task={item} newEvent={newEvent} schedulerData={schedulerData} />
               </div>
             );
         });
