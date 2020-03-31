@@ -3,7 +3,7 @@ import {Col, Row, Popover, Calendar, Radio, Button} from "antd";
 import {LeftOutlined, RightOutlined, CalendarOutlined} from "@ant-design/icons";
 import TimeLine from "../lib/TimeLine";
 import EventItem from "./components/EventItem";
-import DnDSource from "./DnDSource";
+import { DnDSource } from "./DnDSource";
 import DnDContext from "./DnDContext";
 import ResourceView from "./components/ResourceView";
 import HeaderView from "./components/HeaderView";

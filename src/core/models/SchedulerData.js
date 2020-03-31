@@ -4,7 +4,7 @@ import config from '../constants/config'
 import behaviors from '../utils/behaviors'
 import { ViewTypes, CellUnits, DATE_FORMAT, DATETIME_FORMAT } from '../index'
 
-export default class SchedulerData {
+export class SchedulerData {
   constructor(date = moment().format(DATE_FORMAT), viewType = ViewTypes.Week,
               showAgenda = false, isEventPerspective = false,
               newConfig = undefined, newBehaviors = undefined,

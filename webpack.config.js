@@ -63,6 +63,6 @@ module.exports = {
     new BundleAnalyzerPlugin(),
   ],
   optimization: {
-    minimize: true,
+    // minimize: true,
   }
 };

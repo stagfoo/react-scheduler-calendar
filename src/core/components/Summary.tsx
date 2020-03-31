@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SummaryPos} from '../index';
+import { SummaryPos } from '../index';
 import {TextAlignProperty} from "csstype";
 
 interface SummaryProps {

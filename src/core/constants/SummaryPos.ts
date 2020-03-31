@@ -1,4 +1,4 @@
-const SummaryPos = {
+export const SummaryPos = {
     Top: 0,
     TopRight: 1,
     TopLeft: 2,
@@ -6,5 +6,3 @@ const SummaryPos = {
     BottomRight: 4,
     BottomLeft: 5,
 };
-
-export default SummaryPos;

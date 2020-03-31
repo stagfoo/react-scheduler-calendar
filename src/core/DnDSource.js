@@ -2,7 +2,7 @@ import { DragSource } from 'react-dnd'
 import {ViewTypes, DATETIME_FORMAT} from './index'
 import {DnDTypes} from './constants/DnDTypes'
 
-export default class DnDSource {
+export class DnDSource {
     constructor(resolveDragObjFunc, DecoratedComponent, dndType = DnDTypes.EVENT) {
         this.resolveDragObjFunc = resolveDragObjFunc;
         this.DecoratedComponent = DecoratedComponent;

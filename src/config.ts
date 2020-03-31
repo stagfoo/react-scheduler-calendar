@@ -1,4 +1,4 @@
-import SummaryPos from './core/constants/SummaryPos';
+import { SummaryPos } from './core/constants/SummaryPos';
 import ViewTypes from './core/constants/ViewTypes';
 
 export default {
