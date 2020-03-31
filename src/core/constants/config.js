@@ -1,5 +1,5 @@
 import ViewTypes from './ViewTypes'
-import SummaryPos from './SummaryPos'
+import { SummaryPos } from './SummaryPos'
 
 export default {
     schedulerWidth: '100%',

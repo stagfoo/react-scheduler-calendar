@@ -16,7 +16,7 @@
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "webpack",
-    "start": "rollup -c -w",
+    "start:dev": "webpack-dev-server --config webpack.config.dev.js",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn deploy"
   },
@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.0.3",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -64,7 +65,8 @@
     "typescript": "^3.6.4",
     "webpack": "^4.42.0",
     "webpack-bundle-analyzer": "^3.6.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "files": [
     "dist"
