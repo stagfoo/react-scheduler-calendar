@@ -15,8 +15,8 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "webpack",
-    "start:dev": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js",
+    "start:dev": "webpack-dev-server --config ./config/webpack.dev.conf.js",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn deploy"
   },
@@ -66,7 +66,8 @@
     "webpack": "^4.42.0",
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
   },
   "files": [
     "dist"

@@ -1,20 +1,8 @@
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const root = path.resolve(__dirname);
+const root = path.resolve(__dirname, '..');
+const srcPath = path.resolve(root, 'src');
+
 module.exports = {
-  mode: "production",
-  output: {
-    library: 'react-scheduler-calendar',
-    libraryTarget: 'commonjs2',
-    path: __dirname + '/dist',
-    filename: 'index.js'
-  },
-  externals: {
-    'react': 'react',
-    'react-dom': 'react-dom',
-    'moment': 'moment',
-  },
-  entry: './src/index.tsx',
   module: {
     rules: [
       {
@@ -52,17 +40,10 @@ module.exports = {
         ],
       },
       { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader' },
-      { test: /\.json/i, type: 'javascript/auto', loader: 'json-loader' }
     ],
   },
   resolve: {
     modules: ['node_modules', root],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.es6'],
   },
-  plugins: [
-    new BundleAnalyzerPlugin(),
-  ],
-  optimization: {
-    // minimize: true,
-  }
 };
