@@ -282,7 +282,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let schedulerHeader = <div/>;
     if (config.headerEnabled) {
       schedulerHeader = (
-        <Row align="middle" justify="space-between" style={{marginBottom: "24px"}}>
+        <Row align="middle" justify="space-between" style={{marginBottom: "7px"}}>
           {leftCustomHeader}
           <Col>
             <RadioGroup defaultValue={defaultValue} onChange={this.onViewChange}>

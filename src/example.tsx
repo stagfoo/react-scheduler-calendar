@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd'
+import {Card} from 'antd'
 import React, {Component} from 'react';
 
 import config from './config';
@@ -57,11 +57,20 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     // register the external DnDSources
     const dndSources = [taskDndSource, resourceDndSource];
     return (
-      <div>
+      <>
         <CustomDragLayer/>
-        <Row className={styles.container}>
-          <Col span={4}>{dndList}</Col>
-          <Col span={20}>
+        <div className={styles.container}>
+          <div className={styles.leftPane}>
+            <div className={styles.jobList}>
+              {dndList}
+            </div>
+            <div className={styles.jobDetail}>
+              <Card  className={styles.jobDetailCard} title={'Job Detail'}>
+                Job Detail here.
+              </Card>
+            </div>
+          </div>
+          <div className={styles.rightPane}>
             <Scheduler
               schedulerData={viewModel}
               prevClick={this.prevClick}
@@ -83,9 +92,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               dndSources={dndSources}
               toggleExpandFunc={this.toggleExpandFunc}
             />
-          </Col>
-        </Row>
-      </div>
+          </div>
+        </div>
+      </>
     );
   }
 

@@ -1,5 +1,30 @@
 .container {
   background: #f8f8f8;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  .leftPane {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    .jobList {
+      padding: 20px;
+      flex: auto;
+      overflow: auto;
+    }
+    .jobDetail {
+      padding: 20px;
+      height: 40%;
+      min-height: 200px;
+      max-height: 300px;
+      .jobDetailCard {
+        height: 100%;
+      }
+    }
+  }
+  .rightPane {
+    flex: auto;
+  }
 
   :global {
     .calendar-action-header {

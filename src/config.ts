@@ -2,8 +2,8 @@ import { SummaryPos } from './core/constants/SummaryPos';
 import ViewTypes from './core/constants/ViewTypes';
 
 export default {
-  schedulerWidth: '80%',
-  besidesWidth: 20,
+  schedulerWidth: '100%',
+  besidesWidth: 330,
   schedulerMaxHeight: 0,
   tableHeaderHeight: 40,
 
