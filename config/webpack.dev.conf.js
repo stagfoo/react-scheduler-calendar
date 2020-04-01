@@ -27,7 +27,7 @@ module.exports = merge(base, {
   ],
   devServer: {
     contentBase: distPath,
-    compress: true,
+    compress: false,
     port: 9000,
     historyApiFallback: true,
     hot: true,

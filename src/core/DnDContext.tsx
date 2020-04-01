@@ -147,8 +147,7 @@ export default class DnDContext {
     };
   };
   getDropTarget = () => {
-    // @ts-ignore
-    return DropTarget([...this.sourceMap.keys()], this.getDropSpec(), this.getDropCollect)(this.DecoratedComponent);
+    return DropTarget(Array.from(this.sourceMap.keys()), this.getDropSpec(), this.getDropCollect)(this.DecoratedComponent);
   };
   getDndSource = (dndType = DnDTypes.EVENT) => {
     return this.sourceMap.get(dndType);

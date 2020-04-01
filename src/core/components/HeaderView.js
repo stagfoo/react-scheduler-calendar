@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
-import {CellUnits} from '../index'
+import {CellUnits} from '../../core/index'
 
 class HeaderView extends Component {
 

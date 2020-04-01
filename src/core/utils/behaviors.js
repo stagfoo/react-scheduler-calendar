@@ -1,4 +1,4 @@
-import {ViewTypes, CellUnits, DATE_FORMAT} from '../index'
+import {ViewTypes, CellUnits, DATE_FORMAT} from '../../core/index'
 
 //getSummary func example
 export const getSummary = (schedulerData, headerEvents, slotId, slotName, headerStart, headerEnd) => {
