@@ -1,139 +1,156 @@
-import { DropTarget } from 'react-dnd'
-import { getPos } from './utils/Util'
-import { DnDTypes } from './constants/DnDTypes'
-import { CellUnits, DATETIME_FORMAT } from './index'
-import { ViewTypes } from './constants/ViewTypes'
-
+import {DropTarget, DropTargetMonitor} from 'react-dnd';
+import { getPos } from './utils/Util';
+import { DnDTypes } from './constants/DnDTypes';
+import { CellUnits, DATETIME_FORMAT } from './index';
+import { ViewTypes } from './constants/ViewTypes';
 export default class DnDContext {
-  constructor(sources, DecoratedComponent) {
+  private sourceMap: Map<string, any>;
+  private readonly DecoratedComponent: any;
+  constructor(sources: any, DecoratedComponent: any) {
     this.sourceMap = new Map();
-    sources.forEach((item) => {
+    sources.forEach((item: any) => {
       this.sourceMap.set(item.dndType, item);
     });
     this.DecoratedComponent = DecoratedComponent;
   }
-
   getDropSpec = () => {
     return {
-      drop: (props, monitor, component) => {
+      drop: (props: any, monitor: DropTargetMonitor, component: any) => {
         const { schedulerData, resourceEvents } = props;
         const { cellUnit, localeMoment } = schedulerData;
         const type = monitor.getItemType();
         const pos = getPos(component.eventContainer);
         const cellWidth = schedulerData.getContentCellWidth();
-        let initialStartTime = null, initialEndTime = null;
+        let initialStartTime = null,
+          initialEndTime = null;
         if (type === DnDTypes.EVENT) {
           const initialPoint = monitor.getInitialSourceClientOffset();
-          const initialLeftIndex = Math.floor((initialPoint.x - pos.x) / cellWidth);
+          const initialLeftIndex = Math.floor((initialPoint!.x - pos.x) / cellWidth);
           initialStartTime = resourceEvents.headerItems[initialLeftIndex].start;
           initialEndTime = resourceEvents.headerItems[initialLeftIndex].end;
           if (cellUnit !== CellUnits.Hour)
-            initialEndTime = localeMoment(resourceEvents.headerItems[initialLeftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
+            initialEndTime = localeMoment(resourceEvents.headerItems[initialLeftIndex].start)
+              .hour(23)
+              .minute(59)
+              .second(59)
+              .format(DATETIME_FORMAT);
         }
         const point = monitor.getSourceClientOffset();
-        const leftIndex = Math.max(Math.floor((point.x - pos.x) / cellWidth), 0);
+        const leftIndex = Math.max(Math.floor((point!.x - pos.x) / cellWidth), 0);
         const startTime = resourceEvents.headerItems[leftIndex].start;
         let endTime = resourceEvents.headerItems[leftIndex].end;
         if (cellUnit !== CellUnits.Hour)
-          endTime = localeMoment(resourceEvents.headerItems[leftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
-
+          endTime = localeMoment(resourceEvents.headerItems[leftIndex].start)
+            .hour(23)
+            .minute(59)
+            .second(59)
+            .format(DATETIME_FORMAT);
         return {
           slotId: resourceEvents.slotId,
           slotName: resourceEvents.slotName,
           start: startTime,
           end: endTime,
           initialStart: initialStartTime,
-          initialEnd: initialEndTime,
+          initialEnd: initialEndTime
         };
       },
-
-      hover: (props, monitor, component) => {
+      hover: (props: any, monitor: DropTargetMonitor, component: any) => {
         const { schedulerData, resourceEvents, movingEvent } = props;
         const { cellUnit, config, viewType, localeMoment } = schedulerData;
         const item = monitor.getItem();
         const type = monitor.getItemType();
         const pos = getPos(component.eventContainer);
         const cellWidth = schedulerData.getContentCellWidth();
-        let initialStart = null, initialEnd = null;
+        let initialStart = null,
+          initialEnd = null;
         if (type === DnDTypes.EVENT) {
           const initialPoint = monitor.getInitialClientOffset();
-          const initialLeftIndex = Math.floor((initialPoint.x - pos.x) / cellWidth);
+          const initialLeftIndex = Math.floor((initialPoint!.x - pos.x) / cellWidth);
           initialStart = resourceEvents.headerItems[initialLeftIndex].start;
           initialEnd = resourceEvents.headerItems[initialLeftIndex].end;
           if (cellUnit !== CellUnits.Hour)
-            initialEnd = localeMoment(resourceEvents.headerItems[initialLeftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
+            initialEnd = localeMoment(resourceEvents.headerItems[initialLeftIndex].start)
+              .hour(23)
+              .minute(59)
+              .second(59)
+              .format(DATETIME_FORMAT);
         }
         const point = monitor.getClientOffset();
-        const leftIndex = Math.floor((point.x - pos.x) / cellWidth);
+        const leftIndex = Math.floor((point!.x - pos.x) / cellWidth);
         if (!resourceEvents.headerItems[leftIndex]) {
           return;
         }
         let newStart = resourceEvents.headerItems[leftIndex].start;
         let newEnd = resourceEvents.headerItems[leftIndex].end;
         if (cellUnit !== CellUnits.Hour)
-          newEnd = localeMoment(resourceEvents.headerItems[leftIndex].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
-        let slotId = resourceEvents.slotId, slotName = resourceEvents.slotName;
+          newEnd = localeMoment(resourceEvents.headerItems[leftIndex].start)
+            .hour(23)
+            .minute(59)
+            .second(59)
+            .format(DATETIME_FORMAT);
+        let slotId = resourceEvents.slotId,
+          slotName = resourceEvents.slotName;
         let action = 'New';
         const isEvent = type === DnDTypes.EVENT;
         if (isEvent) {
           const event = item;
           if (config.relativeMove) {
-            newStart = localeMoment(event.start).add(localeMoment(newStart).diff(localeMoment(initialStart)), 'ms').format(DATETIME_FORMAT);
+            newStart = localeMoment(event.start)
+              .add(localeMoment(newStart).diff(localeMoment(initialStart)), 'ms')
+              .format(DATETIME_FORMAT);
           } else {
             if (viewType !== ViewTypes.Day) {
               const tmpMoment = localeMoment(newStart);
-              newStart = localeMoment(event.start).year(tmpMoment.year()).month(tmpMoment.month()).date(tmpMoment.date()).format(DATETIME_FORMAT);
+              newStart = localeMoment(event.start)
+                .year(tmpMoment.year())
+                .month(tmpMoment.month())
+                .date(tmpMoment.date())
+                .format(DATETIME_FORMAT);
             }
           }
-          newEnd = localeMoment(newStart).add(localeMoment(event.end).diff(localeMoment(event.start)), 'ms').format(DATETIME_FORMAT);
-
+          newEnd = localeMoment(newStart)
+            .add(localeMoment(event.end).diff(localeMoment(event.start)), 'ms')
+            .format(DATETIME_FORMAT);
           //if crossResourceMove disabled, slot returns old value
           if (config.crossResourceMove === false) {
             slotId = schedulerData._getEventSlotId(item);
             slotName = undefined;
             const slot = schedulerData.getSlotById(slotId);
-            if (slot)
-              slotName = slot.name;
+            if (slot) slotName = slot.name;
           }
-
           action = 'Move';
         }
-
         component.setState({
           hover: {
-            leftIndex: Math.floor((monitor.getSourceClientOffset().x - pos.x) / cellWidth),
-            width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
+            leftIndex: Math.floor((monitor!.getSourceClientOffset()!.x - pos.x) / cellWidth),
+            width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth
           }
         });
-
         if (movingEvent) {
           movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, type, item);
         }
       },
-
-      canDrop: (props, monitor) => {
+      canDrop: (props: any, monitor: DropTargetMonitor) => {
         const { schedulerData, resourceEvents } = props;
         const item = monitor.getItem();
         if (schedulerData._isResizing()) return false;
         const { config } = schedulerData;
         return config.movable && !resourceEvents.groupOnly && (item.movable === undefined || item.movable !== false);
-      },
-    }
+      }
+    };
   };
-
-  getDropCollect = (connect, monitor) => {
+  getDropCollect = (connect: any, monitor: DropTargetMonitor) => {
     return {
       connectDropTarget: connect.dropTarget(),
       isOver: monitor.isOver(),
-      clientOffset: monitor.getClientOffset(),
+      clientOffset: monitor.getClientOffset()
     };
   };
-
   getDropTarget = () => {
+    // @ts-ignore
     return DropTarget([...this.sourceMap.keys()], this.getDropSpec(), this.getDropCollect)(this.DecoratedComponent);
   };
-
   getDndSource = (dndType = DnDTypes.EVENT) => {
     return this.sourceMap.get(dndType);
-  }
+  };
 }

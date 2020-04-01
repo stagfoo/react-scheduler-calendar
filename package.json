@@ -1,6 +1,6 @@
 {
   "name": "react-scheduler-calendar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React component for scheduling/planing in calendar",
   "author": "NGC-AB",
   "license": "MIT",
@@ -15,13 +15,14 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "webpack --config ./config/webpack.prod.js",
+    "build": "webpack --config ./config/webpack.prod.conf.js",
     "start:dev": "webpack-dev-server --config ./config/webpack.dev.conf.js",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn deploy"
   },
   "dependencies": {
     "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
     "react-dnd": "^7.5.0",
     "react-dnd-html5-backend": "^7.5.0",
     "rrule": "^2.6.0"
@@ -29,9 +30,11 @@
   "peerDependencies": {
     "antd": "^4.0.0",
     "moment": "^2.24.0",
-    "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dnd": "^7.5.0",
+    "react-dnd-html5-backend": "^7.5.0",
+    "react-dom": "^16.8.6",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -51,6 +54,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "file-loader": "^6.0.0",
+    "glob": "^7.1.6",
     "html-webpack-plugin": "^4.0.3",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",

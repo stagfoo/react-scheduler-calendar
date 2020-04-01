@@ -1,5 +1,4 @@
 const merge = require('webpack-merge');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const path = require('path');
 const distPath = path.resolve(__dirname, '../dist');
@@ -20,9 +19,6 @@ module.exports = merge(base, {
     'react-dom': 'react-dom',
     'moment': 'moment',
   },
-  plugins: [
-    new BundleAnalyzerPlugin(),
-  ],
   optimization: {
     minimize: true,
   }
