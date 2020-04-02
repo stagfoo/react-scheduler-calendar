@@ -20,6 +20,7 @@ const RadioGroup = Radio.Group;
 
 interface SchedulerProps {
   schedulerData: any;
+  renderResourceList?: (...args: any[]) => any;
   prevClick: (...args: any[]) => any;
   nextClick: (...args: any[]) => any;
   onTodayClick: (...args: any[]) => any;
@@ -141,7 +142,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   }
 
   render() {
-    const {schedulerData, leftCustomHeader, rightCustomHeader} = this.props;
+    const { schedulerData, leftCustomHeader, rightCustomHeader, renderResourceList } = this.props;
     const {renderData, viewType, showAgenda, isEventPerspective, config, startDate, endDate, localeMoment, selectDate} = schedulerData;
     const start = localeMoment(startDate).startOf("day");
     const end = localeMoment(endDate).endOf("day");
@@ -204,31 +205,35 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       const resourceName = schedulerData.isEventPerspective ? config.taskName : config.resourceName;
       tbodyContent = (
         <tr>
-          <td style={{width: resourceTableWidth, verticalAlign: "top"}}>
-            <div className="resource-view">
-              <div style={{overflow: "hidden", height: config.tableHeaderHeight}}>
-                <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
-                  <table className="resource-table">
-                    <thead>
-                    <tr style={{height: config.tableHeaderHeight}}>
-                      <th className="header3-text">{resourceName}</th>
-                    </tr>
-                    </thead>
-                  </table>
+          <td className='resource-list' style={{width: resourceTableWidth, verticalAlign: "top"}}>
+            {
+              renderResourceList ? renderResourceList(resourceName, displayRenderData) : (
+                <div className="resource-view">
+                  <div style={{overflow: "hidden", height: config.tableHeaderHeight}}>
+                    <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
+                      <table className="resource-table">
+                        <thead>
+                        <tr style={{height: config.tableHeaderHeight}}>
+                          <th className="header3-text">{resourceName}</th>
+                        </tr>
+                        </thead>
+                      </table>
+                    </div>
+                  </div>
+                  <div
+                    style={resourceContentStyle}
+                    ref={this.schedulerResourceRef}
+                    onMouseOver={this.onSchedulerResourceMouseOver}
+                    onMouseOut={this.onSchedulerResourceMouseOut}
+                    onScroll={this.onSchedulerResourceScroll}
+                  >
+                    <ResourceView {...this.props} contentScrollbarHeight={resourcePaddingBottom}/>
+                  </div>
                 </div>
-              </div>
-              <div
-                style={resourceContentStyle}
-                ref={this.schedulerResourceRef}
-                onMouseOver={this.onSchedulerResourceMouseOver}
-                onMouseOut={this.onSchedulerResourceMouseOut}
-                onScroll={this.onSchedulerResourceScroll}
-              >
-                <ResourceView {...this.props} contentScrollbarHeight={resourcePaddingBottom}/>
-              </div>
-            </div>
+              )
+            }
           </td>
-          <td>
+          <td className='scheduler-cell'>
             <div className="scheduler-view" style={{width: schedulerContainerWidth, verticalAlign: "top"}}>
               <div style={{overflow: "hidden", borderBottom: "1px solid #e9e9e9", height: config.tableHeaderHeight}}>
                 <div

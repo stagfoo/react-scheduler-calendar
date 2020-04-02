@@ -23,7 +23,7 @@ interface CalendarSchedulerState {
 class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   constructor(props: any) {
     super(props);
-    const schedulerData = new SchedulerData('2017-12-18', ViewTypes.Day, false, false, config);
+    const schedulerData = new SchedulerData('2020-04-02', ViewTypes.Day, false, false, config);
     schedulerData.localeMoment.locale('en');
     schedulerData.setResources(DemoData.resources);
     schedulerData.setEvents(DemoData.eventsForTaskView);
@@ -45,6 +45,27 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         DnDTypes.RESOURCE,
       ),
     };
+  }
+
+  renderResourceList(resourceName: string, renderData: any) {
+    return (
+      <div className={styles.resourceListWrapper}>
+        <div className={styles.resourceTitle} style={{
+          height: `${config.tableHeaderHeight}px`,
+          lineHeight: `${config.tableHeaderHeight}px`,
+          textAlign: 'center'
+        }}>{resourceName}</div>
+        <ul className={styles.resourceList}>
+          { renderData.map((resource: any) => {
+            return (<li className={styles.resourceItem} style={{
+              height: `${resource.rowHeight}px`,
+              lineHeight: `${resource.rowHeight}px`,
+              textAlign: 'center'
+            }}>{resource.slotName}</li>)
+          }) }
+        </ul>
+      </div>
+    );
   }
 
   render() {
@@ -73,6 +94,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
           <div className={styles.rightPane}>
             <Scheduler
               schedulerData={viewModel}
+              renderResourceList={this.renderResourceList}
               prevClick={this.prevClick}
               nextClick={this.nextClick}
               onTodayClick={this.handleTodayClick}

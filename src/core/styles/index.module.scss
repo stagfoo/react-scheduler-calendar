@@ -87,5 +87,27 @@
         }
       }
     }
+
+    .resource-list, .scheduler-cell {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .resourceListWrapper {
+    border: 1px solid #c5c5c5;
+    .resourceTitle {
+      border-bottom: 1px solid #c5c5c5;
+    }
+    .resourceList {
+      margin: 0;
+      padding: 0;
+      & > li {
+        list-style: none;
+        border-bottom: 1px solid #c5c5c5;
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
+    }
   }
 }
