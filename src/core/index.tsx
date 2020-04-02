@@ -12,7 +12,8 @@ import ResourceEvents from "./components/ResourceEvents";
 import AgendaView from "./components/AgendaView";
 import moment from "moment";
 import config from '../config';
-import './css/style.css'
+import './styles/style.css'
+import styles from './styles/index.module.scss'
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -321,7 +322,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       );
     }
     return (
-      <table id="RBS-Scheduler-root" className="scheduler" style={{width: `${width}px`}}>
+      <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{width: `${width}px`}}>
         <thead>
         <tr>
           <td colSpan={2}>{schedulerHeader}</td>

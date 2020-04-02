@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 
 import config from './config';
 import Scheduler, {DnDSource, SchedulerData, ViewTypes} from './';
-import './core/css/style.css';
-import styles from './index.module.scss';
+import './core/styles/style.css';
+import styles from './core/styles/index.module.scss';
 import withDragDropContext from './lib/withDnDContext';
 import CustomDragLayer from './lib/CustomDragLayer';
 import {DnDTypes} from './lib/DnDTypes';

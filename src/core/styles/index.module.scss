@@ -1,36 +1,10 @@
-.container {
-  background: #f8f8f8;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  .leftPane {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    .jobList {
-      padding: 20px;
-      flex: auto;
-      overflow: auto;
-    }
-    .jobDetail {
-      padding: 20px;
-      height: 40%;
-      min-height: 200px;
-      max-height: 300px;
-      .jobDetailCard {
-        height: 100%;
-      }
-    }
-  }
-  .rightPane {
-    flex: auto;
-  }
-
+.schedulerContainer {
   :global {
     .calendar-action-header {
       color: #222222;
       text-align: right;
     }
+
     .scheduler-view {
       border: 1px solid transparent;
       border-top: 1px solid #000;
@@ -38,10 +12,12 @@
       th.header3-text {
         padding-top: 10px;
       }
+
       .event-item {
         user-select: none;
       }
     }
+
     .timeMark {
       text-align: left;
       position: absolute;
@@ -54,6 +30,7 @@
       border-right: 1px solid #e3165b;
       color: #e3165b;
       font-size: 10px;
+
       &:before {
         content: ' ';
         height: 6px;
@@ -64,11 +41,13 @@
         right: -3px;
         top: 0;
       }
+
       .timeText {
         position: absolute;
         right: -25px;
       }
     }
+
     .round-all {
       border-radius: 5px;
     }
@@ -101,8 +80,6 @@
     }
 
     .scheduler-bg-table {
-      //background: #f8f8f8;
-
       td {
         pointer-events: none;
         &:hover {
