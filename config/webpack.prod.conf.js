@@ -7,15 +7,12 @@ const base = require('./webpack.base.conf');
 
 module.exports = merge(base, {
   mode: "production",
-  entry: {
-    'index': path.join(srcPath, 'index.tsx'),
-    'example': path.join(srcPath, 'example.tsx'),
-  },
+  entry: path.join(srcPath, 'index.tsx'),
   output: {
     library: 'react-scheduler-calendar',
     libraryTarget: 'commonjs2',
     path: distPath,
-    filename: '[name].js'
+    filename: 'index.js'
   },
   externals: {
     'react': 'react',
