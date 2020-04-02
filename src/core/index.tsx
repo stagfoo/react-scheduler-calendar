@@ -12,6 +12,7 @@ import ResourceEvents from "./components/ResourceEvents";
 import AgendaView from "./components/AgendaView";
 import moment from "moment";
 import config from '../config';
+import './css/style.css'
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
