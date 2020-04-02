@@ -11,6 +11,7 @@ import BodyView from "./components/BodyView";
 import ResourceEvents from "./components/ResourceEvents";
 import AgendaView from "./components/AgendaView";
 import moment from "moment";
+import config from '../config';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -483,4 +484,6 @@ export * from "./models/SchedulerData";
 export * from "./DnDSource";
 export * from "./DnDContext";
 export * from "./components/AddMorePopover";
+export * from '../lib';
+export { config };
 export default Scheduler;
