@@ -15,7 +15,8 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "webpack --config ./config/webpack.prod.conf.js",
+    "generate:declaration": "tsc --declaration --allowJs --emitDeclarationOnly --outDir ./dist",
+    "build": "yarn generate:declaration && webpack --config ./config/webpack.prod.conf.js",
     "start:dev": "webpack-dev-server --config ./config/webpack.dev.conf.js",
     "prepare": "yarn run build",
     "deploy": "cd example && yarn deploy"
