@@ -47,7 +47,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     };
   }
 
-  renderResourceList(resourceName: string, renderData: any) {
+  renderResourceList(resourceName: string, renderData: any, listRef: any) {
     return (
       <div className={styles.resourceListWrapper}>
         <div className={styles.resourceTitle} style={{
@@ -55,7 +55,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
           lineHeight: `${config.tableHeaderHeight}px`,
           textAlign: 'center'
         }}>{resourceName}</div>
-        <ul className={styles.resourceList}>
+        <ul className={styles.resourceList} ref={listRef}>
           { renderData.map((resource: any) => {
             return (<li className={styles.resourceItem} style={{
               height: `${resource.rowHeight}px`,

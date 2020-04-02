@@ -207,7 +207,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         <tr>
           <td className='resource-list' style={{width: resourceTableWidth, verticalAlign: "top"}}>
             {
-              renderResourceList ? renderResourceList(resourceName, displayRenderData) : (
+              renderResourceList ? renderResourceList(resourceName, displayRenderData, this.schedulerResourceRef) : (
                 <div className="resource-view">
                   <div style={{overflow: "hidden", height: config.tableHeaderHeight}}>
                     <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
