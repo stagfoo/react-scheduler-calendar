@@ -188,30 +188,32 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         <tr>
           <td className='resource-list' style={{width: resourceTableWidth, verticalAlign: "top"}}>
             {
-              renderResourceList ? renderResourceList(resourceName, displayRenderData, this.schedulerResourceRef) : (
-                <div className="resource-view">
-                  <div style={{overflow: "hidden", height: config.tableHeaderHeight}}>
-                    <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
-                      <table className="resource-table">
-                        <thead>
-                        <tr style={{height: config.tableHeaderHeight}}>
-                          <th className="header3-text">{resourceName}</th>
-                        </tr>
-                        </thead>
-                      </table>
+              renderResourceList
+                ? renderResourceList(resourceName, displayRenderData, this.schedulerResourceRef)
+                : (
+                  <div className="resource-view">
+                    <div style={{overflow: "hidden", height: config.tableHeaderHeight}}>
+                      <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
+                        <table className="resource-table">
+                          <thead>
+                          <tr style={{height: config.tableHeaderHeight}}>
+                            <th className="header3-text">{resourceName}</th>
+                          </tr>
+                          </thead>
+                        </table>
+                      </div>
+                    </div>
+                    <div
+                      style={resourceContentStyle}
+                      ref={this.schedulerResourceRef}
+                      onMouseOver={this.onSchedulerResourceMouseOver}
+                      onMouseOut={this.onSchedulerResourceMouseOut}
+                      onScroll={this.onSchedulerResourceScroll}
+                    >
+                      <ResourceView {...this.props} contentScrollbarHeight={resourcePaddingBottom}/>
                     </div>
                   </div>
-                  <div
-                    style={resourceContentStyle}
-                    ref={this.schedulerResourceRef}
-                    onMouseOver={this.onSchedulerResourceMouseOver}
-                    onMouseOut={this.onSchedulerResourceMouseOut}
-                    onScroll={this.onSchedulerResourceScroll}
-                  >
-                    <ResourceView {...this.props} contentScrollbarHeight={resourcePaddingBottom}/>
-                  </div>
-                </div>
-              )
+                )
             }
           </td>
           <td className='scheduler-cell'>
@@ -279,9 +281,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       );
     }
     return (
-      <div className={styles.schedulerWrapper}>
-        <div className={styles.header} style={{width: `${width}px`}}>{schedulerHeader}</div>
-        <div className={styles.schedulerBody}>
+      <div className={`scheduler-wrapper ${styles.schedulerWrapper}`}>
+        <div className='scheduler-header' style={{width: `${width}px`}}>{schedulerHeader}</div>
+        <div className={`scheduler-body ${styles.schedulerBody}`}>
           <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{width: `${width}px`}}>
             <tbody>{tbodyContent}</tbody>
           </table>

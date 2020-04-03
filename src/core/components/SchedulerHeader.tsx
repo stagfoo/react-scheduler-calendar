@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import {Col, Row, Popover, Calendar, Radio, Button} from "antd";
 import {LeftOutlined, RightOutlined, CalendarOutlined} from "@ant-design/icons";
+import moment from "moment";
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -95,7 +96,7 @@ class SchedulerHeader extends React.Component<Props, State> {
               >
                   <span className={"header2-text-label"} style={{cursor: "pointer", marginLeft: "16px"}}>
                     <CalendarOutlined style={{marginRight: "8px"}} className="icon-nav" />
-                    {dateLabel}
+                    {moment(dateLabel).format('MMM DD')}
                   </span>
               </Popover>
             ) : (
