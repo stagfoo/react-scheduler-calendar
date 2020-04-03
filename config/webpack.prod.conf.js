@@ -17,6 +17,8 @@ module.exports = merge(base, {
   externals: {
     'react': 'react',
     'react-dom': 'react-dom',
+    'react-dnd': 'react-dnd',
+    'react-dnd-html5-backend': 'react-dnd-html5-backend',
     'moment': 'moment',
   },
   optimization: {
