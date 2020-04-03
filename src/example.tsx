@@ -57,7 +57,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         }}>{resourceName}</div>
         <ul className={styles.resourceList} ref={listRef}>
           { renderData.map((resource: any) => {
-            return (<li className={styles.resourceItem} style={{
+            return (<li key={resource.slotId} className={styles.resourceItem} style={{
               height: `${resource.rowHeight}px`,
               lineHeight: `${resource.rowHeight}px`,
               textAlign: 'center'

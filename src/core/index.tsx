@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import {Col, Row, Popover, Calendar, Radio, Button} from "antd";
-import {LeftOutlined, RightOutlined, CalendarOutlined} from "@ant-design/icons";
 import TimeLine from "../lib/TimeLine";
 import EventItem from "./components/EventItem";
 import { DnDSource } from "./DnDSource";
@@ -14,9 +12,7 @@ import moment from "moment";
 import config from '../config';
 import './styles/style.css'
 import styles from './styles/index.module.scss'
-
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
+import SchedulerHeader from "./components/SchedulerHeader";
 
 interface SchedulerProps {
   schedulerData: any;
@@ -54,7 +50,6 @@ interface SchedulerProps {
 }
 
 interface SchedulerState {
-  visible: boolean;
   dndContext: any;
   contentHeight: any;
   contentScrollbarHeight: number;
@@ -90,7 +85,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     this.currentArea = -1;
     schedulerData._setDocumentWidth(document.documentElement.clientWidth);
     this.state = {
-      visible: false,
       dndContext: dndContext,
       contentHeight: schedulerData.getSchedulerContentDesiredHeight(),
       contentScrollbarHeight: 17,
@@ -143,23 +137,10 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
 
   render() {
     const { schedulerData, leftCustomHeader, rightCustomHeader, renderResourceList } = this.props;
-    const {renderData, viewType, showAgenda, isEventPerspective, config, startDate, endDate, localeMoment, selectDate} = schedulerData;
+    const {renderData, showAgenda, config, startDate, endDate, localeMoment} = schedulerData;
     const start = localeMoment(startDate).startOf("day");
     const end = localeMoment(endDate).endOf("day");
     const width = schedulerData.getSchedulerWidth();
-    const calendarPopoverEnabled = config.calendarPopoverEnabled;
-    const dateLabel = schedulerData.getDateLabel();
-    const defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}`;
-    const radioButtonList = config.views.map((item: any) => {
-      return (
-        <RadioButton
-          key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
-          value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
-        >
-          <span style={{margin: "0px 8px"}}>{item.viewName}</span>
-        </RadioButton>
-      );
-    });
     let tbodyContent = <tr/>;
     if (showAgenda) {
       tbodyContent = <AgendaView {...this.props} />;
@@ -282,59 +263,30 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         </tr>
       );
     }
-    const popover = (
-      <div className="popover-calendar">
-        <Calendar fullscreen={false} onSelect={this.onSelect} value={localeMoment(selectDate)}/>
-      </div>
-    );
     let schedulerHeader = <div/>;
     if (config.headerEnabled) {
       schedulerHeader = (
-        <Row align="middle" justify="space-between" style={{marginBottom: "7px"}}>
-          {leftCustomHeader}
-          <Col>
-            <RadioGroup defaultValue={defaultValue} onChange={this.onViewChange}>
-              {radioButtonList}
-            </RadioGroup>
-          </Col>
-          <Col>
-            <div className="header2-text calendar-action-header">
-              <Button style={{marginRight: "24px"}} onClick={this.goToToday}>
-                Today
-              </Button>
-              <LeftOutlined style={{marginRight: "4px"}} className="icon-nav" onClick={this.goBack}/>
-              <RightOutlined style={{marginLeft: "4px"}} className="icon-nav" onClick={this.goNext}/>
-              {calendarPopoverEnabled ? (
-                <Popover
-                  content={popover}
-                  placement="bottom"
-                  trigger="click"
-                  visible={this.state.visible}
-                  onVisibleChange={this.handleVisibleChange}
-                >
-                  <span className={"header2-text-label"} style={{cursor: "pointer", marginLeft: "16px"}}>
-                    <CalendarOutlined style={{marginRight: "8px"}} className="icon-nav"/>
-                    {dateLabel}
-                  </span>
-                </Popover>
-              ) : (
-                <span className={"header2-text-label"}>{dateLabel}</span>
-              )}
-            </div>
-          </Col>
-          {rightCustomHeader}
-        </Row>
+        <SchedulerHeader
+          title={leftCustomHeader}
+          schedulerData={schedulerData}
+          onViewChange={this.onViewChange}
+          goToToday={this.goToToday}
+          goBack={this.goBack}
+          goNext={this.goNext}
+          onSelect={this.onSelect}
+          rightCustomHeader={rightCustomHeader}
+        />
       );
     }
     return (
-      <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{width: `${width}px`}}>
-        <thead>
-        <tr>
-          <td colSpan={2}>{schedulerHeader}</td>
-        </tr>
-        </thead>
-        <tbody>{tbodyContent}</tbody>
-      </table>
+      <div className={styles.schedulerWrapper}>
+        <div className={styles.header} style={{width: `${width}px`}}>{schedulerHeader}</div>
+        <div className={styles.schedulerBody}>
+          <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{width: `${width}px`}}>
+            <tbody>{tbodyContent}</tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 
@@ -470,13 +422,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const {prevClick, schedulerData} = this.props;
     prevClick(schedulerData);
   };
-  handleVisibleChange = (visible: boolean) => {
-    this.setState({visible});
-  };
   onSelect = (date: moment.Moment) => {
-    this.setState({
-      visible: false
-    });
     const {onSelectDate, schedulerData} = this.props;
     onSelectDate(schedulerData, date);
   };
