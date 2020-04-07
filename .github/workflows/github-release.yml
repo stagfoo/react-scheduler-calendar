@@ -4,7 +4,7 @@ on:
     tags:
       - 'v*'
 
-name: Create Github PreRelease
+name: Create Github Release
 
 jobs:
   build:
@@ -28,4 +28,4 @@ jobs:
             - Cutomize LeftHeader rendering
 
           draft: false
-          prerelease: true
+          prerelease: false
