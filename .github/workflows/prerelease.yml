@@ -1,4 +1,5 @@
 #From: https://github.com/esamattis/npm-release
+name: NPM Pre-Release
 on:
   push:
     branches:

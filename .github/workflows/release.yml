@@ -1,4 +1,5 @@
 #From: https://github.com/esamattis/npm-release
+name: NPM Release
 on:
   release:
     types: [published]
