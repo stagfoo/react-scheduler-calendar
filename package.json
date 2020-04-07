@@ -19,7 +19,8 @@
     "build": "yarn generate:declaration && webpack --config ./config/webpack.prod.conf.js",
     "start:dev": "webpack-dev-server --config ./config/webpack.dev.conf.js",
     "prepare": "yarn run build",
-    "deploy": "cd example && yarn deploy"
+    "deploy:demo": "cd example && yarn deploy",
+    "release": "np --no-publish"
   },
   "dependencies": {
     "moment": "^2.24.0",
@@ -58,6 +59,7 @@
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.0.3",
     "node-sass": "^4.13.1",
+    "np": "^6.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dnd": "^7.5.0",
