@@ -18,7 +18,7 @@
     "generate:declaration": "tsc --declaration --allowJs --emitDeclarationOnly --outDir ./dist",
     "build": "yarn generate:declaration && webpack --config ./config/webpack.prod.conf.js",
     "start:dev": "webpack-dev-server --config ./config/webpack.dev.conf.js",
-    "prepublish": "yarn run build",
+    "prepublishOnly": "yarn build",
     "deploy:demo": "cd example && yarn deploy",
     "release": "np --no-publish"
   },
