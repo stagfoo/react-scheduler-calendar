@@ -23,7 +23,20 @@ interface CalendarSchedulerState {
 class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   constructor(props: any) {
     super(props);
-    const schedulerData = new SchedulerData('2020-04-02', ViewTypes.Day, false, false, config);
+    const newConfig: Partial<typeof config> = {
+      nonWorkingTimeHeadBgColor: '#fff',
+      eventItemHeight: 59,
+      eventItemLineHeight: 59,
+      dayCellWidth: 30,
+      besidesWidth: 470,
+    };
+    const schedulerData = new SchedulerData(
+      '2020-04-02',
+      ViewTypes.Day,
+      false,
+      false,
+      { ...config, ...newConfig },
+    );
     schedulerData.localeMoment.locale('en');
     schedulerData.setResources(DemoData.resources);
     schedulerData.setEvents(DemoData.eventsForTaskView);
@@ -78,9 +91,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     // register the external DnDSources
     const dndSources = [taskDndSource, resourceDndSource];
     return (
-      <>
+      <div className={styles.container}>
         <CustomDragLayer/>
-        <div className={styles.container}>
+        <div className={styles.content}>
           <div className={styles.leftPane}>
             <div className={styles.jobList}>
               {dndList}
@@ -116,7 +129,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
             />
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
