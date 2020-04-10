@@ -13,6 +13,7 @@ import ResourceList from './lib/ResourceList';
 import TaskItem from './lib/TaskItem';
 import TaskList from './lib/TaskList';
 import DemoData from './_mockData/DemoData';
+import moment from "moment";
 
 interface CalendarSchedulerState {
   viewModel: any;
@@ -31,7 +32,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       besidesWidth: 470,
     };
     const schedulerData = new SchedulerData(
-      '2020-04-02',
+      moment().format('YYYY-MM-DD'),
       ViewTypes.Day,
       false,
       false,
@@ -40,6 +41,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     schedulerData.localeMoment.locale('en');
     schedulerData.setResources(DemoData.resources);
     schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setScrollToSpecialMoment(true);
     this.state = {
       viewModel: schedulerData,
       taskDndSource: new DnDSource(

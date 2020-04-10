@@ -1,5 +1,4 @@
-import { SummaryPos } from './core/constants/SummaryPos';
-import ViewTypes from './core/constants/ViewTypes';
+import { SummaryPos } from './core';
 
 export default {
   schedulerWidth: '100%',
@@ -35,6 +34,7 @@ export default {
   eventItemLineHeight: 88,
   nonAgendaSlotMinHeight: 0,
   dayStartFrom: 0,
+  dayAimTo: 9,
   dayStopTo: 23,
   defaultEventBgColor: '#80C5F6',
   selectedAreaColor: '#7EC2F3',
