@@ -47,6 +47,7 @@ class EventItem extends Component {
     viewEvent2Text: PropTypes.string,
     conflictOccurred: PropTypes.func,
     eventItemTemplateResolver: PropTypes.func,
+    renderEvent: PropTypes.func,
   }
 
   UNSAFE_componentWillReceiveProps(np) {
@@ -473,7 +474,7 @@ class EventItem extends Component {
   }
 
   render() {
-    const { eventItem, isStart, isEnd, isInPopover, eventItemClick, schedulerData, isDragging, connectDragSource, eventItemTemplateResolver } = this.props;
+    const { eventItem, isStart, isEnd, isInPopover, eventItemClick, schedulerData, isDragging, connectDragSource, eventItemTemplateResolver, renderEvent } = this.props;
     const { config, localeMoment } = schedulerData;
     const { left, width, top } = this.state;
     const roundCls = isStart ? (isEnd ? 'round-all' : 'round-head') : (isEnd ? 'round-tail' : 'round-none');
@@ -504,7 +505,7 @@ class EventItem extends Component {
     let eventItemTemplate = (
       <div className={roundCls + ' event-item'} key={eventItem.id}
            style={{ height: config.eventItemHeight, backgroundColor: bgColor }}>
-        <span style={{ marginLeft: '10px', lineHeight: `${config.eventItemHeight}px` }}>{eventTitle}</span>
+        {renderEvent(eventItem)}
       </div>
     );
     if (eventItemTemplateResolver)
