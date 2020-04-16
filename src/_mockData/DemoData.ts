@@ -147,18 +147,19 @@ const DemoData = {
     eventsForTaskView: [
         {
             id: 1,
-            start: '2017-12-18 09:30:00',
-            end: '2017-12-18 13:30:00',
+            start: '2020-4-16 09:30:00',
+            end: '2020-4-16 13:30:00',
             resourceId: 'r1',
             title: 'I am finished',
             bgColor: '#D9D9D9',
             groupId: 1,
             groupName: 'Job1',
+            item: {}
         },
         {
             id: 2,
-            start: '2017-12-18 12:30:00',
-            end: '2017-12-18 13:30:00',
+            start: '2020-4-16 17:30:00',
+            end: '2020-4-16 18:30:00',
             resourceId: 'r2',
             title: 'I am not resizable',
             resizable: false,
