@@ -9,7 +9,7 @@ import BodyView from "./components/BodyView";
 import ResourceEvents from "./components/ResourceEvents";
 import AgendaView from "./components/AgendaView";
 import moment from "moment";
-import config from '../config';
+import config from './constants/config';
 import './styles/style.css'
 import styles from './styles/index.module.scss'
 import SchedulerHeader from "./components/SchedulerHeader";

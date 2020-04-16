@@ -1,7 +1,7 @@
 import {Card} from 'antd'
 import React, {Component} from 'react';
 
-import config from './config';
+import config from './override-config';
 import Scheduler, {DnDSource, SchedulerData, ViewTypes} from './';
 import './core/styles/style.css';
 import styles from './core/styles/index.module.scss';
