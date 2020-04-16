@@ -1,4 +1,4 @@
-import { SummaryPos } from './core/constants/SummaryPos';
+import { SummaryPos } from './core';
 
 export default {
   schedulerWidth: '100%',
