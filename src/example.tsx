@@ -82,6 +82,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       </div>
     );
   }
+  renderEvent = (eventItem: any) => {
+    return (<div>render event<span>{eventItem.id}</span></div>);
+  };
 
   render() {
     const {viewModel, taskDndSource, resourceDndSource} = this.state;
@@ -128,6 +131,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               subtitleGetter={this.subtitleGetter}
               dndSources={dndSources}
               toggleExpandFunc={this.toggleExpandFunc}
+              renderEvent={this.renderEvent}
             />
           </div>
         </div>
