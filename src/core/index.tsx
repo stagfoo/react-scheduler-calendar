@@ -47,6 +47,7 @@ interface SchedulerProps {
   onScrollRight?: (...args: any[]) => any;
   onScrollTop?: (...args: any[]) => any;
   onScrollBottom?: (...args: any[]) => any;
+  renderEvent?: (eventItem: any) => any;
 }
 
 interface SchedulerState {
