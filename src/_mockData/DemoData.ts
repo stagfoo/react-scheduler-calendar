@@ -1,3 +1,6 @@
+import moment from 'moment';
+
+const todayDate = moment().format('YYYY-MM-DD');
 const DemoData = {
     resources: [
         {
@@ -146,25 +149,25 @@ const DemoData = {
     ],
     eventsForTaskView: [
         {
-            id: 1,
-            start: '2020-4-16 09:30:00',
-            end: '2020-4-16 13:30:00',
-            resourceId: 'r1',
-            title: 'I am finished',
-            bgColor: '#D9D9D9',
-            groupId: 1,
-            groupName: 'Job1',
-            item: {}
+          id: 1,
+          start: `${todayDate} 09:30:00`,
+          end: `${todayDate} 13:30:00`,
+          resourceId: 'r1',
+          title: 'I am finished',
+          bgColor: '#D9D9D9',
+          groupId: 1,
+          groupName: 'Job1',
+          item: {},
         },
         {
-            id: 2,
-            start: '2020-4-16 17:30:00',
-            end: '2020-4-16 18:30:00',
-            resourceId: 'r2',
-            title: 'I am not resizable',
-            resizable: false,
-            groupId: 2,
-            groupName: 'Job2',
+          id: 2,
+          start: `${todayDate} 17:30:00`,
+          end: `${todayDate} 19:30:00`,
+          resourceId: 'r2',
+          title: 'I am not resizable',
+          resizable: false,
+          groupId: 2,
+          groupName: 'Job2',
         },
         {
             id: 3,
