@@ -39,6 +39,7 @@ class ResourceEvents extends Component {
     viewEvent2Text: PropTypes.string,
     newEvent: PropTypes.func,
     eventItemTemplateResolver: PropTypes.func,
+    getHoverAreaStyle: PropTypes.func,
   }
 
   componentDidMount() {
@@ -244,7 +245,7 @@ class ResourceEvents extends Component {
   }
 
   render() {
-    const { resourceEvents, schedulerData, connectDropTarget, dndSource, isOver, clientOffset } = this.props;
+    const { resourceEvents, schedulerData, connectDropTarget, dndSource, isOver, getHoverAreaStyle } = this.props;
     const { cellUnit, startDate, endDate, config, localeMoment } = schedulerData;
     const { isSelecting, left, width } = this.state;
     const cellWidth = schedulerData.getContentCellWidth();
@@ -252,10 +253,27 @@ class ResourceEvents extends Component {
     const rowWidth = schedulerData.getContentTableWidth();
     const DnDEventItem = dndSource.getDragSource();
     const selectedArea = isSelecting ? <SelectedArea {...this.props} left={left} width={width}/> : <div/>;
-    const hoverArea = isOver && this.state.hover ? <div style={{
-      width: this.state.hover.width, top: 0, bottom: 0, position: 'absolute',
-      left: this.state.hover.leftIndex * cellWidth, background: '#79cbcf',
-    }}/> : null;
+    let hoverArea = null;
+
+    if(isOver && this.state.hover) {
+      let hoverStyle = {
+        top: 0,
+        bottom: 0,
+        position: 'absolute',
+        left: this.state.hover.leftIndex * cellWidth,
+        background: '#b5dbe2',
+        width: cellWidth,
+      };
+
+      if (getHoverAreaStyle) {
+        hoverStyle = {
+          ...hoverStyle,
+          ...getHoverAreaStyle(this.state.hover),
+        };
+      }
+
+      hoverArea = <div style={hoverStyle} />
+    }
 
     const eventList = [];
     resourceEvents.headerItems.forEach((headerItem, index) => {

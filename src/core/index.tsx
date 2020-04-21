@@ -48,6 +48,7 @@ interface SchedulerProps {
   onScrollTop?: (...args: any[]) => any;
   onScrollBottom?: (...args: any[]) => any;
   renderEvent?: (eventItem: any) => any;
+  getHoverAreaStyle?: (hoverParams: any) => React.CSSProperties;
 }
 
 interface SchedulerState {

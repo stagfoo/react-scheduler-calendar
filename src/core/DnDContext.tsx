@@ -112,7 +112,7 @@ export default class DnDContext {
             .add(localeMoment(event.end).diff(localeMoment(event.start)), 'ms')
             .format(DATETIME_FORMAT);
           //if crossResourceMove disabled, slot returns old value
-          if (config.crossResourceMove === false) {
+          if (!config.crossResourceMove) {
             slotId = schedulerData._getEventSlotId(item);
             slotName = undefined;
             const slot = schedulerData.getSlotById(slotId);
@@ -123,7 +123,7 @@ export default class DnDContext {
         component.setState({
           hover: {
             leftIndex: Math.floor((monitor!.getSourceClientOffset()!.x - pos.x) / cellWidth),
-            width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth
+            item,
           }
         });
         if (movingEvent) {
