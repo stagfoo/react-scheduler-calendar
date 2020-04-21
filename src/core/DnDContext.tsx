@@ -115,7 +115,9 @@ export default class DnDContext {
         component.setState({
           hover: {
             leftIndex: Math.floor((monitor!.getSourceClientOffset()!.x - eventContainerPosition.x) / cellWidth),
+            width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
             item: draggingItem,
+            itemType: draggingItemType,
           }
         });
         if (movingEvent) {

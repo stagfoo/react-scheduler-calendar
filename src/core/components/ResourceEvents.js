@@ -262,7 +262,7 @@ class ResourceEvents extends Component {
         position: 'absolute',
         left: this.state.hover.leftIndex * cellWidth,
         background: '#b5dbe2',
-        width: cellWidth,
+        width: this.state.hover.width || cellWidth,
       };
 
       if (getHoverAreaStyle) {
