@@ -57,26 +57,16 @@ export default class DnDContext {
       hover: (props: any, monitor: DropTargetMonitor, component: any) => {
         const { schedulerData, resourceEvents, movingEvent } = props;
         const { cellUnit, config, viewType, localeMoment } = schedulerData;
-        const item = monitor.getItem();
-        const type = monitor.getItemType();
-        const pos = getPos(component.eventContainer);
+        const draggingItem = monitor.getItem();
+        const draggingItemType = monitor.getItemType();
+        const isEvent = draggingItemType === DnDTypes.EVENT;
+
+        const eventContainerPosition = getPos(component.eventContainer);
+        const pointerPosition = monitor.getClientOffset();
+
         const cellWidth = schedulerData.getContentCellWidth();
-        let initialStart = null,
-          initialEnd = null;
-        if (type === DnDTypes.EVENT) {
-          const initialPoint = monitor.getInitialClientOffset();
-          const initialLeftIndex = Math.floor((initialPoint!.x - pos.x) / cellWidth);
-          initialStart = resourceEvents.headerItems[initialLeftIndex].start;
-          initialEnd = resourceEvents.headerItems[initialLeftIndex].end;
-          if (cellUnit !== CellUnits.Hour)
-            initialEnd = localeMoment(resourceEvents.headerItems[initialLeftIndex].start)
-              .hour(23)
-              .minute(59)
-              .second(59)
-              .format(DATETIME_FORMAT);
-        }
-        const point = monitor.getClientOffset();
-        const leftIndex = Math.floor((point!.x - pos.x) / cellWidth);
+
+        const leftIndex = Math.floor((pointerPosition!.x - eventContainerPosition.x) / cellWidth);
         if (!resourceEvents.headerItems[leftIndex]) {
           return;
         }
@@ -91,9 +81,11 @@ export default class DnDContext {
         let slotId = resourceEvents.slotId,
           slotName = resourceEvents.slotName;
         let action = 'New';
-        const isEvent = type === DnDTypes.EVENT;
         if (isEvent) {
-          const event = item;
+          const initialPointerPosition = monitor.getInitialClientOffset()!;
+          const initialLeftIndex = Math.floor((initialPointerPosition!.x - eventContainerPosition.x) / cellWidth);
+          const initialStart = resourceEvents.headerItems[initialLeftIndex].start;
+          const event = draggingItem;
           if (config.relativeMove) {
             newStart = localeMoment(event.start)
               .add(localeMoment(newStart).diff(localeMoment(initialStart)), 'ms')
@@ -113,7 +105,7 @@ export default class DnDContext {
             .format(DATETIME_FORMAT);
           //if crossResourceMove disabled, slot returns old value
           if (!config.crossResourceMove) {
-            slotId = schedulerData._getEventSlotId(item);
+            slotId = schedulerData._getEventSlotId(draggingItem);
             slotName = undefined;
             const slot = schedulerData.getSlotById(slotId);
             if (slot) slotName = slot.name;
@@ -122,12 +114,12 @@ export default class DnDContext {
         }
         component.setState({
           hover: {
-            leftIndex: Math.floor((monitor!.getSourceClientOffset()!.x - pos.x) / cellWidth),
-            item,
+            leftIndex: Math.floor((monitor!.getSourceClientOffset()!.x - eventContainerPosition.x) / cellWidth),
+            item: draggingItem,
           }
         });
         if (movingEvent) {
-          movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, type, item);
+          movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, draggingItemType, draggingItem);
         }
       },
       canDrop: (props: any, monitor: DropTargetMonitor) => {
