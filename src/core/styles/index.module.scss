@@ -57,14 +57,13 @@
       color: #e3165b;
       font-size: 10px;
 
-      &:before {
-        content: ' ';
+      .timeMarkPoint {
         height: 6px;
         width: 6px;
         position: absolute;
         //background: #e3165b;
         border-radius: 3px;
-        right: -3px;
+        right: -3.5px;
         top: 0;
       }
 

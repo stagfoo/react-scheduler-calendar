@@ -32,6 +32,7 @@ const TimeLine: React.FC<Interface> = (props: Interface) => {
           className={'timeMark'}
           style={isAfterToday ? {width, border: 'none'} : {width}}
         >
+          <div className={isAfterToday ? '' : 'timeMarkPoint'} />
           <span className='timeText' hidden={isAfterToday}> {currentTime.format('h:mm a')} </span>
         </div>
       }
