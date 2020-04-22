@@ -11,7 +11,11 @@ const TimeLine: React.FC<Interface> = (props: Interface) => {
   const [currentTime, setCurrentTime] = useState(moment());
   const { startTime, endTime, maxWidth } = props;
   const progress = currentTime.diff(startTime) / endTime.diff(startTime);
-  const width = Math.round(progress * maxWidth);
+  const width = Math.min(Math.round(progress * maxWidth), maxWidth);
+
+  const isBeforeToday = progress < 0;
+  const isAfterToday = progress > 1;
+
   useEffect(() => {
     const intervalId = setInterval(
       () => setCurrentTime(moment()),
@@ -23,12 +27,12 @@ const TimeLine: React.FC<Interface> = (props: Interface) => {
   return (
     <>
       {
-        currentTime.isBetween(startTime, endTime) &&
+        (!isBeforeToday) &&
         <div
           className={'timeMark'}
-          style={{ width }}
+          style={isAfterToday ? {width, border: 'none'} : {width}}
         >
-          <span className='timeText'> {currentTime.format('h:mm a')} </span>
+          <span className='timeText' hidden={isAfterToday}> {currentTime.format('h:mm a')} </span>
         </div>
       }
     </>
