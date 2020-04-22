@@ -503,8 +503,7 @@ class EventItem extends Component {
       endResizeDiv = <div className="event-resizer event-end-resizer" ref={(ref) => this.endResizer = ref}></div>;
 
     let eventItemTemplate = (
-      <div className={roundCls + ' event-item'} key={eventItem.id}
-           style={{ height: config.eventItemHeight, backgroundColor: bgColor }}>
+      <div key={eventItem.id} style={{ height: config.eventItemHeight}}>
         {renderEvent(eventItem)}
       </div>
     );
