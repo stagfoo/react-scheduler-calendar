@@ -793,8 +793,15 @@ export class SchedulerData {
   getSpan(startTime: any, endTime: any, headers: any) {
     if (this.showAgenda) return 1;
 
-    const start = this.localeMoment(startTime);
-    const end = this.localeMoment.min(this.localeMoment(endTime), this.localeMoment(headers[headers.length - 1].time));
+    const start = moment.max(
+      this.localeMoment(startTime),
+      this.localeMoment(headers[0].time)
+    );
+    const end = moment.min(
+      this.localeMoment(endTime),
+      this.localeMoment(headers[headers.length - 1].time)
+    );
+
     let span;
     if (this.cellUnit === CellUnits.Hour) {
       span = Math.ceil(end.diff(start, 'minutes') / this.config.minuteStep);

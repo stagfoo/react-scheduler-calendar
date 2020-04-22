@@ -510,9 +510,11 @@ class EventItem extends Component {
     if (eventItemTemplateResolver)
       eventItemTemplate = eventItemTemplateResolver(schedulerData, eventItem, bgColor, isStart, isEnd, 'event-item', config.eventItemHeight, undefined);
 
-    const a = <div className="timeline-event" style={{ left: left, width: width, top: top, opacity: isDragging ? 0.2 : 1 }} onClick={() => {
-      if (eventItemClick) eventItemClick(schedulerData, eventItem);
-    }}>
+    const eventElement = <div className="timeline-event"
+                              style={{left: left, width: width, top: top, opacity: isDragging ? 0.2 : 1}}
+                              onClick={() => {
+                                if (eventItemClick) eventItemClick(schedulerData, eventItem);
+                              }}>
       {eventItemTemplate}
       {startResizeDiv}
       {endResizeDiv}
@@ -522,12 +524,12 @@ class EventItem extends Component {
       (schedulerData._isResizing() || config.eventItemPopoverEnabled === false || eventItem.showPopover === false || isDragging ?
           <div style={{ position: 'relative' }}>
             {
-              connectDragSource(a)
+              connectDragSource(eventElement)
             }
           </div> :
           <Popover placement="bottomLeft" content={content} trigger="hover" style={{ position: 'relative' }}>
             {
-              connectDragSource(a)
+              connectDragSource(eventElement)
             }
           </Popover>
       )

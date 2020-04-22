@@ -298,7 +298,7 @@ class ResourceEvents extends Component {
             const isEnd = eventEnd <= durationEnd;
 
             const left = index * cellWidth + (index > 0 ? 2 : 3);
-            const width = (evt.span * cellWidth - (index > 0 ? 5 : 6)) > 0 ? (evt.span * cellWidth - (index > 0 ? 5 : 6)) : 0;
+            const width = Math.max((evt.span * cellWidth - (index > 0 ? 5 : 6)), 0)
             const top = marginTop + idx * config.eventItemLineHeight;
             const eventItem = <DnDEventItem
               {...this.props}
