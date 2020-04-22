@@ -110,19 +110,18 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     });
   };
 
-  componentDidMount() {
-    this.resolveScrollbarSize();
-  }
-
-  componentDidUpdate() {
-    this.resolveScrollbarSize();
-    const {schedulerData} = this.props;
-    const {localeMoment, behaviors, config} = schedulerData;
+  scrollToSpecificTime = (): void => {
+    const { schedulerData } = this.props;
+    const { localeMoment, behaviors, config, selectDate } = schedulerData;
     if (schedulerData.getScrollToSpecialMoment() && !!behaviors.getScrollSpecialMomentFunc) {
       if (!!this.schedulerContent && this.schedulerContent.scrollWidth > this.schedulerContent.clientWidth) {
-        const start = localeMoment(schedulerData.startDate).startOf("day"),
-          end = localeMoment(schedulerData.endDate).endOf("day"),
-          specialMoment = behaviors.getScrollSpecialMomentFunc(schedulerData, config.dayAimTo);
+        const start = localeMoment(selectDate).startOf("day");
+        const end = localeMoment(selectDate).endOf("day");
+        const isToday = localeMoment(selectDate).isSame(localeMoment(), 'day');
+        const currentTime = localeMoment().hour() > 2 ? localeMoment().hour() - 2 : 0;
+        const aimTime = isToday ? currentTime : config.dayAimTo;
+        const specialMoment = behaviors.getScrollSpecialMomentFunc(schedulerData, aimTime);
+
         if (specialMoment >= start && specialMoment <= end) {
           let offsetCell = 0;
           schedulerData.headers.forEach((item: any) => {
@@ -134,6 +133,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         }
       }
     }
+  };
+
+  componentDidMount() {
+    this.resolveScrollbarSize();
+    this.scrollToSpecificTime();
+  }
+
+  componentDidUpdate() {
+    this.resolveScrollbarSize();
   }
 
   render() {
@@ -415,18 +423,25 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   goToToday = () => {
     const {onTodayClick, schedulerData} = this.props;
     schedulerData.setDate();
+    this.scrollToSpecificTime();
     onTodayClick(schedulerData);
   };
   goNext = () => {
     const {nextClick, schedulerData} = this.props;
+    schedulerData.next();
+    this.scrollToSpecificTime();
     nextClick(schedulerData);
   };
   goBack = () => {
     const {prevClick, schedulerData} = this.props;
+    schedulerData.prev();
+    this.scrollToSpecificTime();
     prevClick(schedulerData);
   };
   onSelect = (date: moment.Moment) => {
     const {onSelectDate, schedulerData} = this.props;
+    schedulerData.setDate(date);
+    this.scrollToSpecificTime();
     onSelectDate(schedulerData, date);
   };
 }

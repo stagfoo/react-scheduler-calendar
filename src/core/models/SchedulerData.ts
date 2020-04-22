@@ -155,6 +155,7 @@ export class SchedulerData {
     this.events = [];
     this._createHeaders();
     this._createRenderData();
+    this.setScrollToSpecialMoment(true);
   }
 
   next() {
@@ -162,6 +163,7 @@ export class SchedulerData {
     this.events = [];
     this._createHeaders();
     this._createRenderData();
+    this.setScrollToSpecialMoment(true);
   }
 
   setDate(date = moment().format(DATE_FORMAT)) {
@@ -169,6 +171,7 @@ export class SchedulerData {
     this.events = [];
     this._createHeaders();
     this._createRenderData();
+    this.setScrollToSpecialMoment(true);
   }
 
   setViewType(viewType = ViewTypes.Week, showAgenda = false, isEventPerspective = false) {
@@ -570,6 +573,7 @@ export class SchedulerData {
       this.startDate = date ? this.selectDate
         : this.localeMoment(this.startDate).add(num, 'days').format(DATE_FORMAT);
       this.endDate = this.startDate;
+      this.selectDate = this.startDate;
     } else if (this.viewType === ViewTypes.Month) {
       this.startDate = date ? this.localeMoment(date).startOf('month').format(DATE_FORMAT)
         : this.localeMoment(this.startDate).add(num, 'months').format(DATE_FORMAT);
