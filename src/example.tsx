@@ -26,6 +26,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     super(props);
     const newConfig: Partial<typeof config> = {
       nonWorkingTimeHeadBgColor: '#fff',
+      nonWorkingTimeHeadColor: '#222',
       eventItemHeight: 59,
       eventItemLineHeight: 59,
       dayCellWidth: 30,
@@ -140,14 +141,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   }
 
   prevClick = (schedulerData: any) => {
-    schedulerData.prev();
+    // schedulerData.prev();
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
     });
   };
   nextClick = (schedulerData: any) => {
-    schedulerData.next();
+    // schedulerData.next();
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
@@ -169,7 +170,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     });
   };
   onSelectDate = (schedulerData: any, date: any) => {
-    schedulerData.setDate(date);
+    // schedulerData.setDate(date);
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
