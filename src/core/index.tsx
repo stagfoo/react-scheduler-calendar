@@ -136,12 +136,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     }
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.resolveScrollbarSize();
     this.scrollToSpecificTime();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     this.resolveScrollbarSize();
   }
 
@@ -424,25 +424,25 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   goToToday = () => {
     const {onTodayClick, schedulerData} = this.props;
     schedulerData.setDate();
-    this.scrollToSpecificTime();
+    setTimeout(() => this.scrollToSpecificTime());
     onTodayClick(schedulerData);
   };
   goNext = () => {
     const {nextClick, schedulerData} = this.props;
     schedulerData.next();
-    this.scrollToSpecificTime();
+    setTimeout(() => this.scrollToSpecificTime());
     nextClick(schedulerData);
   };
   goBack = () => {
     const {prevClick, schedulerData} = this.props;
     schedulerData.prev();
-    this.scrollToSpecificTime();
+    setTimeout(() => this.scrollToSpecificTime());
     prevClick(schedulerData);
   };
   onSelect = (date: moment.Moment) => {
     const {onSelectDate, schedulerData} = this.props;
     schedulerData.setDate(date);
-    this.scrollToSpecificTime();
+    setTimeout(() => this.scrollToSpecificTime());
     onSelectDate(schedulerData, date);
   };
 }
