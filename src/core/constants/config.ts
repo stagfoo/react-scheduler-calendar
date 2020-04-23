@@ -30,6 +30,7 @@ export default {
   eventItemHeight: 88,
   eventItemLineHeight: 88,
   nonAgendaSlotMinHeight: 0,
+  dayStartTimeOffset: 2,
   dayStartFrom: 0,
   dayVisibleStartFrom: 9,
   dayStopTo: 23,
