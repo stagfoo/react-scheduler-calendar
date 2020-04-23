@@ -49,6 +49,7 @@ interface SchedulerProps {
   onScrollBottom?: (...args: any[]) => any;
   renderEvent?: (eventItem: any) => any;
   getHoverAreaStyle?: (hoverParams: any) => React.CSSProperties;
+  showBody?: boolean;
 }
 
 interface SchedulerState {
@@ -290,14 +291,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         />
       );
     }
+    const { showBody } = this.props;
     return (
       <div className={`scheduler-wrapper ${styles.schedulerWrapper}`}>
-        <div className='scheduler-header' style={{width: `${width}px`}}>{schedulerHeader}</div>
-        <div className={`scheduler-body ${styles.schedulerBody}`}>
-          <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{width: `${width}px`}}>
+        <div className='scheduler-header' style={{ width: `${width}px` }}>{schedulerHeader}</div>
+        {showBody && <div className={`scheduler-body ${styles.schedulerBody}`}>
+          <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{ width: `${width}px` }}>
             <tbody>{tbodyContent}</tbody>
           </table>
-        </div>
+        </div>}
       </div>
     );
   }

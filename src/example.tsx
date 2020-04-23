@@ -133,6 +133,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               dndSources={dndSources}
               toggleExpandFunc={this.toggleExpandFunc}
               renderEvent={this.renderEvent}
+              showBody={true}
             />
           </div>
         </div>
