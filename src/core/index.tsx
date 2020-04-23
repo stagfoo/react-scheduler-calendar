@@ -113,14 +113,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   scrollToSpecificTime = (): void => {
     const { schedulerData } = this.props;
     const { localeMoment, behaviors, config, selectDate } = schedulerData;
+    const { dayVisibleStartFrom, dayStartTimeOffset, dayStartFrom } = config;
     if (schedulerData.getScrollToSpecialMoment() && !!behaviors.getScrollSpecialMomentFunc) {
       if (!!this.schedulerContent && this.schedulerContent.scrollWidth > this.schedulerContent.clientWidth) {
         const start = localeMoment(selectDate).startOf("day");
         const end = localeMoment(selectDate).endOf("day");
         const isToday = localeMoment(selectDate).isSame(localeMoment(), 'day');
-        const currentTime = localeMoment().hour() > 2 ? localeMoment().hour() - 2 : 0;
-        const aimTime = isToday ? currentTime : config.dayAimTo;
-        const specialMoment = behaviors.getScrollSpecialMomentFunc(schedulerData, aimTime);
+        const currentTime = localeMoment().hour() > dayStartTimeOffset ? localeMoment().hour() - dayStartTimeOffset : dayStartFrom;
+        const visibleStartFrom = isToday ? currentTime : dayVisibleStartFrom;
+        const specialMoment = behaviors.getScrollSpecialMomentFunc(schedulerData, visibleStartFrom);
 
         if (specialMoment >= start && specialMoment <= end) {
           let offsetCell = 0;

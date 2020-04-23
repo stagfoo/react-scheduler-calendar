@@ -85,9 +85,9 @@ export const getEventText = (schedulerData, event) => {
     return eventText;
 }
 
-export const getScrollSpecialMoment = (schedulerData, dayAimTo) => {
+export const getScrollSpecialMoment = (schedulerData, dayVisibleStartFrom) => {
     const { localeMoment, selectDate } = schedulerData;
-    return localeMoment(selectDate).startOf('day').hours(dayAimTo);
+    return localeMoment(selectDate).startOf('day').hours(dayVisibleStartFrom);
 };
 
 export const isNonWorkingTime = (schedulerData, time) => {
