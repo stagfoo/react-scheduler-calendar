@@ -95,6 +95,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     return (<div>render event<span>{eventItem.id}</span></div>);
   };
 
+  handleConflict = (): void => {
+    this.setState({ showBody: false });
+    setTimeout(() => {
+      this.state.viewModel.setScrollToSpecialMoment(true);
+      this.setState({ showBody: true });
+    }, 1000);
+  }
+
   render() {
     const {viewModel, taskDndSource, resourceDndSource, showBody} = this.state;
     const dndList = viewModel.isEventPerspective ? (
@@ -109,6 +117,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         <CustomDragLayer/>
         <div className={styles.content}>
           <div className={styles.leftPane}>
+            <div><button onClick={this.handleConflict}>drop conflict</button></div>
             <div className={styles.jobList}>
               {dndList}
             </div>

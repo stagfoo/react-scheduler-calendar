@@ -243,6 +243,7 @@ class EventItem extends Component {
       });
 
       if (conflictOccurred) {
+        schedulerData.setScrollToSpecialMoment(true);
         conflictOccurred(schedulerData, 'StartResize', eventItem, DnDTypes.EVENT, slotId, slotName, newStart, eventItem.end);
       } else {
         console.log('Conflict occurred, set conflictOccurred func in Scheduler to handle it');
