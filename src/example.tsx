@@ -19,6 +19,7 @@ interface CalendarSchedulerState {
   viewModel: any;
   taskDndSource: any;
   resourceDndSource: any;
+  showBody: boolean;
 }
 
 class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
@@ -60,7 +61,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         ResourceItem,
         DnDTypes.RESOURCE,
       ),
+      showBody: false,
     };
+  }
+
+  componentDidMount(): void {
+    setTimeout(() => {
+      this.setState({ showBody: true });
+    }, 1000);
   }
 
   renderResourceList(resourceName: string, renderData: any, listRef: any) {
@@ -88,7 +96,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
 
   render() {
-    const {viewModel, taskDndSource, resourceDndSource} = this.state;
+    const {viewModel, taskDndSource, resourceDndSource, showBody} = this.state;
     const dndList = viewModel.isEventPerspective ? (
       <ResourceList schedulerData={viewModel} newEvent={this.newEvent} resourceDndSource={resourceDndSource}/>
     ) : (
@@ -133,7 +141,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               dndSources={dndSources}
               toggleExpandFunc={this.toggleExpandFunc}
               renderEvent={this.renderEvent}
-              showBody={true}
+              showBody={showBody}
             />
           </div>
         </div>
@@ -146,7 +154,12 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     schedulerData.setEvents(DemoData.eventsForTaskView);
     this.setState({
       viewModel: schedulerData,
+      showBody: false,
     });
+
+    setTimeout(() => {
+      this.setState({ showBody: true })
+    }, 2000);
   };
   nextClick = (schedulerData: any) => {
     // schedulerData.next();

@@ -63,6 +63,7 @@ interface SchedulerState {
   scrollTop: number;
   documentWidth: number;
   documentHeight: number;
+  showBody: boolean;
 }
 
 class Scheduler extends Component<SchedulerProps, SchedulerState> {
@@ -97,7 +98,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       scrollLeft: 0,
       scrollTop: 0,
       documentWidth: document.documentElement.clientWidth,
-      documentHeight: document.documentElement.clientHeight
+      documentHeight: document.documentElement.clientHeight,
+      showBody: this.props.showBody!,
     };
     if (schedulerData.isSchedulerResponsive()) window.onresize = this.onWindowResize;
   }
@@ -142,8 +144,17 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     this.scrollToSpecificTime();
   }
 
-  componentDidUpdate(): void {
+  static getDerivedStateFromProps(props: SchedulerProps, state: SchedulerState) {
+    if (props.showBody !== state.showBody) {
+      return { showBody: props.showBody };
+    }
+  }
+
+  componentDidUpdate(props: SchedulerProps, state: SchedulerState): void {
     this.resolveScrollbarSize();
+    if (this.props.showBody !== state.showBody) {
+      this.scrollToSpecificTime();
+    }
   }
 
   render() {
@@ -426,25 +437,21 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   goToToday = () => {
     const {onTodayClick, schedulerData} = this.props;
     schedulerData.setDate();
-    setTimeout(() => this.scrollToSpecificTime());
     onTodayClick(schedulerData);
   };
   goNext = () => {
     const {nextClick, schedulerData} = this.props;
     schedulerData.next();
-    setTimeout(() => this.scrollToSpecificTime());
     nextClick(schedulerData);
   };
   goBack = () => {
     const {prevClick, schedulerData} = this.props;
     schedulerData.prev();
-    setTimeout(() => this.scrollToSpecificTime());
     prevClick(schedulerData);
   };
   onSelect = (date: moment.Moment) => {
     const {onSelectDate, schedulerData} = this.props;
     schedulerData.setDate(date);
-    setTimeout(() => this.scrollToSpecificTime());
     onSelectDate(schedulerData, date);
   };
 }
