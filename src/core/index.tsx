@@ -148,11 +148,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     if (props.showBody !== state.showBody) {
       return { showBody: props.showBody };
     }
+    return null;
   }
 
-  componentDidUpdate(props: SchedulerProps, state: SchedulerState): void {
+  componentDidUpdate(props: SchedulerProps): void {
     this.resolveScrollbarSize();
-    if (this.props.showBody && this.props.showBody !== state.showBody) {
+    if (this.props.showBody && this.props.showBody !== props.showBody) {
       this.scrollToSpecificTime();
     }
   }
