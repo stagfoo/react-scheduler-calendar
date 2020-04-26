@@ -206,7 +206,6 @@ class ResourceEvents extends Component {
     if (hasConflict) {
       const { conflictOccurred } = this.props;
       if (conflictOccurred) {
-        schedulerData.setScrollToSpecialMoment(true);
         conflictOccurred(schedulerData, 'New', {
           id: undefined,
           start: startTime,

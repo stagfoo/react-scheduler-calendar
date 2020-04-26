@@ -81,7 +81,6 @@ export class DnDSource {
                 if (hasConflict) {
                     const { conflictOccurred } = props;
                     if (conflictOccurred) {
-                        schedulerData.setScrollToSpecialMoment(true);
                         conflictOccurred(schedulerData, action, item, type, slotId, slotName, newStart, newEnd);
                     } else {
                         console.log('Conflict occurred, set conflictOccurred func in Scheduler to handle it');

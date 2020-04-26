@@ -117,6 +117,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const { schedulerData } = this.props;
     const { localeMoment, behaviors, config, selectDate } = schedulerData;
     const { dayVisibleStartFrom, dayStartTimeOffset, dayStartFrom } = config;
+    schedulerData.setScrollToSpecialMoment(true);
     if (schedulerData.getScrollToSpecialMoment() && !!behaviors.getScrollSpecialMomentFunc) {
       if (!!this.schedulerContent && this.schedulerContent.scrollWidth > this.schedulerContent.clientWidth) {
         const start = localeMoment(selectDate).startOf("day");

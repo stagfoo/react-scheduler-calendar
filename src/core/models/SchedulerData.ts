@@ -155,7 +155,6 @@ export class SchedulerData {
     this.events = [];
     this._createHeaders();
     this._createRenderData();
-    this.setScrollToSpecialMoment(true);
   }
 
   next() {
@@ -163,7 +162,6 @@ export class SchedulerData {
     this.events = [];
     this._createHeaders();
     this._createRenderData();
-    this.setScrollToSpecialMoment(true);
   }
 
   setDate(date = moment().format(DATE_FORMAT)) {
@@ -171,7 +169,6 @@ export class SchedulerData {
     this.events = [];
     this._createHeaders();
     this._createRenderData();
-    this.setScrollToSpecialMoment(true);
   }
 
   setViewType(viewType = ViewTypes.Week, showAgenda = false, isEventPerspective = false) {
