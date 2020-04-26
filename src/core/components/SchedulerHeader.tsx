@@ -89,7 +89,7 @@ class SchedulerHeader extends React.Component<Props, State> {
             {calendarPopoverEnabled ? (
               <Popover
                 content={this.renderPopover()}
-                placement="bottom"
+                placement="bottomRight"
                 trigger="click"
                 visible={this.state.visible}
                 onVisibleChange={this.handleVisibleChange}
