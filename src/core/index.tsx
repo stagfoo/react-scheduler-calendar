@@ -183,7 +183,11 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
             resourceEvents={item}
             dndSource={eventDndSource}
             onHover={(params: any) => {
-              this.schedulerContent.scrollLeft = params.left;
+              if (this.schedulerContent.scrollLeft > params.left) {
+                this.schedulerContent.scrollLeft = params.left;
+              } else if (schedulerContainerWidth < params.left + params.width) {
+                this.schedulerContent.scrollLeft = schedulerWidth - schedulerContainerWidth;
+              }
             }}
           />
         );
