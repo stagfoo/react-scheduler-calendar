@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import TimeLine from "../lib/TimeLine";
 import EventItem from "./components/EventItem";
-import { DnDSource } from "./DnDSource";
+import {DnDSource} from "./DnDSource";
 import DnDContext from "./DnDContext";
 import ResourceView from "./components/ResourceView";
 import HeaderView from "./components/HeaderView";
@@ -114,9 +114,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   };
 
   scrollToSpecificTime = (): void => {
-    const { schedulerData } = this.props;
-    const { localeMoment, behaviors, config, selectDate } = schedulerData;
-    const { dayVisibleStartFrom, dayStartTimeOffset, dayStartFrom } = config;
+    const {schedulerData} = this.props;
+    const {localeMoment, behaviors, config, selectDate} = schedulerData;
+    const {dayVisibleStartFrom, dayStartTimeOffset, dayStartFrom} = config;
     schedulerData.setScrollToSpecialMoment(true);
     if (schedulerData.getScrollToSpecialMoment() && !!behaviors.getScrollSpecialMomentFunc) {
       if (!!this.schedulerContent && this.schedulerContent.scrollWidth > this.schedulerContent.clientWidth) {
@@ -147,7 +147,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
 
   static getDerivedStateFromProps(props: SchedulerProps, state: SchedulerState) {
     if (props.showBody !== state.showBody) {
-      return { showBody: props.showBody };
+      return {showBody: props.showBody};
     }
     return null;
   }
@@ -160,7 +160,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   }
 
   render() {
-    const { schedulerData, leftCustomHeader, rightCustomHeader, renderResourceList } = this.props;
+    const {schedulerData, leftCustomHeader, rightCustomHeader, renderResourceList} = this.props;
     const {renderData, showAgenda, config, startDate, endDate, localeMoment} = schedulerData;
     const start = localeMoment(startDate).startOf("day");
     const end = localeMoment(endDate).endOf("day");
@@ -176,7 +176,17 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       const eventDndSource = this.state.dndContext.getDndSource();
       const displayRenderData = renderData.filter((o: any) => o.render);
       const resourceEventsList = displayRenderData.map((item: any) => {
-        return <DndResourceEvents {...this.props} key={item.slotId} resourceEvents={item} dndSource={eventDndSource}/>;
+        return (
+          <DndResourceEvents
+            {...this.props}
+            key={item.slotId}
+            resourceEvents={item}
+            dndSource={eventDndSource}
+            onHover={(params: any) => {
+              this.schedulerContent.scrollLeft = params.left;
+            }}
+          />
+        );
       });
       const contentScrollbarHeight = this.state.contentScrollbarHeight,
         contentScrollbarWidth = this.state.contentScrollbarWidth,
@@ -217,7 +227,11 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                 : (
                   <div className="resource-view">
                     <div style={{overflow: "hidden", height: config.tableHeaderHeight}}>
-                      <div style={{overflowX: "scroll", overflowY: "hidden", margin: `0px 0px -${contentScrollbarHeight}px`}}>
+                      <div style={{
+                        overflowX: "scroll",
+                        overflowY: "hidden",
+                        margin: `0px 0px -${contentScrollbarHeight}px`
+                      }}>
                         <table className="resource-table">
                           <thead>
                           <tr style={{height: config.tableHeaderHeight}}>
@@ -304,12 +318,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         />
       );
     }
-    const { showBody } = this.props;
+    const {showBody} = this.props;
     return (
       <div className={`scheduler-wrapper ${styles.schedulerWrapper}`}>
-        <div className='scheduler-header' style={{ width: `${width}px` }}>{schedulerHeader}</div>
+        <div className='scheduler-header' style={{width: `${width}px`}}>{schedulerHeader}</div>
         {showBody && <div className={`scheduler-body ${styles.schedulerBody}`}>
-          <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{ width: `${width}px` }}>
+          <table id="RBS-Scheduler-root" className={styles.schedulerContainer} style={{width: `${width}px`}}>
             <tbody>{tbodyContent}</tbody>
           </table>
         </div>}
@@ -468,5 +482,5 @@ export * from "./DnDSource";
 export * from "./DnDContext";
 export * from "./components/AddMorePopover";
 export * from '../lib';
-export { config };
+export {config};
 export default Scheduler;

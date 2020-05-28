@@ -28,6 +28,7 @@ class ResourceEvents extends Component {
     onSetAddMoreState: PropTypes.func,
     updateEventStart: PropTypes.func,
     updateEventEnd: PropTypes.func,
+    onHover: PropTypes.func,
     moveEvent: PropTypes.func,
     movingEvent: PropTypes.func,
     conflictOccurred: PropTypes.func,
@@ -245,7 +246,7 @@ class ResourceEvents extends Component {
   }
 
   render() {
-    const { resourceEvents, schedulerData, connectDropTarget, dndSource, isOver, getHoverAreaStyle } = this.props;
+    const { resourceEvents, schedulerData, connectDropTarget, dndSource, isOver, getHoverAreaStyle, onHover } = this.props;
     const { cellUnit, startDate, endDate, config, localeMoment } = schedulerData;
     const { isSelecting, left, width } = this.state;
     const cellWidth = schedulerData.getContentCellWidth();
@@ -273,6 +274,13 @@ class ResourceEvents extends Component {
       }
 
       hoverArea = <div style={hoverStyle} />
+      if (onHover) {
+        const hoverEventParams = {
+          left: hoverStyle.left,
+          width: hoverStyle.width,
+        }
+        onHover(hoverEventParams);
+      }
     }
 
     const eventList = [];
