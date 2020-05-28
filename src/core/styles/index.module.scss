@@ -146,4 +146,10 @@
     flex: 1;
     overflow-y: auto;
   }
+  .schedulerContent {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 0;
+    position: relative;
+  }
 }

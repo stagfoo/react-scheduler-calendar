@@ -26,6 +26,7 @@ module.exports = merge(base, {
     }),
   ],
   devServer: {
+    host: '0.0.0.0',
     contentBase: distPath,
     compress: false,
     port: 9000,

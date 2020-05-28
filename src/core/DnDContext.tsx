@@ -1,11 +1,15 @@
-import {DropTarget, DropTargetMonitor} from 'react-dnd';
-import { getPos } from './utils/Util';
-import { DnDTypes } from './constants/DnDTypes';
-import { CellUnits, DATETIME_FORMAT } from './index';
-import { ViewTypes } from './constants/ViewTypes';
+import {DropTarget, DropTargetMonitor, XYCoord} from 'react-dnd';
+import {getPos} from './utils/Util';
+import {DnDTypes} from './constants/DnDTypes';
+import {CellUnits, DATETIME_FORMAT} from './index';
+import {ViewTypes} from './constants/ViewTypes';
+
 export default class DnDContext {
   private sourceMap: Map<string, any>;
   private readonly DecoratedComponent: any;
+  private prevHoverCalledTime: number = 0;
+  private prevHoverPosition: XYCoord | null = null;
+
   constructor(sources: any, DecoratedComponent: any) {
     this.sourceMap = new Map();
     sources.forEach((item: any) => {
@@ -13,11 +17,14 @@ export default class DnDContext {
     });
     this.DecoratedComponent = DecoratedComponent;
   }
+
   getDropSpec = () => {
     return {
       drop: (props: any, monitor: DropTargetMonitor, component: any) => {
-        const { schedulerData, resourceEvents } = props;
-        const { cellUnit, localeMoment } = schedulerData;
+        this.prevHoverCalledTime = 0;
+        this.prevHoverPosition = null;
+        const {schedulerData, resourceEvents} = props;
+        const {cellUnit, localeMoment} = schedulerData;
         const type = monitor.getItemType();
         const pos = getPos(component.eventContainer);
         const cellWidth = schedulerData.getContentCellWidth();
@@ -55,14 +62,23 @@ export default class DnDContext {
         };
       },
       hover: (props: any, monitor: DropTargetMonitor, component: any) => {
-        const { schedulerData, resourceEvents, movingEvent } = props;
-        const { cellUnit, config, viewType, localeMoment } = schedulerData;
+        const currentTime = new Date().valueOf();
+        if (this.prevHoverCalledTime !== 0 && currentTime - this.prevHoverCalledTime < 10) {
+          return;
+        }
+        const pointerPosition = monitor.getClientOffset();
+        if(!this.prevHoverPosition) {
+          this.prevHoverPosition = pointerPosition;
+        }
+
+        this.prevHoverCalledTime = currentTime;
+        const {schedulerData, resourceEvents, movingEvent} = props;
+        const {cellUnit, config, viewType, localeMoment} = schedulerData;
         const draggingItem = monitor.getItem();
         const draggingItemType = monitor.getItemType();
         const isEvent = draggingItemType === DnDTypes.EVENT;
 
         const eventContainerPosition = getPos(component.eventContainer);
-        const pointerPosition = monitor.getClientOffset();
 
         const cellWidth = schedulerData.getContentCellWidth();
 
@@ -118,17 +134,20 @@ export default class DnDContext {
             width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
             item: draggingItem,
             itemType: draggingItemType,
+            pointer: pointerPosition,
+            movement: { x: pointerPosition!.x - this.prevHoverPosition!.x, y: pointerPosition!.y - this.prevHoverPosition!.y},
           }
         });
         if (movingEvent) {
           movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, draggingItemType, draggingItem);
         }
+        this.prevHoverPosition = pointerPosition;
       },
       canDrop: (props: any, monitor: DropTargetMonitor) => {
-        const { schedulerData, resourceEvents } = props;
+        const {schedulerData, resourceEvents} = props;
         const item = monitor.getItem();
         if (schedulerData._isResizing()) return false;
-        const { config } = schedulerData;
+        const {config} = schedulerData;
         return config.movable && !resourceEvents.groupOnly && (item.movable === undefined || item.movable !== false);
       }
     };

@@ -276,8 +276,8 @@ class ResourceEvents extends Component {
       hoverArea = <div style={hoverStyle} />
       if (onHover) {
         const hoverEventParams = {
-          left: hoverStyle.left,
-          width: hoverStyle.width,
+          pointer: this.state.hover.pointer,
+          movement: this.state.hover.movement,
         }
         onHover(hoverEventParams);
       }
