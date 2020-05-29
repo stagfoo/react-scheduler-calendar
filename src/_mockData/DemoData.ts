@@ -2,39 +2,12 @@ import moment from 'moment';
 
 const todayDate = moment().format('YYYY-MM-DD');
 const DemoData = {
-    resources: [
-        {
-            id: 'r0',
-            name: 'Category 1',
-            groupOnly: true,
-        },
-        {
-            id: 'r1',
-            name: 'Technician1',
-            parentId: 'r0',
-        },
-        {
-            id: 'r2',
-            name: 'Technician2',
-            parentId: 'r0',
-        },
-        {
-            id: 'r3',
-            name: 'Technician3',
-        },
-        {
-            id: 'r4',
-            name: 'Technician4',
-        },
-        {
-            id: 'r5',
-            name: 'Technician5',
-        },
-        {
-            id: 'r6',
-            name: 'Technician6',
-        },
-    ],
+    resources: new Array(20).fill(0).map((_, index) => (
+      {
+        id: `r${index}`,
+        name: `Resource${index}`,
+      }
+    )),
     events: [
         {
             id: 1,

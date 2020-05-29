@@ -157,7 +157,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   };
 
   accelerateRate(distance: number, maxDistance: number) {
-    return Math.exp((maxDistance - distance) / maxDistance * 3)
+    return Math.exp((maxDistance - distance) / maxDistance * 2)
   }
 
   handleHover(params: any): void {
@@ -173,8 +173,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
 
     this.preHoverTime = new Date().valueOf();
 
-    const { movement, pointer} = params;
-    console.log(movement);
+    const { pointer} = params;
     const {x: pointerX, y: pointerY} = pointer;
     const schedulerContentBound = this.schedulerContent.getBoundingClientRect();
     const schedulerViewBound = this.schedulerView.getBoundingClientRect();
@@ -182,11 +181,10 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let scrollLeft = this.schedulerContent.scrollLeft;
     let scrollTop = this.schedulerView.scrollTop;
     const SCROLL_DISTANCE = 60;
-    if (pointerX - schedulerContentBound.left < SCROLL_DISTANCE && this.schedulerContent.scrollLeft > 0 && movement.x <= 0) {
+    if (pointerX - schedulerContentBound.left < SCROLL_DISTANCE && this.schedulerContent.scrollLeft > 0) {
       scrollLeft = Math.max(0, this.schedulerContent.scrollLeft - step * this.accelerateRate(pointerX - schedulerContentBound.left, SCROLL_DISTANCE));
     } else if (
       schedulerContentBound.right - pointerX < SCROLL_DISTANCE &&
-      movement.x >= 0 &&
       this.schedulerContent.scrollLeft < this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth
     ) {
       scrollLeft = this.schedulerContent.scrollLeft + step * this.accelerateRate(schedulerContentBound.right - pointerX, SCROLL_DISTANCE);
@@ -201,13 +199,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       scrollTop = this.schedulerView.scrollTop + step * this.accelerateRate(schedulerViewBound.bottom - pointerY, SCROLL_DISTANCE);
     }
 
-    this.schedulerContent.scrollTo({
-      left: scrollLeft,
-    });
-
-    this.schedulerView.scrollTo({
-      top: scrollTop,
-    });
+    this.schedulerContent.scrollLeft = scrollLeft;
+    this.schedulerView.scrollTop = scrollTop;
   }
 
   componentDidMount(): void {
