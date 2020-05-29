@@ -8,7 +8,6 @@ const base = require('./webpack.base.conf');
 module.exports = merge(base, {
   mode: "production",
   entry: path.join(srcPath, 'index.tsx'),
-  devtool: 'eval-source-map',
   output: {
     library: 'react-scheduler-calendar',
     libraryTarget: 'commonjs2',
@@ -26,7 +25,6 @@ module.exports = merge(base, {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        sourceMap: true,
         terserOptions: {
           keep_fnames: true,
           keep_classnames: true,
