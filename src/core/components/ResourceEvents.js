@@ -29,7 +29,6 @@ class ResourceEvents extends Component {
     updateEventStart: PropTypes.func,
     updateEventEnd: PropTypes.func,
     onHover: PropTypes.func,
-    isOver: PropTypes.boolean,
     moveEvent: PropTypes.func,
     movingEvent: PropTypes.func,
     conflictOccurred: PropTypes.func,
