@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { Component } from 'react';
+import DnDObserver from 'src/core/components/DnDObserver';
 import ResourceEventsList from 'src/core/components/ResourceEventsList';
 import TimeLine from '../lib/TimeLine';
 import AgendaView from './components/AgendaView';
@@ -418,7 +419,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                         dndContext={this.state.dndContext}
                         displayRenderData={displayRenderData}
                         onHover={this.handleHover.bind(this)}
-                        onDraggingChanged={this.handleDraggingChanged.bind(this)}
                         {...this.props}
                       />
                       </tbody>
@@ -462,25 +462,28 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     }
     const { showBody } = this.props;
     return (
-      <div className={`scheduler-wrapper ${styles.schedulerWrapper}`}>
-        <div className="scheduler-header" style={{ width: `${width}px` }}>
-          {schedulerHeader}
-        </div>
-        {showBody && (
-          <div
-            className={`scheduler-body ${styles.schedulerBody}`}
-            ref={this.schedulerViewRef}
-          >
-            <table
-              id="RBS-Scheduler-root"
-              className={styles.schedulerContainer}
-              style={{ width: `${width}px` }}
-            >
-              <tbody>{tbodyContent}</tbody>
-            </table>
+      <>
+        <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)} />
+        <div className={`scheduler-wrapper ${styles.schedulerWrapper}`}>
+          <div className="scheduler-header" style={{ width: `${width}px` }}>
+            {schedulerHeader}
           </div>
-        )}
-      </div>
+          {showBody && (
+            <div
+              className={`scheduler-body ${styles.schedulerBody}`}
+              ref={this.schedulerViewRef}
+            >
+              <table
+                id="RBS-Scheduler-root"
+                className={styles.schedulerContainer}
+                style={{ width: `${width}px` }}
+              >
+                <tbody>{tbodyContent}</tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </>
     );
   }
 

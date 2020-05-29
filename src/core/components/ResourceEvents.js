@@ -30,7 +30,6 @@ class ResourceEvents extends Component {
     updateEventEnd: PropTypes.func,
     onHover: PropTypes.func,
     isOver: PropTypes.boolean,
-    onDraggingChanged: PropTypes.func,
     moveEvent: PropTypes.func,
     movingEvent: PropTypes.func,
     conflictOccurred: PropTypes.func,
@@ -54,12 +53,6 @@ class ResourceEvents extends Component {
       } else {
         this.eventContainer.addEventListener('mousedown', this.initDrag, false);
       }
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.isDragging !== prevProps.isDragging) {
-      this.props.onDraggingChanged(this.props.isDragging);
     }
   }
 
