@@ -57,12 +57,10 @@ class ResourceEvents extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    if(this.props.isOver !== nextProps.isOver) {
-      // this.props.onHoverChanged(this.props.isOver, nextProps.isOver);
-      console.log(nextProps.isOver);
+  componentDidUpdate(prevProps) {
+    if (this.props.isOver !== prevProps.isOver) {
+      this.props.onHoverChanged(this.props.isOver, prevProps.isOver);
     }
-    return true;
   }
 
   // eslint-disable-next-line camelcase
@@ -136,10 +134,10 @@ class ResourceEvents extends Component {
       document.documentElement.addEventListener('mousemove', this.doDrag, false);
       document.documentElement.addEventListener('mouseup', this.stopDrag, false);
     }
-    document.onselectstart = function() {
+    document.onselectstart = function () {
       return false;
     };
-    document.ondragstart = function() {
+    document.ondragstart = function () {
       return false;
     };
   };
@@ -284,7 +282,7 @@ class ResourceEvents extends Component {
     const rowWidth = schedulerData.getContentTableWidth();
     const DnDEventItem = dndSource.getDragSource();
     const selectedArea = isSelecting ?
-      <SelectedArea style={ {left, width, backgroundColor: schedulerData.config.selectedAreaColor }} /> : <div/>;
+      <SelectedArea style={{ left, width, backgroundColor: schedulerData.config.selectedAreaColor }}/> : <div/>;
     let hoverArea = null;
 
     if (isOver && this.state.hover) {
@@ -376,7 +374,7 @@ class ResourceEvents extends Component {
           const width = cellWidth - (index > 0 ? 5 : 6);
           const key = `${resourceEvents.slotId}_${headerItem.time}`;
           const summary = <Summary key={key} schedulerData={schedulerData} summary={headerItem.summary} left={left}
-            width={width} top={top}/>;
+                                   width={width} top={top}/>;
           eventList.push(summary);
         }
       }
@@ -388,7 +386,7 @@ class ResourceEvents extends Component {
           {
             connectDropTarget(
               <div ref={this.eventContainerRef} className="event-container"
-                style={{ height: resourceEvents.rowHeight }}>
+                   style={{ height: resourceEvents.rowHeight }}>
                 {hoverArea}
                 {selectedArea}
                 {eventList}
