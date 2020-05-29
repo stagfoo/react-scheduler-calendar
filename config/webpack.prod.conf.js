@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-
+const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const distPath = path.resolve(__dirname, '../dist');
 const srcPath = path.resolve(__dirname, '../src');
@@ -8,6 +8,7 @@ const base = require('./webpack.base.conf');
 module.exports = merge(base, {
   mode: "production",
   entry: path.join(srcPath, 'index.tsx'),
+  devtool: 'eval-source-map',
   output: {
     library: 'react-scheduler-calendar',
     libraryTarget: 'commonjs2',
@@ -23,6 +24,14 @@ module.exports = merge(base, {
   },
   optimization: {
     minimize: true,
-    moduleIds: 'named'
+    minimizer: [
+      new TerserPlugin({
+        sourceMap: true,
+        terserOptions: {
+          keep_fnames: true,
+          keep_classnames: true,
+        },
+      }),
+    ],
   }
 });

@@ -70,6 +70,7 @@
     "react-scripts-ts": "^2.16.0",
     "rrule": "^2.6.0",
     "sass-loader": "^8.0.2",
+    "terser-webpack-plugin": "^3.0.2",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
     "webpack": "^4.42.0",
