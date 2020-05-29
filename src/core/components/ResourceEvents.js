@@ -30,7 +30,7 @@ class ResourceEvents extends Component {
     updateEventEnd: PropTypes.func,
     onHover: PropTypes.func,
     isOver: PropTypes.boolean,
-    onHoverChanged: PropTypes.func,
+    onDraggingChanged: PropTypes.func,
     moveEvent: PropTypes.func,
     movingEvent: PropTypes.func,
     conflictOccurred: PropTypes.func,
@@ -58,8 +58,8 @@ class ResourceEvents extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.isOver !== prevProps.isOver) {
-      this.props.onHoverChanged(this.props.isOver, prevProps.isOver);
+    if (this.props.isDragging !== prevProps.isDragging) {
+      this.props.onDraggingChanged(this.props.isDragging);
     }
   }
 

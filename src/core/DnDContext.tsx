@@ -166,6 +166,7 @@ export default class DnDContext {
       connectDropTarget: connect.dropTarget(),
       isOver: monitor.isOver({ shallow: true }),
       clientOffset: monitor.getClientOffset(),
+      isDragging: monitor.getClientOffset() !== null,
     };
   }
 

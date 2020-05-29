@@ -6,25 +6,22 @@ interface RequiredProps {
   displayRenderData: any[];
   schedulerData: any;
   onHover: (args: any) => void;
+  onDraggingChanged: (isDragging: boolean) => void;
 }
 
 type Props = RequiredProps & Partial<SchedulerProps>;
 export const ResourceEventsList: React.FC<Props> = (props) => {
-  const { dndContext, displayRenderData, schedulerData, onHover, ...rest } = props;
-  const refs = displayRenderData.map((item: any, index: number) => React.createRef());
+  const { dndContext, displayRenderData, schedulerData, onHover, onDraggingChanged, ...rest } = props;
   const DndResourceEvents = dndContext.getDropTarget();
   const eventDndSource = dndContext.getDndSource();
   const resourceEventsList = displayRenderData.map((item: any, index: number) => (
     <DndResourceEvents
-      ref={refs[index]}
       key={item.slotId}
       resourceEvents={item}
       dndSource={eventDndSource}
       schedulerData={schedulerData}
       onHover={onHover}
-      onHoverChanged={() => refs.findIndex(
-        (ref) => ref.current && (ref.current as any).decoratedRef.current.props.isOver,
-      ) >= 0}
+      onDraggingChanged={onDraggingChanged}
       {...rest}
     />
   ));

@@ -169,6 +169,17 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     return Math.exp((maxDistance - distance) / maxDistance * 2);
   }
 
+  handleDraggingChanged(isDragging: boolean) {
+    if (!isDragging) {
+      this.hasMovedInSchedulerContent = {
+        left: false,
+        right: false,
+        up: false,
+        down: false,
+      };
+    }
+  }
+
   handleHover(params: any): void {
     if (!(this.schedulerContent && this.schedulerView)) {
       return;
@@ -334,9 +345,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   >
                     <table className="resource-table">
                       <thead>
-                        <tr style={{ height: config.tableHeaderHeight }}>
-                          <th className="header3-text">{resourceName}</th>
-                        </tr>
+                      <tr style={{ height: config.tableHeaderHeight }}>
+                        <th className="header3-text">{resourceName}</th>
+                      </tr>
                       </thead>
                     </table>
                   </div>
@@ -403,12 +414,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   <div className="scheduler-content-table-container">
                     <table className="scheduler-content-table">
                       <tbody>
-                        <ResourceEventsList
-                          dndContext={this.state.dndContext}
-                          displayRenderData={displayRenderData}
-                          onHover={this.handleHover.bind(this)}
-                          { ...this.props}
-                        />
+                      <ResourceEventsList
+                        dndContext={this.state.dndContext}
+                        displayRenderData={displayRenderData}
+                        onHover={this.handleHover.bind(this)}
+                        onDraggingChanged={this.handleDraggingChanged.bind(this)}
+                        {...this.props}
+                      />
                       </tbody>
                     </table>
                   </div>
@@ -584,13 +596,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   };
   onSchedulerContentMouseOut = () => {
     this.currentArea = -1;
-    this.hasMovedInSchedulerContent = {
-      left: false,
-      right: false,
-      up: false,
-      down: false,
-    };
-    // console.log('onSchedulerContentMouseOut', this.hasMovedInSchedulerContent);
   };
   onSchedulerContentScroll = () => {
     if (
