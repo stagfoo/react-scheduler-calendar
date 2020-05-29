@@ -164,7 +164,7 @@ export default class DnDContext {
   getDropCollect(connect: DropTargetConnector, monitor: DropTargetMonitor) {
     return {
       connectDropTarget: connect.dropTarget(),
-      isOver: monitor.isOver(),
+      isOver: monitor.isOver({ shallow: true }),
       clientOffset: monitor.getClientOffset(),
     };
   }

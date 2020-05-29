@@ -273,16 +273,13 @@ class ResourceEvents extends Component {
     const cellMaxEvents = schedulerData.getCellMaxEvents();
     const rowWidth = schedulerData.getContentTableWidth();
     const DnDEventItem = dndSource.getDragSource();
-    const selectedArea = isSelecting ? <SelectedArea {...this.props} left={left} width={width}/> : <div/>;
+    const selectedArea = isSelecting ?
+      <SelectedArea style={ {left, width, backgroundColor: schedulerData.config.selectedAreaColor }} /> : <div/>;
     let hoverArea = null;
 
     if (isOver && this.state.hover) {
       let hoverStyle = {
-        top: 0,
-        bottom: 0,
-        position: 'absolute',
         left: this.state.hover.leftIndex * cellWidth,
-        background: '#b5dbe2',
         width: this.state.hover.width || cellWidth,
       };
 
@@ -293,7 +290,7 @@ class ResourceEvents extends Component {
         };
       }
 
-      hoverArea = <div style={hoverStyle}/>;
+      hoverArea = <div className={'hover-area'} style={hoverStyle}/>;
       if (onHover) {
         const hoverEventParams = {
           pointer: this.state.hover.pointer,

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 interface SelectedAreaProps {
-  schedulerData: any;
-  left: number;
-  width: number;
+  style?: React.CSSProperties;
 }
 
 class SelectedArea extends Component<SelectedAreaProps> {
@@ -12,12 +10,11 @@ class SelectedArea extends Component<SelectedAreaProps> {
   }
 
   render() {
-    const { left, width, schedulerData } = this.props;
-    const { config } = schedulerData;
+    const { style } = this.props;
     return (
       <div
         className="selected-area"
-        style={{ left, width, top: 0, bottom: 0, backgroundColor: config.selectedAreaColor }}
+        style={style}
       />
     );
   }
