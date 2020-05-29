@@ -8,8 +8,8 @@ import { getPos } from './utils/Util';
 export default class DnDContext {
   private sourceMap: Map<string, any>;
   private readonly DecoratedComponent: React.ComponentType;
-  private prevHoverCalledTime = 0;
-  private prevHoverPosition: XYCoord | null = null;
+  private lastHoverCalledTime = 0;
+  private lastHoverPosition: XYCoord | null = null;
 
   constructor(sources: any, DecoratedComponent: React.ComponentType) {
     this.sourceMap = new Map();
@@ -21,7 +21,7 @@ export default class DnDContext {
 
   getDropSpec = () => ({
     drop: (props: any, monitor: DropTargetMonitor, component: any) => {
-      this.prevHoverPosition = null;
+      this.lastHoverPosition = null;
       const { schedulerData, resourceEvents } = props;
       const { cellUnit, localeMoment } = schedulerData;
       const type = monitor.getItemType();
@@ -64,15 +64,15 @@ export default class DnDContext {
     },
     hover: (props: any, monitor: DropTargetMonitor, component: any) => {
       const currentTime = new Date().valueOf();
-      if (currentTime - this.prevHoverCalledTime < 10) {
+      const calledInterval = currentTime - this.lastHoverCalledTime;
+      if (calledInterval < 10) {
         return;
       }
       const pointerPosition = monitor.getClientOffset();
-      if (!this.prevHoverPosition) {
-        this.prevHoverPosition = pointerPosition;
+      if (!this.lastHoverPosition) {
+        this.lastHoverPosition = pointerPosition;
       }
-
-      this.prevHoverCalledTime = currentTime;
+      this.lastHoverCalledTime = currentTime;
       const { schedulerData, resourceEvents, movingEvent } = props;
       const { cellUnit, config, viewType, localeMoment } = schedulerData;
       const draggingItem = monitor.getItem();
@@ -140,15 +140,15 @@ export default class DnDContext {
           itemType: draggingItemType,
           pointer: pointerPosition,
           movement: {
-            x: pointerPosition!.x - this.prevHoverPosition!.x,
-            y: pointerPosition!.y - this.prevHoverPosition!.y,
+            x: pointerPosition!.x - this.lastHoverPosition!.x,
+            y: pointerPosition!.y - this.lastHoverPosition!.y,
           },
         },
       });
       if (movingEvent) {
         movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, draggingItemType, draggingItem);
       }
-      this.prevHoverPosition = pointerPosition;
+      this.lastHoverPosition = pointerPosition;
     },
     canDrop: (props: any, monitor: DropTargetMonitor) => {
       const { schedulerData, resourceEvents } = props;
@@ -162,15 +162,19 @@ export default class DnDContext {
   });
 
   getDropCollect(connect: DropTargetConnector, monitor: DropTargetMonitor) {
+    const isDragging = monitor.getClientOffset() !== null;
+    if (!isDragging) {
+      this.lastHoverPosition = null;
+    }
     return {
       connectDropTarget: connect.dropTarget(),
       isOver: monitor.isOver({ shallow: true }),
       clientOffset: monitor.getClientOffset(),
-      isDragging: monitor.getClientOffset() !== null,
+      isDragging,
     };
   }
 
   getDropTarget = () => DropTarget(
-    Array.from(this.sourceMap.keys()), this.getDropSpec(), this.getDropCollect)(this.DecoratedComponent);
+    Array.from(this.sourceMap.keys()), this.getDropSpec(), this.getDropCollect.bind(this))(this.DecoratedComponent);
   getDndSource = (dndType = DnDTypes.EVENT) => this.sourceMap.get(dndType);
 }

@@ -202,8 +202,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       down: this.hasMovedInSchedulerContent.down || movement.y < 0,
     };
 
-    // console.log(this.hasMovedInSchedulerContent);
-
     const { x: pointerX, y: pointerY } = pointer;
     const schedulerContentBound = this.schedulerContent.getBoundingClientRect();
     const schedulerViewBound = this.schedulerView.getBoundingClientRect();
