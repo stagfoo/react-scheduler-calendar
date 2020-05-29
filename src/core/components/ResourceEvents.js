@@ -1,11 +1,11 @@
-import { PropTypes } from 'prop-types'
-import React, { Component } from 'react'
-import { CellUnits, DATETIME_FORMAT, SummaryPos } from '../../core/index'
-import { DnDTypes } from '../constants/DnDTypes'
-import { getPos } from '../utils/Util'
-import AddMore from './AddMore'
-import SelectedArea from './SelectedArea'
-import Summary from './Summary'
+import { PropTypes } from 'prop-types';
+import React, { Component } from 'react';
+import { CellUnits, DATETIME_FORMAT, SummaryPos } from '../../core/index';
+import { DnDTypes } from '../constants/DnDTypes';
+import { getPos } from '../utils/Util';
+import AddMore from './AddMore';
+import SelectedArea from './SelectedArea';
+import Summary from './Summary';
 
 const supportTouch = 'ontouchstart' in window;
 
@@ -18,7 +18,7 @@ class ResourceEvents extends Component {
       isSelecting: false,
       left: 0,
       width: 0,
-    }
+    };
   }
 
   static propTypes = {
@@ -41,7 +41,7 @@ class ResourceEvents extends Component {
     newEvent: PropTypes.func,
     eventItemTemplateResolver: PropTypes.func,
     getHoverAreaStyle: PropTypes.func,
-  }
+  };
 
   componentDidMount() {
     const { schedulerData } = this.props;
@@ -55,6 +55,7 @@ class ResourceEvents extends Component {
     }
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(np) {
     if (supportTouch) {
       // this.eventContainer.removeEventListener('touchstart', this.initDrag, false);
@@ -72,20 +73,30 @@ class ResourceEvents extends Component {
 
   initDrag = (ev) => {
     const { isSelecting } = this.state;
-    if (isSelecting) return;
-    if ((ev.srcElement || ev.target) !== this.eventContainer) return;
+    if (isSelecting) {
+      return;
+    }
+    if ((ev.srcElement || ev.target) !== this.eventContainer) {
+      return;
+    }
 
     ev.stopPropagation();
 
     const { resourceEvents } = this.props;
-    if (resourceEvents.groupOnly) return;
+    if (resourceEvents.groupOnly) {
+      return;
+    }
     let clientX = 0;
     if (supportTouch) {
-      if (ev.changedTouches.length === 0) return;
+      if (ev.changedTouches.length === 0) {
+        return;
+      }
       const touch = ev.changedTouches[0];
       clientX = touch.pageX;
     } else {
-      if (ev.buttons && ev.buttons !== 1) return;
+      if (ev.buttons && ev.buttons !== 1) {
+        return;
+      }
       clientX = ev.clientX;
     }
 
@@ -99,11 +110,11 @@ class ResourceEvents extends Component {
     const width = (rightIndex - leftIndex) * cellWidth;
 
     this.setState({
-      startX: startX,
-      left: left,
-      leftIndex: leftIndex,
-      width: width,
-      rightIndex: rightIndex,
+      startX,
+      left,
+      leftIndex,
+      width,
+      rightIndex,
       isSelecting: true,
     });
 
@@ -115,20 +126,22 @@ class ResourceEvents extends Component {
       document.documentElement.addEventListener('mousemove', this.doDrag, false);
       document.documentElement.addEventListener('mouseup', this.stopDrag, false);
     }
-    document.onselectstart = function () {
+    document.onselectstart = function() {
       return false;
     };
-    document.ondragstart = function () {
+    document.ondragstart = function() {
       return false;
     };
-  }
+  };
 
   doDrag = (ev) => {
     ev.stopPropagation();
 
     let clientX = 0;
     if (supportTouch) {
-      if (ev.changedTouches.length === 0) return;
+      if (ev.changedTouches.length === 0) {
+        return;
+      }
       const touch = ev.changedTouches[0];
       clientX = touch.pageX;
     } else {
@@ -148,13 +161,13 @@ class ResourceEvents extends Component {
     const width = (rightIndex - leftIndex) * cellWidth;
 
     this.setState({
-      leftIndex: leftIndex,
-      left: left,
-      rightIndex: rightIndex,
-      width: width,
+      leftIndex,
+      left,
+      rightIndex,
+      width,
       isSelecting: true,
     });
-  }
+  };
 
   stopDrag = (ev) => {
     ev.stopPropagation();
@@ -175,8 +188,10 @@ class ResourceEvents extends Component {
 
     const startTime = headers[leftIndex].time;
     let endTime = resourceEvents.headerItems[rightIndex - 1].end;
-    if (cellUnit !== CellUnits.Hour)
-      endTime = localeMoment(resourceEvents.headerItems[rightIndex - 1].start).hour(23).minute(59).second(59).format(DATETIME_FORMAT);
+    if (cellUnit !== CellUnits.Hour) {
+      endTime = localeMoment(resourceEvents.headerItems[rightIndex - 1].start).hour(23).minute(59).second(59)
+        .format(DATETIME_FORMAT);
+    }
     const slotId = resourceEvents.slotId;
     const slotName = resourceEvents.slotName;
 
@@ -191,15 +206,17 @@ class ResourceEvents extends Component {
 
     let hasConflict = false;
     if (config.checkConflict) {
-      const start = localeMoment(startTime),
-        end = localeMoment(endTime);
+      const start = localeMoment(startTime);
+      const end = localeMoment(endTime);
 
       events.forEach((e) => {
         if (schedulerData._getEventSlotId(e) === slotId) {
-          const eStart = localeMoment(e.start),
-            eEnd = localeMoment(e.end);
-          if ((start >= eStart && start < eEnd) || (end > eStart && end <= eEnd) || (eStart >= start && eStart < end) || (eEnd > start && eEnd <= end))
+          const eStart = localeMoment(e.start);
+          const eEnd = localeMoment(e.end);
+          if ((start >= eStart && start < eEnd) || (end > eStart && end <= eEnd) || (eStart >= start && eStart < end)
+            || (eEnd > start && eEnd <= end)) {
             hasConflict = true;
+          }
         }
       });
     }
@@ -211,18 +228,19 @@ class ResourceEvents extends Component {
           id: undefined,
           start: startTime,
           end: endTime,
-          slotId: slotId,
-          slotName: slotName,
+          slotId,
+          slotName,
           title: undefined,
         }, DnDTypes.EVENT, slotId, slotName, startTime, endTime);
       } else {
         console.log('Conflict occurred, set conflictOccurred func in Scheduler to handle it');
       }
     } else {
-      if (newEvent)
+      if (newEvent) {
         newEvent(schedulerData, slotId, slotName, startTime, endTime);
+      }
     }
-  }
+  };
 
   cancelDrag = (ev) => {
     ev.stopPropagation();
@@ -243,10 +261,12 @@ class ResourceEvents extends Component {
         isSelecting: false,
       });
     }
-  }
+  };
 
   render() {
-    const { resourceEvents, schedulerData, connectDropTarget, dndSource, isOver, getHoverAreaStyle, onHover } = this.props;
+    const {
+      resourceEvents, schedulerData, connectDropTarget, dndSource, isOver, getHoverAreaStyle, onHover,
+    } = this.props;
     const { cellUnit, startDate, endDate, config, localeMoment } = schedulerData;
     const { isSelecting, left, width } = this.state;
     const cellWidth = schedulerData.getContentCellWidth();
@@ -273,12 +293,12 @@ class ResourceEvents extends Component {
         };
       }
 
-      hoverArea = <div style={hoverStyle}/>
+      hoverArea = <div style={hoverStyle}/>;
       if (onHover) {
         const hoverEventParams = {
           pointer: this.state.hover.pointer,
           movement: this.state.hover.movement,
-        }
+        };
         onHover(hoverEventParams);
       }
     }
@@ -288,7 +308,8 @@ class ResourceEvents extends Component {
 
       if (headerItem.count > 0 || headerItem.summary) {
 
-        const isTop = config.summaryPos === SummaryPos.TopRight || config.summaryPos === SummaryPos.Top || config.summaryPos === SummaryPos.TopLeft;
+        const isTop = config.summaryPos === SummaryPos.TopRight ||
+          config.summaryPos === SummaryPos.Top || config.summaryPos === SummaryPos.TopLeft;
         const marginTop = resourceEvents.hasSummary && isTop ? 1 + config.eventItemLineHeight : 1;
         const renderEventsMaxIndex = headerItem.addMore === 0 ? cellMaxEvents : headerItem.addMoreIndex;
 
@@ -306,7 +327,7 @@ class ResourceEvents extends Component {
             const isEnd = eventEnd <= durationEnd;
 
             const left = index * cellWidth + (index > 0 ? 2 : 3);
-            const width = Math.max((evt.span * cellWidth - (index > 0 ? 5 : 6)), 0)
+            const width = Math.max((evt.span * cellWidth - (index > 0 ? 5 : 6)), 0);
             const top = marginTop + idx * config.eventItemLineHeight;
             const eventItem = <DnDEventItem
               {...this.props}
@@ -320,7 +341,7 @@ class ResourceEvents extends Component {
               top={top}
               leftIndex={index}
               rightIndex={index + evt.span}
-            />
+            />;
             eventList.push(eventItem);
           }
         });
@@ -348,7 +369,7 @@ class ResourceEvents extends Component {
           const width = cellWidth - (index > 0 ? 5 : 6);
           const key = `${resourceEvents.slotId}_${headerItem.time}`;
           const summary = <Summary key={key} schedulerData={schedulerData} summary={headerItem.summary} left={left}
-                                   width={width} top={top}/>;
+            width={width} top={top}/>;
           eventList.push(summary);
         }
       }
@@ -360,7 +381,7 @@ class ResourceEvents extends Component {
           {
             connectDropTarget(
               <div ref={this.eventContainerRef} className="event-container"
-                   style={{ height: resourceEvents.rowHeight }}>
+                style={{ height: resourceEvents.rowHeight }}>
                 {hoverArea}
                 {selectedArea}
                 {eventList}
@@ -386,18 +407,18 @@ class ResourceEvents extends Component {
         const height = (headerItem.count + 1) * config.eventItemLineHeight + 20;
 
         onSetAddMoreState({
-          headerItem: headerItem,
-          left: left,
-          top: top,
-          height: height,
+          headerItem,
+          left,
+          top,
+          height,
         });
       }
     }
-  }
+  };
 
   eventContainerRef = (element) => {
     this.eventContainer = element;
-  }
+  };
 }
 
-export default ResourceEvents
+export default ResourceEvents;

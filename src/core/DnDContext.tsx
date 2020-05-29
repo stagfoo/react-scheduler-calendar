@@ -157,7 +157,7 @@ export default class DnDContext {
         return false;
       }
       const { config } = schedulerData;
-      return config.movable && !resourceEvents.groupOnly && (item.movable === undefined || item.movable !== false);
+      return config.movable && !resourceEvents.groupOnly && (item.movable === undefined || item.movable);
     },
   });
 

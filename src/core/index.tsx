@@ -74,6 +74,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   private schedulerContentBgTable: any;
   private schedulerHead: HTMLDivElement | undefined;
   private preHoverTime = 0;
+  private hasMovedInSchedulerContent = {
+    left: false,
+    right: false,
+    up: false,
+    down: false,
+  };
 
   constructor(props: SchedulerProps) {
     super(props);
@@ -174,7 +180,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
 
     this.preHoverTime = new Date().valueOf();
 
-    const { pointer } = params;
+    const { pointer, isOver, movement } = params;
+    this.hasMovedInSchedulerContent = {
+      left: this.hasMovedInSchedulerContent.left || movement.x < 0,
+      right: this.hasMovedInSchedulerContent.right || movement.x > 0,
+      up:  this.hasMovedInSchedulerContent.up || movement.y > 0,
+      down:  this.hasMovedInSchedulerContent.down || movement.y < 0,
+    };
     const { x: pointerX, y: pointerY } = pointer;
     const schedulerContentBound = this.schedulerContent.getBoundingClientRect();
     const schedulerViewBound = this.schedulerView.getBoundingClientRect();
@@ -182,13 +194,17 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let scrollLeft = this.schedulerContent.scrollLeft;
     let scrollTop = this.schedulerView.scrollTop;
     const SCROLL_DISTANCE = 60;
-    if (pointerX - schedulerContentBound.left < SCROLL_DISTANCE && this.schedulerContent.scrollLeft > 0) {
-      scrollLeft = Math.max(0, this.schedulerContent.scrollLeft - step * this.accelerateRate(pointerX - schedulerContentBound.left, SCROLL_DISTANCE));
+    if (this.hasMovedInSchedulerContent.left &&
+      pointerX - schedulerContentBound.left < SCROLL_DISTANCE && this.schedulerContent.scrollLeft > 0) {
+      scrollLeft = Math.max(0, this.schedulerContent.scrollLeft - step * this.accelerateRate(
+        pointerX - schedulerContentBound.left, SCROLL_DISTANCE),
+      );
     } else if (
-      schedulerContentBound.right - pointerX < SCROLL_DISTANCE &&
+      this.hasMovedInSchedulerContent.right && schedulerContentBound.right - pointerX < SCROLL_DISTANCE &&
       this.schedulerContent.scrollLeft < this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth
     ) {
-      scrollLeft = this.schedulerContent.scrollLeft + step * this.accelerateRate(schedulerContentBound.right - pointerX, SCROLL_DISTANCE);
+      scrollLeft = this.schedulerContent.scrollLeft + step * this.accelerateRate(schedulerContentBound.right
+        - pointerX, SCROLL_DISTANCE);
     }
 
     if (pointerY - schedulerViewBound.top < 80 && this.schedulerView.scrollTop > 0) {
@@ -323,9 +339,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   >
                     <table className="resource-table">
                       <thead>
-                      <tr style={{ height: config.tableHeaderHeight }}>
-                        <th className="header3-text">{resourceName}</th>
-                      </tr>
+                        <tr style={{ height: config.tableHeaderHeight }}>
+                          <th className="header3-text">{resourceName}</th>
+                        </tr>
                       </thead>
                     </table>
                   </div>
@@ -437,8 +453,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
           {schedulerHeader}
         </div>
         {showBody && (
-          <div className={`scheduler-body ${styles.schedulerBody}`}
-               ref={this.schedulerViewRef}
+          <div
+            className={`scheduler-body ${styles.schedulerBody}`}
+            ref={this.schedulerViewRef}
           >
             <table
               id="RBS-Scheduler-root"
@@ -565,6 +582,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   };
   onSchedulerContentMouseOut = () => {
     this.currentArea = -1;
+    this.hasMovedInSchedulerContent = {
+      left: false,
+      right: false,
+      up: false,
+      down: false,
+    };
   };
   onSchedulerContentScroll = () => {
     if (

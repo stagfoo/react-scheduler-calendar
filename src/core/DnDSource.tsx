@@ -110,7 +110,7 @@ export class DnDSource {
       }
       const { config } = schedulerData;
       return config.movable && (resourceEvents === undefined || !resourceEvents.groupOnly) &&
-        (item.movable === undefined || item.movable !== false);
+        (item.movable === undefined || item.movable);
     },
   });
   getDragCollect = (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
