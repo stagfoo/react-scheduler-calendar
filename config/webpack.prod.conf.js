@@ -23,5 +23,6 @@ module.exports = merge(base, {
   },
   optimization: {
     minimize: true,
+    moduleIds: 'named'
   }
 });
