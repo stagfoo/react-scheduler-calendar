@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { Component } from 'react';
+import ResourceEventsList from 'src/core/components/ResourceEventsList';
 import TimeLine from '../lib/TimeLine';
 import AgendaView from './components/AgendaView';
 import BodyView from './components/BodyView';
@@ -14,7 +15,7 @@ import { DnDSource } from './DnDSource';
 import styles from './styles/index.module.scss';
 import './styles/style.css';
 
-interface SchedulerProps {
+export interface SchedulerProps {
   schedulerData: any;
   renderResourceList?: (...args: any[]) => any;
   prevClick: (...args: any[]) => any;
@@ -185,8 +186,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     this.hasMovedInSchedulerContent = {
       left: this.hasMovedInSchedulerContent.left || movement.x < 0,
       right: this.hasMovedInSchedulerContent.right || movement.x > 0,
-      up:  this.hasMovedInSchedulerContent.up || movement.y > 0,
-      down:  this.hasMovedInSchedulerContent.down || movement.y < 0,
+      up: this.hasMovedInSchedulerContent.up || movement.y > 0,
+      down: this.hasMovedInSchedulerContent.down || movement.y < 0,
     };
 
     // console.log(this.hasMovedInSchedulerContent);
@@ -244,12 +245,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     if (this.props.showBody && this.props.showBody !== props.showBody) {
       this.scrollToSpecificTime();
     }
-    console.log(this.resourceEventsSlots.map((slot: any) =>  {
-      if (slot.current && slot.current.decoratedRef) {
-        return slot.current.decoratedRef.current.props.isOver;
-      }
-    }));
-    // console.log(this.resourceEventsSlots);
   }
 
   render() {
@@ -277,20 +272,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       const resourceTableWidth = schedulerData.getResourceTableWidth();
       const schedulerContainerWidth = width - resourceTableWidth + 1;
       const schedulerWidth = schedulerData.getContentTableWidth() - 1;
-      const DndResourceEvents = this.state.dndContext.getDropTarget();
-      const eventDndSource = this.state.dndContext.getDndSource();
       const displayRenderData = renderData.filter((o: any) => o.render);
       this.resourceEventsSlots = displayRenderData.map(() => (React.createRef()));
-      const resourceEventsList = displayRenderData.map((item: any, index: number) => (
-        <DndResourceEvents
-          {...this.props}
-          key={item.slotId}
-          ref={this.resourceEventsSlots[index]}
-          resourceEvents={item}
-          dndSource={eventDndSource}
-          onHover={this.handleHover.bind(this)}
-        />
-      ));
       const contentScrollbarHeight = this.state.contentScrollbarHeight;
       const contentScrollbarWidth = this.state.contentScrollbarWidth;
       const resourceScrollbarHeight = this.state.resourceScrollbarHeight;
@@ -419,7 +402,14 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                 <div style={{ width: schedulerWidth, height: contentHeight }}>
                   <div className="scheduler-content-table-container">
                     <table className="scheduler-content-table">
-                      <tbody>{resourceEventsList}</tbody>
+                      <tbody>
+                        <ResourceEventsList
+                          dndContext={this.state.dndContext}
+                          displayRenderData={displayRenderData}
+                          onHover={this.handleHover.bind(this)}
+                          { ...this.props}
+                        />
+                      </tbody>
                     </table>
                   </div>
                   <div className="scheduler-bg">
