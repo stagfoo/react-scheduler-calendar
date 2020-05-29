@@ -29,6 +29,8 @@ class ResourceEvents extends Component {
     updateEventStart: PropTypes.func,
     updateEventEnd: PropTypes.func,
     onHover: PropTypes.func,
+    isOver: PropTypes.boolean,
+    onHoverChanged: PropTypes.func,
     moveEvent: PropTypes.func,
     movingEvent: PropTypes.func,
     conflictOccurred: PropTypes.func,
@@ -53,6 +55,14 @@ class ResourceEvents extends Component {
         this.eventContainer.addEventListener('mousedown', this.initDrag, false);
       }
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if(this.props.isOver !== nextProps.isOver) {
+      // this.props.onHoverChanged(this.props.isOver, nextProps.isOver);
+      console.log(nextProps.isOver);
+    }
+    return true;
   }
 
   // eslint-disable-next-line camelcase

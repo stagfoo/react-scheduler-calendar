@@ -74,6 +74,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   private schedulerContentBgTable: any;
   private schedulerHead: HTMLDivElement | undefined;
   private preHoverTime = 0;
+  private resourceEventsSlots: any = [];
   private hasMovedInSchedulerContent = {
     left: false,
     right: false,
@@ -187,6 +188,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       up:  this.hasMovedInSchedulerContent.up || movement.y > 0,
       down:  this.hasMovedInSchedulerContent.down || movement.y < 0,
     };
+
+    // console.log(this.hasMovedInSchedulerContent);
+
     const { x: pointerX, y: pointerY } = pointer;
     const schedulerContentBound = this.schedulerContent.getBoundingClientRect();
     const schedulerViewBound = this.schedulerView.getBoundingClientRect();
@@ -240,6 +244,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     if (this.props.showBody && this.props.showBody !== props.showBody) {
       this.scrollToSpecificTime();
     }
+    console.log(this.resourceEventsSlots.map((slot: any) =>  {
+      if (slot.current && slot.current.decoratedRef) {
+        return slot.current.decoratedRef.current.props.isOver;
+      }
+    }));
+    // console.log(this.resourceEventsSlots);
   }
 
   render() {
@@ -270,10 +280,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       const DndResourceEvents = this.state.dndContext.getDropTarget();
       const eventDndSource = this.state.dndContext.getDndSource();
       const displayRenderData = renderData.filter((o: any) => o.render);
-      const resourceEventsList = displayRenderData.map((item: any) => (
+      this.resourceEventsSlots = displayRenderData.map(() => (React.createRef()));
+      const resourceEventsList = displayRenderData.map((item: any, index: number) => (
         <DndResourceEvents
           {...this.props}
           key={item.slotId}
+          ref={this.resourceEventsSlots[index]}
           resourceEvents={item}
           dndSource={eventDndSource}
           onHover={this.handleHover.bind(this)}
@@ -588,6 +600,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       up: false,
       down: false,
     };
+    // console.log('onSchedulerContentMouseOut', this.hasMovedInSchedulerContent);
   };
   onSchedulerContentScroll = () => {
     if (
