@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
 import { Popover } from 'antd';
+import React, { Component } from 'react';
 import EventItemPopover from './EventItemPopover';
 
 interface AgendaEventItemProps {
@@ -22,31 +22,37 @@ class AgendaEventItem extends Component<AgendaEventItemProps, {}> {
   }
 
   render() {
-    const {eventItem, isStart, isEnd, eventItemClick, schedulerData, eventItemTemplateResolver} = this.props;
-    const {config} = schedulerData;
+    const { eventItem, isStart, isEnd, eventItemClick, schedulerData, eventItemTemplateResolver } = this.props;
+    const { config } = schedulerData;
     const roundCls = isStart ? (isEnd ? 'round-all' : 'round-head') : isEnd ? 'round-tail' : 'round-none';
     let bgColor = config.defaultEventBgColor;
-    if (eventItem.bgColor) bgColor = eventItem.bgColor;
+    if (eventItem.bgColor) {
+      bgColor = eventItem.bgColor;
+    }
     const titleText = schedulerData.behaviors.getEventTextFunc(schedulerData, eventItem);
     const content = <EventItemPopover {...this.props} title={eventItem.title} startTime={eventItem.start}
-                                      endTime={eventItem.end} statusColor={bgColor}/>;
+      endTime={eventItem.end} statusColor={bgColor}/>;
     let eventItemTemplate = (
       <div
         className={roundCls + ' event-item'}
         key={eventItem.id}
-        style={{height: config.eventItemHeight, maxWidth: config.agendaMaxEventWidth, backgroundColor: bgColor}}
+        style={{ height: config.eventItemHeight, maxWidth: config.agendaMaxEventWidth, backgroundColor: bgColor }}
       >
-        <span style={{marginLeft: '10px', lineHeight: `${config.eventItemHeight}px`}}>{titleText}</span>
+        <span style={{ marginLeft: '10px', lineHeight: `${config.eventItemHeight}px` }}>{titleText}</span>
       </div>
     );
-    if (eventItemTemplateResolver)
-      eventItemTemplate = eventItemTemplateResolver(schedulerData, eventItem, bgColor, isStart, isEnd, 'event-item', config.eventItemHeight, config.agendaMaxEventWidth);
+    if (eventItemTemplateResolver) {
+      eventItemTemplate = eventItemTemplateResolver(schedulerData, eventItem, bgColor, isStart,
+        isEnd, 'event-item', config.eventItemHeight, config.agendaMaxEventWidth);
+    }
     return config.eventItemPopoverEnabled ? (
       <Popover placement="bottomLeft" content={content} trigger="hover">
         <a
           className="day-event"
           onClick={() => {
-            if (eventItemClick) eventItemClick(schedulerData, eventItem);
+            if (eventItemClick) {
+              eventItemClick(schedulerData, eventItem);
+            }
           }}
         >
           {eventItemTemplate}
@@ -54,15 +60,17 @@ class AgendaEventItem extends Component<AgendaEventItemProps, {}> {
       </Popover>
     ) : (
       <span>
-                <a
-                  className="day-event"
-                  onClick={() => {
-                    if (eventItemClick) eventItemClick(schedulerData, eventItem);
-                  }}
-                >
-                    {eventItemTemplate}
-                </a>
-            </span>
+        <a
+          className="day-event"
+          onClick={() => {
+            if (eventItemClick) {
+              eventItemClick(schedulerData, eventItem);
+            }
+          }}
+        >
+          {eventItemTemplate}
+        </a>
+      </span>
     );
   }
 }

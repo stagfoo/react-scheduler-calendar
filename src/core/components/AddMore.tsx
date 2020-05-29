@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 interface AddMoreProps {
   schedulerData: any;
@@ -16,18 +16,18 @@ class AddMore extends Component<AddMoreProps> {
   }
 
   render() {
-    const {number, left, width, top, clickAction, headerItem, schedulerData} = this.props;
-    const {config} = schedulerData;
+    const { number, left, width, top, clickAction, headerItem, schedulerData } = this.props;
+    const { config } = schedulerData;
     const content = '+' + number + 'more';
     return (
       <div
         className="timeline-event"
-        style={{left: left, width: width, top: top}}
+        style={{ left, width, top }}
         onClick={() => {
           clickAction(headerItem);
         }}
       >
-        <div style={{height: config.eventItemHeight, color: '#999', textAlign: 'center'}}>{content}</div>
+        <div style={{ height: config.eventItemHeight, color: '#999', textAlign: 'center' }}>{content}</div>
       </div>
     );
   }

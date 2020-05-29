@@ -8,7 +8,7 @@ declare module '*.css' {
 }
 
 declare module '*.scss' {
-  const content: {[className: string]: string};
+  const content: { [className: string]: string };
   export = content;
 }
 
@@ -21,5 +21,5 @@ declare module '*.svg' {
   const svgUrl: string;
   const svgComponent: SvgrComponent;
   export default svgUrl;
-  export { svgComponent as ReactComponent }
+  export { svgComponent as ReactComponent };
 }

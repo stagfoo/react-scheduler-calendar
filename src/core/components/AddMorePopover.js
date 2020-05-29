@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Col, Row } from 'antd'
-import EventItem from './EventItem'
-import { DnDSource } from '../DnDSource'
+import { Col, Row } from 'antd';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { DnDSource } from '../DnDSource';
+import EventItem from './EventItem';
 
 class AddMorePopover extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dndSource: new DnDSource((props) => {
-        return props.eventItem;
-      }, EventItem),
-    }
+      dndSource: new DnDSource((p) => p.eventItem, EventItem),
+    };
   }
 
   static propTypes = {
@@ -70,7 +68,7 @@ class AddMorePopover extends Component {
     });
 
     return (
-      <div className="add-more-popover-overlay" style={{ left: left, top: top, height: height, width: '170px' }}>
+      <div className="add-more-popover-overlay" style={{ left, top, height, width: '170px' }}>
         <Row type="flex" justify="space-between" align="middle">
           <Col span="22">
             <span className="base-text">{header}</span>
@@ -87,4 +85,4 @@ class AddMorePopover extends Component {
   }
 }
 
-export default AddMorePopover
+export default AddMorePopover;

@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const JobCard: React.FC<Props> = (props) => (
-  <div style={ { backgroundColor: 'white', padding: 20 } }>
+  <div style={{ backgroundColor: 'white', padding: 20 }}>
     <div>
       {props.name}
     </div>

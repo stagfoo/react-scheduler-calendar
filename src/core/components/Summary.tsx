@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import { TextAlignProperty } from 'csstype';
+import React, { Component } from 'react';
 import { SummaryPos } from '../index';
-import {TextAlignProperty} from "csstype";
 
 interface SummaryProps {
   schedulerData: any;
@@ -16,10 +16,12 @@ class Summary extends Component<SummaryProps, {}> {
   }
 
   render() {
-    const {summary, left, width, top, schedulerData} = this.props;
-    const {config} = schedulerData;
+    const { summary, left, width, top, schedulerData } = this.props;
+    const { config } = schedulerData;
     let color = config.summaryColor;
-    if (summary.color) color = summary.color;
+    if (summary.color) {
+      color = summary.color;
+    }
     let textAlign: TextAlignProperty = 'center';
     if (config.summaryPos === SummaryPos.TopRight || config.summaryPos === SummaryPos.BottomRight) {
       textAlign = 'right';
@@ -28,14 +30,16 @@ class Summary extends Component<SummaryProps, {}> {
     }
     let style: React.CSSProperties = {
       height: config.eventItemHeight,
-      color: color,
-      textAlign: textAlign,
+      color,
+      textAlign,
       marginLeft: '6px',
-      marginRight: '6px'
+      marginRight: '6px',
     };
-    if (summary.fontSize) style = {...style, fontSize: summary.fontSize};
+    if (summary.fontSize) {
+      style = { ...style, fontSize: summary.fontSize };
+    }
     return (
-      <div className="timeline-event header2-text" style={{left: left, width: width, top: top, cursor: 'default'}}>
+      <div className="timeline-event header2-text" style={{ left, width, top, cursor: 'default' }}>
         <div style={style}>{summary.text}</div>
       </div>
     );

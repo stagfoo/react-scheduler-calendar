@@ -1,4 +1,4 @@
 export const DnDTypes = {
-    TASK: 'task',
-    RESOURCE: 'resource',
+  TASK: 'task',
+  RESOURCE: 'resource',
 };

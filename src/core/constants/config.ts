@@ -1,5 +1,5 @@
-import ViewTypes from "./ViewTypes";
-import { SummaryPos } from "./SummaryPos";
+import { SummaryPos } from './SummaryPos';
+
 export default {
   schedulerWidth: '100%',
   besidesWidth: 330,
@@ -65,5 +65,5 @@ export default {
   nonAgendaDayCellHeaderFormat: 'ha',
   nonAgendaOtherCellHeaderFormat: 'ddd M/D',
   minuteStep: 30,
-  views: []
+  views: [],
 };

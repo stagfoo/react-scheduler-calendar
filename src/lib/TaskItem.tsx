@@ -32,7 +32,7 @@ class TaskItem extends Component<any, {}> {
         {
           connectDragSource(
             <div>
-              <JobCard name={task.name} />
+              <JobCard name={task.name}/>
             </div>,
           )}
       </>

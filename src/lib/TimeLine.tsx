@@ -9,7 +9,7 @@ interface Interface {
 
 const TimeLine: React.FC<Interface> = (props: Interface) => {
   const [currentTime, setCurrentTime] = useState(moment());
-  const {startTime, endTime, maxWidth} = props;
+  const { startTime, endTime, maxWidth } = props;
   const progress = currentTime.diff(startTime) / endTime.diff(startTime);
   const width = Math.min(Math.round(progress * maxWidth), maxWidth);
 
@@ -30,12 +30,12 @@ const TimeLine: React.FC<Interface> = (props: Interface) => {
         (!isAfterToday) &&
         <div
           className='timeMark'
-          style={isBeforeToday ? {width, border: 'none'} : {width}}
+          style={isBeforeToday ? { width, border: 'none' } : { width }}
         >
           {
             (!isBeforeToday) &&
             <>
-              <div className='timeMarkPoint' />
+              <div className='timeMarkPoint'/>
               <span className='timeText'> {currentTime.format('h:mm a')} </span>
             </>
           }

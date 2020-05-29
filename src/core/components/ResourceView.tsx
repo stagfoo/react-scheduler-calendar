@@ -1,6 +1,6 @@
-import React, {Component} from "react";
 import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
-import TechnicianCard from "../../technicianCard";
+import React, { Component } from 'react';
+import TechnicianCard from '../../technicianCard';
 
 interface ResourceViewProps {
   schedulerData: any;
@@ -16,8 +16,11 @@ class ResourceView extends Component<ResourceViewProps, {}> {
   }
 
   render() {
-    const {schedulerData, contentScrollbarHeight, slotClickedFunc, slotItemTemplateResolver, toggleExpandFunc} = this.props;
-    const {renderData} = schedulerData;
+    const {
+      schedulerData,
+      contentScrollbarHeight, slotClickedFunc, slotItemTemplateResolver, toggleExpandFunc,
+    } = this.props;
+    const { renderData } = schedulerData;
     const width = schedulerData.getResourceTableWidth() - 2;
     const paddingBottom = contentScrollbarHeight;
     const displayRenderData = renderData.filter((o: any) => o.render);
@@ -32,14 +35,18 @@ class ResourceView extends Component<ResourceViewProps, {}> {
           <MinusSquareOutlined
             key={`es${item.indent}`}
             onClick={() => {
-              if (toggleExpandFunc) toggleExpandFunc(schedulerData, item.slotId);
+              if (toggleExpandFunc) {
+                toggleExpandFunc(schedulerData, item.slotId);
+              }
             }}
           />
         ) : (
           <PlusSquareOutlined
             key={`es${item.indent}`}
             onClick={() => {
-              if (toggleExpandFunc) toggleExpandFunc(schedulerData, item.slotId);
+              if (toggleExpandFunc) {
+                toggleExpandFunc(schedulerData, item.slotId);
+              }
             }}
           />
         );
@@ -47,38 +54,41 @@ class ResourceView extends Component<ResourceViewProps, {}> {
       indents.push(indent);
       const a = slotClickedFunc ? (
         <span className="slot-cell">
-                    {indents}
+          {indents}
           <a
             className="slot-text"
             onClick={() => {
               slotClickedFunc(schedulerData, item);
             }}
           >
-                        {item.slotName}
-                    </a>
-                </span>
+            {item.slotName}
+          </a>
+        </span>
       ) : (
         <span className="slot-cell">
-                    {indents}
+          {indents}
           <span className="slot-text">
-                        <TechnicianCard name={item.slotName}/>
-                    </span>
-                </span>
+            <TechnicianCard name={item.slotName}/>
+          </span>
+        </span>
       );
       let slotItem = (
-        <div title={item.slotName} className="overflow-text header2-text" style={{textAlign: "left"}}>
+        <div title={item.slotName} className="overflow-text header2-text" style={{ textAlign: 'left' }}>
           {a}
         </div>
       );
       if (slotItemTemplateResolver) {
-        const temp = slotItemTemplateResolver(schedulerData, item, slotClickedFunc, width, "overflow-text header2-text");
-        if (temp) slotItem = temp;
+        const temp = slotItemTemplateResolver(schedulerData, item, slotClickedFunc, width,
+          'overflow-text header2-text');
+        if (temp) {
+          slotItem = temp;
+        }
       }
-      let tdStyle: React.CSSProperties = {height: item.rowHeight};
+      let tdStyle: React.CSSProperties = { height: item.rowHeight };
       if (item.groupOnly) {
         tdStyle = {
           ...tdStyle,
-          backgroundColor: schedulerData.config.groupOnlySlotColor
+          backgroundColor: schedulerData.config.groupOnlySlotColor,
         };
       }
       return (
@@ -90,7 +100,7 @@ class ResourceView extends Component<ResourceViewProps, {}> {
       );
     });
     return (
-      <div style={{paddingBottom: paddingBottom}}>
+      <div style={{ paddingBottom }}>
         <table className="resource-table">
           <tbody>{resourceList}</tbody>
         </table>

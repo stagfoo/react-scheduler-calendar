@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 interface SelectedAreaProps {
   schedulerData: any;
@@ -12,12 +12,12 @@ class SelectedArea extends Component<SelectedAreaProps> {
   }
 
   render() {
-    const {left, width, schedulerData} = this.props;
-    const {config} = schedulerData;
+    const { left, width, schedulerData } = this.props;
+    const { config } = schedulerData;
     return (
       <div
         className="selected-area"
-        style={{left: left, width: width, top: 0, bottom: 0, backgroundColor: config.selectedAreaColor}}
+        style={{ left, width, top: 0, bottom: 0, backgroundColor: config.selectedAreaColor }}
       />
     );
   }

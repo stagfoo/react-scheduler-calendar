@@ -107,6 +107,7 @@
     .scheduler-bg-table {
       td {
         pointer-events: none;
+
         &:hover {
           background-color: #7f7f7f !important;
         }
@@ -118,17 +119,22 @@
       padding: 0;
     }
   }
+
   .resourceListWrapper {
     border: 1px solid #c5c5c5;
+
     .resourceTitle {
       border-bottom: 1px solid #c5c5c5;
     }
+
     .resourceList {
       margin: 0;
       padding: 0;
+
       & > li {
         list-style: none;
         border-bottom: 1px solid #c5c5c5;
+
         &:last-of-type {
           border-bottom: none;
         }
@@ -136,16 +142,19 @@
     }
   }
 }
+
 .schedulerWrapper {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+
   .schedulerBody {
     width: 100%;
     flex: 1;
     overflow-y: auto;
   }
+
   .schedulerContent {
     overflow-x: auto;
     overflow-y: hidden;

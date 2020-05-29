@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
-import AddMore from './AddMore'
-import Summary from './Summary'
-import SelectedArea from './SelectedArea'
+import React, { Component } from 'react'
 import { CellUnits, DATETIME_FORMAT, SummaryPos } from '../../core/index'
-import { getPos } from '../utils/Util'
 import { DnDTypes } from '../constants/DnDTypes'
+import { getPos } from '../utils/Util'
+import AddMore from './AddMore'
+import SelectedArea from './SelectedArea'
+import Summary from './Summary'
 
 const supportTouch = 'ontouchstart' in window;
 
@@ -256,7 +256,7 @@ class ResourceEvents extends Component {
     const selectedArea = isSelecting ? <SelectedArea {...this.props} left={left} width={width}/> : <div/>;
     let hoverArea = null;
 
-    if(isOver && this.state.hover) {
+    if (isOver && this.state.hover) {
       let hoverStyle = {
         top: 0,
         bottom: 0,
@@ -273,7 +273,7 @@ class ResourceEvents extends Component {
         };
       }
 
-      hoverArea = <div style={hoverStyle} />
+      hoverArea = <div style={hoverStyle}/>
       if (onHover) {
         const hoverEventParams = {
           pointer: this.state.hover.pointer,

@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
-import {Col, Row, Popover, Calendar, Radio, Button} from "antd";
-import {LeftOutlined, RightOutlined, CalendarOutlined} from "@ant-design/icons";
-import moment from "moment";
+import { CalendarOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Button, Calendar, Col, Popover, Radio, Row } from 'antd';
+import moment from 'moment';
+import React, { ReactNode } from 'react';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -28,20 +28,18 @@ class SchedulerHeader extends React.Component<Props, State> {
     super(props);
     this.state = {
       visible: false,
-    }
+    };
   }
 
   renderRadioButtonList(config: any) {
-    return config.views.map((item: any) => {
-      return (
-        <RadioButton
-          key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
-          value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
-        >
-          <span style={{margin: "0px 8px"}}>{item.viewName}</span>
-        </RadioButton>
-      );
-    })
+    return config.views.map((item: any) => (
+      <RadioButton
+        key={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
+        value={`${item.viewType}${item.showAgenda ? 1 : 0}${item.isEventPerspective ? 1 : 0}`}
+      >
+        <span style={{ margin: '0px 8px' }}>{item.viewName}</span>
+      </RadioButton>
+    ));
   }
 
   renderPopover = () => {
@@ -72,7 +70,7 @@ class SchedulerHeader extends React.Component<Props, State> {
     const dateLabel = schedulerData.getDateLabel();
 
     return (
-      <Row align="middle" justify="space-between" style={{marginBottom: "7px"}}>
+      <Row align="middle" justify="space-between" style={{ marginBottom: '7px' }}>
         {title}
         <Col>
           <RadioGroup defaultValue={defaultValue} onChange={onViewChange}>
@@ -81,11 +79,11 @@ class SchedulerHeader extends React.Component<Props, State> {
         </Col>
         <Col>
           <div className="header2-text calendar-action-header">
-            <Button style={{marginRight: "24px"}} onClick={goToToday}>
+            <Button style={{ marginRight: '24px' }} onClick={goToToday}>
               Today
             </Button>
-            <LeftOutlined style={{marginRight: "4px"}} className="icon-nav" onClick={goBack}/>
-            <RightOutlined style={{marginLeft: "4px"}} className="icon-nav" onClick={goNext}/>
+            <LeftOutlined style={{ marginRight: '4px' }} className="icon-nav" onClick={goBack}/>
+            <RightOutlined style={{ marginLeft: '4px' }} className="icon-nav" onClick={goNext}/>
             {calendarPopoverEnabled ? (
               <Popover
                 content={this.renderPopover()}
@@ -94,13 +92,13 @@ class SchedulerHeader extends React.Component<Props, State> {
                 visible={this.state.visible}
                 onVisibleChange={this.handleVisibleChange}
               >
-                  <span className={"header2-text-label"} style={{cursor: "pointer", marginLeft: "16px"}}>
-                    <CalendarOutlined style={{marginRight: "8px"}} className="icon-nav" />
-                    {moment(dateLabel).format('MMM DD')}
-                  </span>
+                <span className={'header2-text-label'} style={{ cursor: 'pointer', marginLeft: '16px' }}>
+                  <CalendarOutlined style={{ marginRight: '8px' }} className="icon-nav"/>
+                  {moment(dateLabel).format('MMM DD')}
+                </span>
               </Popover>
             ) : (
-              <span className={"header2-text-label"}>{dateLabel}</span>
+              <span className={'header2-text-label'}>{dateLabel}</span>
             )}
           </div>
         </Col>

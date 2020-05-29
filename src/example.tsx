@@ -1,19 +1,19 @@
-import {Card} from 'antd'
-import React, {Component} from 'react';
-
-import config from './overrideConfig';
-import Scheduler, {DnDSource, SchedulerData, ViewTypes} from './';
-import './core/styles/style.css';
+import { Card } from 'antd';
+import moment from 'moment';
+import React, { Component } from 'react';
+import { DnDTypes } from 'src/lib';
+import Scheduler, { DnDSource, SchedulerData, ViewTypes } from './';
+import DemoData from './_mockData/DemoData';
 import styles from './core/styles/index.module.scss';
-import withDragDropContext from './lib/withDnDContext';
+import './core/styles/style.css';
 import CustomDragLayer from './lib/CustomDragLayer';
-import {DnDTypes} from './lib/DnDTypes';
 import ResourceItem from './lib/ResourceItem';
 import ResourceList from './lib/ResourceList';
 import TaskItem from './lib/TaskItem';
 import TaskList from './lib/TaskList';
-import DemoData from './_mockData/DemoData';
-import moment from "moment";
+import withDragDropContext from './lib/withDnDContext';
+
+import config from './overrideConfig';
 
 interface CalendarSchedulerState {
   viewModel: any;
@@ -47,9 +47,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     this.state = {
       viewModel: schedulerData,
       taskDndSource: new DnDSource(
-        (prop: any) => {
-          return prop.task;
-        },
+        (prop: any) => prop.task,
         TaskItem,
         DnDTypes.TASK,
       ),
@@ -77,20 +75,21 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         <div className={styles.resourceTitle} style={{
           height: `${config.tableHeaderHeight}px`,
           lineHeight: `${config.tableHeaderHeight}px`,
-          textAlign: 'center'
+          textAlign: 'center',
         }}>{resourceName}</div>
         <ul className={styles.resourceList} ref={listRef}>
-          { renderData.map((resource: any) => {
+          {renderData.map((resource: any) => {
             return (<li key={resource.slotId} className={styles.resourceItem} style={{
               height: `${resource.rowHeight}px`,
               lineHeight: `${resource.rowHeight}px`,
-              textAlign: 'center'
-            }}>{resource.slotName}</li>)
-          }) }
+              textAlign: 'center',
+            }}>{resource.slotName}</li>);
+          })}
         </ul>
       </div>
     );
   }
+
   renderEvent = (eventItem: any) => {
     return (<div>render event<span>{eventItem.id}</span></div>);
   };
@@ -101,10 +100,10 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       this.state.viewModel.setScrollToSpecialMoment(true);
       this.setState({ showBody: true });
     }, 1000);
-  }
+  };
 
   render() {
-    const {viewModel, taskDndSource, resourceDndSource, showBody} = this.state;
+    const { viewModel, taskDndSource, resourceDndSource, showBody } = this.state;
     const dndList = viewModel.isEventPerspective ? (
       <ResourceList schedulerData={viewModel} newEvent={this.newEvent} resourceDndSource={resourceDndSource}/>
     ) : (
@@ -117,12 +116,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         <CustomDragLayer/>
         <div className={styles.content}>
           <div className={styles.leftPane}>
-            <div><button onClick={this.handleConflict}>drop conflict</button></div>
+            <div>
+              <button onClick={this.handleConflict}>drop conflict</button>
+            </div>
             <div className={styles.jobList}>
               {dndList}
             </div>
             <div className={styles.jobDetail}>
-              <Card  className={styles.jobDetailCard} title={'Job Detail'}>
+              <Card className={styles.jobDetailCard} title={'Job Detail'}>
                 Job Detail here.
               </Card>
             </div>
@@ -167,7 +168,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     });
 
     setTimeout(() => {
-      this.setState({ showBody: true })
+      this.setState({ showBody: true });
     }, 2000);
   };
   nextClick = (schedulerData: any) => {
@@ -213,7 +214,8 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
   newEvent = (schedulerData: any, slotId: any, slotName: any, start: any, end: any, type: string, item: any) => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(`Do you want to create a new event? {slotId: ${slotId}, slotName: ${slotName}, start: ${start}, end: ${end}, type: ${type}, item: ${item}}`)) {
+    if (confirm(`Do you want to create a new event?
+    {slotId: ${slotId}, slotName: ${slotName}, start: ${start}, end: ${end}, type: ${type}, item: ${item}}`)) {
       let newFreshId = 0;
       schedulerData.events.forEach((event: { id: number }) => {
         if (event.id >= newFreshId) {
@@ -252,7 +254,8 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
   updateEventStart = (schedulerData: any, event: any, newStart: any) => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(`Do you want to adjust the start of the event? {eventId: ${event.id}, eventTitle: ${event.title}, newStart: ${newStart}}`)) {
+    if (confirm(`Do you want to adjust the start of the event? {eventId: ${event.id},
+    eventTitle: ${event.title}, newStart: ${newStart}}`)) {
       schedulerData.updateEventStart(event, newStart);
     }
     this.setState({
@@ -261,7 +264,8 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
   updateEventEnd = (schedulerData: any, event: any, newEnd: any) => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(`Do you want to adjust the end of the event? {eventId: ${event.id}, eventTitle: ${event.title}, newEnd: ${newEnd}}`)) {
+    if (confirm(`Do you want to adjust the end of the event? {eventId: ${event.id},
+    eventTitle: ${event.title}, newEnd: ${newEnd}}`)) {
       schedulerData.updateEventEnd(event, newEnd);
     }
     this.setState({
@@ -270,8 +274,10 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
   moveEvent = (schedulerData: any, event: any, slotId: any, slotName: any, start: any, end: any) => {
     // eslint-disable-next-line no-restricted-globals
-    // if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
-    console.log(`{eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`);
+    // if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle:
+    // ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
+    console.log(`{eventId: ${event.id}, eventTitle: ${event.title},
+    newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`);
     schedulerData.moveEvent(event, slotId, slotName, start, end);
     this.setState({
       viewModel: schedulerData,
@@ -291,7 +297,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     this.setState({
       viewModel: schedulerData,
     });
-  }
+  };
 }
 
 export default withDragDropContext(CalendarScheduler);
