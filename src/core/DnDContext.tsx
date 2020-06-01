@@ -53,14 +53,16 @@ export default class DnDContext {
       if (calledInterval < 10) {
         return;
       }
-      let pointerPosition = monitor.getSourceClientOffset();
+
+      const pointerPosition = monitor.getClientOffset();
+      let dragBenchmarkPoint = monitor.getSourceClientOffset();
       const draggingItemType = monitor.getItemType();
       if (draggingItemType === DnDTypes.TASK) {
-        pointerPosition = monitor.getClientOffset();
+        dragBenchmarkPoint = monitor.getClientOffset();
       }
 
       if (!this.lastHoverPosition) {
-        this.lastHoverPosition = pointerPosition;
+        this.lastHoverPosition = monitor.getClientOffset();
       }
       this.lastHoverCalledTime = currentTime;
 
@@ -70,10 +72,9 @@ export default class DnDContext {
       const isEvent = draggingItemType === DnDTypes.EVENT;
 
       const eventContainerPosition = getPos(component.eventContainer);
-
       const cellWidth = schedulerData.getContentCellWidth();
 
-      const leftIndex = Math.floor((pointerPosition!.x - eventContainerPosition.x) / cellWidth);
+      const leftIndex = Math.floor((dragBenchmarkPoint!.x - eventContainerPosition.x) / cellWidth);
       if (!resourceEvents.headerItems[leftIndex]) {
         return;
       }
@@ -116,7 +117,7 @@ export default class DnDContext {
       }
       component.setState({
         hover: {
-          leftIndex: Math.floor((pointerPosition!.x - eventContainerPosition.x) / cellWidth),
+          leftIndex,
           width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
           item: draggingItem,
           itemType: draggingItemType,
