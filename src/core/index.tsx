@@ -214,8 +214,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       this.hasMovedOverScheduler.right && schedulerContentBound.right - pointerX < config.autoScrollingThreshold &&
       this.schedulerContent.scrollLeft < this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth
     ) {
-      scrollLeft = this.schedulerContent.scrollLeft + baseScrollDistance * getScrollSpeedRate(schedulerContentBound.right
-        - pointerX, config.autoScrollingThreshold);
+      scrollLeft = this.schedulerContent.scrollLeft + baseScrollDistance * getScrollSpeedRate(
+        schedulerContentBound.right - pointerX, config.autoScrollingThreshold);
     }
 
     if (pointerY - schedulerViewBound.top < (config.autoScrollingThreshold + 30) && this.schedulerView.scrollTop > 0) {
