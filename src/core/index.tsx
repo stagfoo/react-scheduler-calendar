@@ -56,7 +56,6 @@ export interface SchedulerProps {
 }
 
 interface SchedulerState {
-  dndContext: any;
   contentHeight: any;
   contentScrollbarHeight: number;
   contentScrollbarWidth: number;
@@ -84,6 +83,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     up: false,
     down: false,
   };
+  private DndResourceEvents: any;
+  private eventDndSource: any;
 
   constructor(props: SchedulerProps) {
     super(props);
@@ -99,7 +100,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     this.currentArea = -1;
     schedulerData._setDocumentWidth(document.documentElement.clientWidth);
     this.state = {
-      dndContext,
       contentHeight: schedulerData.getSchedulerContentDesiredHeight(),
       contentScrollbarHeight: 17,
       contentScrollbarWidth: 17,
@@ -114,6 +114,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     if (schedulerData.isSchedulerResponsive()) {
       window.onresize = this.onWindowResize;
     }
+
+    this.DndResourceEvents = dndContext.getDropTarget();
+    this.eventDndSource = dndContext.getDndSource();
   }
 
   onWindowResize = () => {
@@ -413,12 +416,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   <div className="scheduler-content-table-container">
                     <table className="scheduler-content-table">
                       <tbody>
-                      <ResourceEventsList
-                        dndContext={this.state.dndContext}
-                        displayRenderData={displayRenderData}
-                        onHover={this.handleHover.bind(this)}
-                        {...this.props}
-                      />
+                        <ResourceEventsList
+                          DndResourceEvents={this.DndResourceEvents}
+                          eventDndSource={this.eventDndSource}
+                          displayRenderData={displayRenderData}
+                          onHover={this.handleHover.bind(this)}
+                          {...this.props}
+                        />
                       </tbody>
                     </table>
                   </div>
