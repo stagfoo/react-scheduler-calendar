@@ -1,8 +1,8 @@
 import { Popover } from 'antd';
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
+import { DnDTypes } from 'src/lib/DnDTypes';
 import { CellUnits, DATETIME_FORMAT } from '../../core/index';
-import { DnDTypes } from '../constants/DnDTypes';
 import EventItemPopover from './EventItemPopover';
 
 const supportTouch = 'ontouchstart' in window;

@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
+import { DnDTypes } from 'src/lib/DnDTypes';
 import { CellUnits, DATETIME_FORMAT, SummaryPos } from '../../core/index';
-import { DnDTypes } from '../constants/DnDTypes';
 import { getPos } from '../utils/Util';
 import AddMore from './AddMore';
 import SelectedArea from './SelectedArea';

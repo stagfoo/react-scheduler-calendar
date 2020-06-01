@@ -1,6 +1,5 @@
 import { DragSource, DragSourceConnector, DragSourceMonitor } from 'react-dnd';
-import { DnDTypes } from './constants/DnDTypes';
-import { DATETIME_FORMAT, ViewTypes } from './index';
+import { DATETIME_FORMAT, DnDTypes, ViewTypes } from './index';
 
 export class DnDSource {
   private resolveDragObjFunc: (args: any) => any;

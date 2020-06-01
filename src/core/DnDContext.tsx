@@ -1,8 +1,7 @@
 import React from 'react';
 import { DropTarget, DropTargetConnector, DropTargetMonitor, XYCoord } from 'react-dnd';
-import { DnDTypes } from './constants/DnDTypes';
 import { ViewTypes } from './constants/ViewTypes';
-import { CellUnits, DATETIME_FORMAT } from './index';
+import { CellUnits, DATETIME_FORMAT, DnDTypes } from './index';
 import { getPos } from './utils/Util';
 
 export default class DnDContext {
@@ -27,7 +26,10 @@ export default class DnDContext {
       const type = monitor.getItemType();
       const pos = getPos(component.eventContainer);
       const cellWidth = schedulerData.getContentCellWidth();
-      const point = monitor.getSourceClientOffset();
+      let point = monitor.getSourceClientOffset();
+      if (monitor.getItemType() === DnDTypes.TASK) {
+        point = monitor.getClientOffset();
+      }
       const leftIndex = Math.max(Math.floor((point!.x - pos.x) / cellWidth), 0);
       const startTime = resourceEvents.headerItems[leftIndex].start;
       let endTime = resourceEvents.headerItems[leftIndex].end;
@@ -51,15 +53,20 @@ export default class DnDContext {
       if (calledInterval < 10) {
         return;
       }
-      const pointerPosition = monitor.getClientOffset();
+      let pointerPosition = monitor.getSourceClientOffset();
+      const draggingItemType = monitor.getItemType();
+      if (draggingItemType === DnDTypes.TASK) {
+        pointerPosition = monitor.getClientOffset();
+      }
+
       if (!this.lastHoverPosition) {
         this.lastHoverPosition = pointerPosition;
       }
       this.lastHoverCalledTime = currentTime;
+
       const { schedulerData, resourceEvents, movingEvent } = props;
       const { cellUnit, config, viewType, localeMoment } = schedulerData;
       const draggingItem = monitor.getItem();
-      const draggingItemType = monitor.getItemType();
       const isEvent = draggingItemType === DnDTypes.EVENT;
 
       const eventContainerPosition = getPos(component.eventContainer);
@@ -109,7 +116,7 @@ export default class DnDContext {
       }
       component.setState({
         hover: {
-          leftIndex: Math.floor((monitor!.getSourceClientOffset()!.x - eventContainerPosition.x) / cellWidth),
+          leftIndex: Math.floor((pointerPosition!.x - eventContainerPosition.x) / cellWidth),
           width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
           item: draggingItem,
           itemType: draggingItemType,
