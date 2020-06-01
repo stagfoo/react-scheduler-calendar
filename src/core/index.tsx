@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import DnDObserver from 'src/core/components/DnDObserver';
 import ResourceEventsList from 'src/core/components/ResourceEventsList';
+import { getScrollSpeedRate } from 'src/core/utils/Util';
 import TimeLine from '../lib/TimeLine';
 import AgendaView from './components/AgendaView';
 import BodyView from './components/BodyView';
@@ -77,7 +78,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   private schedulerHead: HTMLDivElement | undefined;
   private preHoverTime = 0;
   private resourceEventsSlots: any = [];
-  private hasMovedInSchedulerContent = {
+  private hasMovedOverScheduler = {
     left: false,
     right: false,
     up: false,
@@ -166,13 +167,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     }
   };
 
-  accelerateRate(distance: number, maxDistance: number) {
-    return Math.exp((maxDistance - distance) / maxDistance * 2);
-  }
-
   handleDraggingChanged(isDragging: boolean) {
     if (!isDragging) {
-      this.hasMovedInSchedulerContent = {
+      this.hasMovedOverScheduler = {
         left: false,
         right: false,
         up: false,
@@ -190,16 +187,16 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     }
     const currentTime = new Date().valueOf();
     const interval = currentTime - this.preHoverTime;
-    const step = Math.round(interval * 50 / 1000); // 200px/s
+    const baseScrollDistance = Math.round(interval * config.autoScrollingBaseSpeed / 1000);
 
     this.preHoverTime = new Date().valueOf();
 
-    const { pointer, isOver, movement } = params;
-    this.hasMovedInSchedulerContent = {
-      left: this.hasMovedInSchedulerContent.left || movement.x < 0,
-      right: this.hasMovedInSchedulerContent.right || movement.x > 0,
-      up: this.hasMovedInSchedulerContent.up || movement.y > 0,
-      down: this.hasMovedInSchedulerContent.down || movement.y < 0,
+    const { pointer, movement } = params;
+    this.hasMovedOverScheduler = {
+      left: this.hasMovedOverScheduler.left || movement.x < 0,
+      right: this.hasMovedOverScheduler.right || movement.x > 0,
+      up: this.hasMovedOverScheduler.up || movement.y > 0,
+      down: this.hasMovedOverScheduler.down || movement.y < 0,
     };
 
     const { x: pointerX, y: pointerY } = pointer;
@@ -208,27 +205,30 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
 
     let scrollLeft = this.schedulerContent.scrollLeft;
     let scrollTop = this.schedulerView.scrollTop;
-    const SCROLL_DISTANCE = 60;
-    if (this.hasMovedInSchedulerContent.left &&
-      pointerX - schedulerContentBound.left < SCROLL_DISTANCE && this.schedulerContent.scrollLeft > 0) {
-      scrollLeft = Math.max(0, this.schedulerContent.scrollLeft - step * this.accelerateRate(
-        pointerX - schedulerContentBound.left, SCROLL_DISTANCE),
-      );
+    if (this.hasMovedOverScheduler.left &&
+      pointerX - schedulerContentBound.left < config.autoScrollingThreshold && this.schedulerContent.scrollLeft > 0) {
+      scrollLeft = Math.max(0, this.schedulerContent.scrollLeft - baseScrollDistance * getScrollSpeedRate(
+        pointerX - schedulerContentBound.left, config.autoScrollingThreshold,
+      ));
     } else if (
-      this.hasMovedInSchedulerContent.right && schedulerContentBound.right - pointerX < SCROLL_DISTANCE &&
+      this.hasMovedOverScheduler.right && schedulerContentBound.right - pointerX < config.autoScrollingThreshold &&
       this.schedulerContent.scrollLeft < this.schedulerContent.scrollWidth - this.schedulerContent.clientWidth
     ) {
-      scrollLeft = this.schedulerContent.scrollLeft + step * this.accelerateRate(schedulerContentBound.right
-        - pointerX, SCROLL_DISTANCE);
+      scrollLeft = this.schedulerContent.scrollLeft + baseScrollDistance * getScrollSpeedRate(schedulerContentBound.right
+        - pointerX, config.autoScrollingThreshold);
     }
 
-    if (pointerY - schedulerViewBound.top < 80 && this.schedulerView.scrollTop > 0) {
-      scrollTop = Math.max(0, this.schedulerView.scrollTop - step * this.accelerateRate(pointerY - schedulerViewBound.top, 80));
+    if (pointerY - schedulerViewBound.top < (config.autoScrollingThreshold + 30) && this.schedulerView.scrollTop > 0) {
+      scrollTop = Math.max(0, this.schedulerView.scrollTop - baseScrollDistance * getScrollSpeedRate(
+        pointerY - schedulerViewBound.top, config.autoScrollingThreshold + 30)
+      );
     } else if (
-      schedulerViewBound.bottom - pointerY < SCROLL_DISTANCE &&
+      schedulerViewBound.bottom - pointerY < config.autoScrollingThreshold &&
       this.schedulerView.scrollTop < this.schedulerView.scrollHeight - this.schedulerView.clientHeight
     ) {
-      scrollTop = this.schedulerView.scrollTop + step * this.accelerateRate(schedulerViewBound.bottom - pointerY, SCROLL_DISTANCE);
+      scrollTop = this.schedulerView.scrollTop + baseScrollDistance * getScrollSpeedRate(
+        schedulerViewBound.bottom - pointerY, config.autoScrollingThreshold
+      );
     }
 
     this.schedulerContent.scrollLeft = scrollLeft;
@@ -344,9 +344,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   >
                     <table className="resource-table">
                       <thead>
-                      <tr style={{ height: config.tableHeaderHeight }}>
-                        <th className="header3-text">{resourceName}</th>
-                      </tr>
+                        <tr style={{ height: config.tableHeaderHeight }}>
+                          <th className="header3-text">{resourceName}</th>
+                        </tr>
                       </thead>
                     </table>
                   </div>

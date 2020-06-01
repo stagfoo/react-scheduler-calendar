@@ -66,4 +66,6 @@ export default {
   nonAgendaOtherCellHeaderFormat: 'ddd M/D',
   minuteStep: 30,
   views: [],
+  autoScrollingBaseSpeed: 50,
+  autoScrollingThreshold: 60,
 };
