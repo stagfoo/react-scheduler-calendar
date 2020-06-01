@@ -58,7 +58,7 @@ export default {
   recurringEventsEnabled: true,
   headerEnabled: true,
   displayWeekend: true,
-  relativeMove: true,
+  relativeMove: false,
   defaultExpanded: true,
 
   resourceName: 'Technicians',
