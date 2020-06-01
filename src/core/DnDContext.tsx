@@ -27,21 +27,6 @@ export default class DnDContext {
       const type = monitor.getItemType();
       const pos = getPos(component.eventContainer);
       const cellWidth = schedulerData.getContentCellWidth();
-      let initialStartTime = null;
-      let initialEndTime = null;
-      if (type === DnDTypes.EVENT) {
-        const initialPoint = monitor.getInitialSourceClientOffset();
-        const initialLeftIndex = Math.floor((initialPoint!.x - pos.x) / cellWidth);
-        initialStartTime = resourceEvents.headerItems[initialLeftIndex].start;
-        initialEndTime = resourceEvents.headerItems[initialLeftIndex].end;
-        if (cellUnit !== CellUnits.Hour) {
-          initialEndTime = localeMoment(resourceEvents.headerItems[initialLeftIndex].start)
-            .hour(23)
-            .minute(59)
-            .second(59)
-            .format(DATETIME_FORMAT);
-        }
-      }
       const point = monitor.getSourceClientOffset();
       const leftIndex = Math.max(Math.floor((point!.x - pos.x) / cellWidth), 0);
       const startTime = resourceEvents.headerItems[leftIndex].start;
@@ -58,8 +43,6 @@ export default class DnDContext {
         slotName: resourceEvents.slotName,
         start: startTime,
         end: endTime,
-        initialStart: initialStartTime,
-        initialEnd: initialEndTime,
       };
     },
     hover: (props: any, monitor: DropTargetMonitor, component: any) => {
@@ -100,24 +83,16 @@ export default class DnDContext {
       let slotName = resourceEvents.slotName;
       let action = 'New';
       if (isEvent) {
-        const initialPointerPosition = monitor.getInitialClientOffset()!;
-        const initialLeftIndex = Math.floor((initialPointerPosition!.x - eventContainerPosition.x) / cellWidth);
-        const initialStart = resourceEvents.headerItems[initialLeftIndex].start;
         const event = draggingItem;
-        if (config.relativeMove) {
+        if (viewType !== ViewTypes.Day) {
+          const tmpMoment = localeMoment(newStart);
           newStart = localeMoment(event.start)
-            .add(localeMoment(newStart).diff(localeMoment(initialStart)), 'ms')
+            .year(tmpMoment.year())
+            .month(tmpMoment.month())
+            .date(tmpMoment.date())
             .format(DATETIME_FORMAT);
-        } else {
-          if (viewType !== ViewTypes.Day) {
-            const tmpMoment = localeMoment(newStart);
-            newStart = localeMoment(event.start)
-              .year(tmpMoment.year())
-              .month(tmpMoment.month())
-              .date(tmpMoment.date())
-              .format(DATETIME_FORMAT);
-          }
         }
+
         newEnd = localeMoment(newStart)
           .add(localeMoment(event.end).diff(localeMoment(event.start)), 'ms')
           .format(DATETIME_FORMAT);

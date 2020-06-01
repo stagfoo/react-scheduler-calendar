@@ -30,31 +30,23 @@ export class DnDSource {
       let slotName = dropResult.slotName;
       let newStart = dropResult.start;
       let newEnd = dropResult.end;
-      const initialStart = dropResult.initialStart;
-      const initialEnd = dropResult.initialEnd;
       let action = 'New';
       const isEvent = type === DnDTypes.EVENT;
       if (isEvent) {
         const event = item;
-        if (config.relativeMove) {
+        if (viewType !== ViewTypes.Day) {
+          const tmpMoment = localeMoment(newStart);
           newStart = localeMoment(event.start)
-            .add(localeMoment(newStart).diff(localeMoment(initialStart)), 'ms')
+            .year(tmpMoment.year())
+            .month(tmpMoment.month())
+            .date(tmpMoment.date())
             .format(DATETIME_FORMAT);
-        } else {
-          if (viewType !== ViewTypes.Day) {
-            const tmpMoment = localeMoment(newStart);
-            newStart = localeMoment(event.start)
-              .year(tmpMoment.year())
-              .month(tmpMoment.month())
-              .date(tmpMoment.date())
-              .format(DATETIME_FORMAT);
-          }
         }
         newEnd = localeMoment(newStart)
           .add(localeMoment(event.end).diff(localeMoment(event.start)), 'ms')
           .format(DATETIME_FORMAT);
         // if crossResourceMove disabled, slot returns old value
-        if (config.crossResourceMove === false) {
+        if (!config.crossResourceMove) {
           slotId = schedulerData._getEventSlotId(item);
           slotName = undefined;
           const slot = schedulerData.getSlotById(slotId);
