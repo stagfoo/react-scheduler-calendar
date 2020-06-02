@@ -279,6 +279,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const start = localeMoment(startDate).startOf('day');
     const end = localeMoment(endDate).endOf('day');
     const width = schedulerData.getSchedulerWidth();
+    const cellWidth = schedulerData.getContentCellWidth()
     let tbodyContent = <tr/>;
     if (showAgenda) {
       tbodyContent = <AgendaView {...this.props} />;
@@ -400,7 +401,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                     }}
                   >
                     <table className="scheduler-bg-table">
-                      <HeaderView {...this.props} />
+                      <HeaderView
+                        headers={schedulerData.headers}
+                        cellUnit={schedulerData.cellUnit}
+                        localeMoment={localeMoment}
+                        config={schedulerData.config}
+                        cellWidth={cellWidth}
+                        headerHeight={schedulerData.getTableHeaderHeight()}
+                        minuteStepsInHour={schedulerData.getMinuteStepsInHour()}
+                      />
                     </table>
                   </div>
                 </div>
@@ -435,7 +444,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                     >
                       <Background
                         config={config}
-                        cellWidth={schedulerData.getContentCellWidth()}
+                        cellWidth={cellWidth}
                         renderData={schedulerData.renderData}
                         headers={schedulerData.headers}
                       />
