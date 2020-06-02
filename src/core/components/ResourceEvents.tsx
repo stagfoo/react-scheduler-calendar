@@ -17,12 +17,6 @@ interface ResourceEventsProps {
   moveEvent?: (...args: any[]) => any;
   movingEvent?: (...args: any[]) => any;
   conflictOccurred?: (...args: any[]) => any;
-  subtitleGetter?: (...args: any[]) => any;
-  eventItemClick?: (...args: any[]) => any;
-  viewEventClick?: (...args: any[]) => any;
-  viewEventText?: string;
-  viewEvent2Click?: (...args: any[]) => any;
-  viewEvent2Text?: string;
   newEvent?: (...args: any[]) => any;
   eventItemTemplateResolver?: (...args: any[]) => any;
   getHoverAreaStyle?: (...args: any[]) => any;
