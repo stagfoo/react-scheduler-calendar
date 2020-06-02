@@ -826,26 +826,23 @@ export class SchedulerData {
     if (this.showAgenda) {
       return 1;
     }
+    const start = moment.max(
+      this.localeMoment(startTime),
+      this.localeMoment(headers[0].time),
+    );
+    const end = moment.min(
+      this.localeMoment(endTime),
+      this.localeMoment(headers[headers.length - 1].time),
+    );
 
-    let start = this.localeMoment(startTime);
-    let end = this.localeMoment(endTime);
-    let span = 0;
-    const duration = end.diff(start, 'min');
-    const dayStartOfStartTime = this.localeMoment(headers[0].time);
-    const dayEndOfEndTime = this.localeMoment(headers[headers.length - 1].time).endOf('day');
-
-    if (start.isBefore(dayStartOfStartTime)) {
-      start = dayStartOfStartTime;
-      end = start.add(duration, 'min');
-    }
-    if (end.isAfter(dayEndOfEndTime)) {
-      end = dayEndOfEndTime;
-    }
-
+    let span;
     if (this.cellUnit === CellUnits.Hour) {
       span = Math.ceil(end.diff(start, 'minutes') / this.config.minuteStep);
     } else {
       span = end.diff(start, 'days');
+    }
+    if (this.localeMoment(endTime).isAfter(this.localeMoment(headers[headers.length - 1].time))) {
+      span += 1;
     }
     return span;
   }
