@@ -48,7 +48,7 @@ const config = {
   movable: true,
   creatable: true,
   crossResourceMove: true,
-  checkConflict: true,
+  checkConflict: false,
   scrollToSpecialMomentEnabled: true,
   eventItemPopoverEnabled: true,
   calendarPopoverEnabled: true,
