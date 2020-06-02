@@ -2,14 +2,13 @@ import React from 'react';
 import { DnDTypes } from 'src/lib/DnDTypes';
 import { CellUnits, DATETIME_FORMAT, SchedulerData, SummaryPos } from 'src/core';
 import { getPos } from '../utils/Util';
-import AddMore from './AddMore';
 import SelectedArea from './SelectedArea';
 import Summary from './Summary';
 const supportTouch = 'ontouchstart' in window;
 interface ResourceEventsProps {
-  resourceEvents: any;
+  resourceEvents?: any;
   schedulerData: SchedulerData;
-  dndSource: any;
+  dndSource?: any;
   onSetAddMoreState?: (...args: any[]) => any;
   updateEventStart?: (...args: any[]) => any;
   updateEventEnd?: (...args: any[]) => any;
@@ -428,25 +427,6 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
             eventList.push(eventItem);
           }
         });
-        if (headerItem.addMore > 0) {
-          const leftOfAddMore = index * cellWidth + (index > 0 ? 2 : 3);
-          const widthOfAddMore = cellWidth - (index > 0 ? 5 : 6);
-          const top =
-            marginTop + headerItem.addMoreIndex * config.eventItemLineHeight;
-          const addMoreItem = (
-            <AddMore
-              {...this.props}
-              key={headerItem.time}
-              headerItem={headerItem}
-              number={headerItem.addMore}
-              left={leftOfAddMore}
-              width={widthOfAddMore}
-              top={top}
-              clickAction={this.onAddMoreClick}
-            />
-          );
-          eventList.push(addMoreItem);
-        }
         if (headerItem.summary) {
           const top = isTop
             ? 1

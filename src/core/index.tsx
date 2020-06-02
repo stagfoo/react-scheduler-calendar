@@ -89,6 +89,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     if (dndSources && dndSources.length > 0) {
       sources = [...sources, ...dndSources];
     }
+    // @ts-ignore
     const dndContext = new DnDContext(sources, ResourceEvents);
     this.currentArea = -1;
     schedulerData._setDocumentWidth(document.documentElement.clientWidth);
@@ -715,7 +716,6 @@ export * from './constants/SummaryPos';
 export * from './models/SchedulerData';
 export * from './DnDSource';
 export * from './DnDContext';
-export * from './components/AddMorePopover';
 export * from '../lib';
 export { DEFAULT_CONFIG };
 export default Scheduler;
