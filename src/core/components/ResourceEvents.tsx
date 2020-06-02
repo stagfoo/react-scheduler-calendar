@@ -17,6 +17,7 @@ interface ResourceEventsProps {
   movingEvent?: (...args: any[]) => any;
   conflictOccurred?: (...args: any[]) => any;
   newEvent?: (...args: any[]) => any;
+  eventItemClick?: (...args: any[]) => any;
   eventItemTemplateResolver?: (...args: any[]) => any;
   getHoverAreaStyle?: (...args: any[]) => any;
   connectDropTarget: (...args: any[]) => any;

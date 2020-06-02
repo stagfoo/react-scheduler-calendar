@@ -24,6 +24,7 @@ interface EventItemProps {
   updateEventEnd?: (...args: any[]) => any;
   moveEvent?: (...args: any[]) => any;
   subtitleGetter?: (...args: any[]) => any;
+  eventItemClick?: (...args: any[]) => any;
   conflictOccurred?: (...args: any[]) => any;
   eventItemTemplateResolver?: (...args: any[]) => any;
   renderEvent?: (...args: any[]) => React.ReactElement;
@@ -650,6 +651,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       isStart,
       isEnd,
       isInPopover,
+      eventItemClick,
       schedulerData,
       isDragging,
       connectDragSource,
@@ -726,6 +728,11 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       <div
         className="timeline-event"
         style={{ left, width, top, opacity: isDragging ? 0.2 : 1 }}
+        onClick={() => {
+          if (eventItemClick) {
+            eventItemClick(schedulerData, eventItem);
+          }
+        }}
       >
         {eventItemTemplate}
         {startResizeDiv}

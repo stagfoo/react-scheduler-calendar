@@ -39,6 +39,7 @@ export interface SchedulerProps {
   toggleExpandFunc?: (...args: any[]) => any;
   slotItemTemplateResolver?: (...args: any[]) => any;
   nonAgendaCellHeaderTemplateResolver?: (...args: any[]) => any;
+  eventItemClick?: (...args: any[]) => any;
   onScrollLeft?: (...args: any[]) => any;
   onScrollRight?: (...args: any[]) => any;
   onScrollTop?: (...args: any[]) => any;
