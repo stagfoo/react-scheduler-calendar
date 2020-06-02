@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { DnDTypes } from 'src/lib/DnDTypes';
 import { CellUnits, DATETIME_FORMAT, SchedulerData, SummaryPos } from 'src/core';
 import { getPos } from '../utils/Util';
@@ -38,7 +38,7 @@ interface ResourceEventsState {
   isSelecting?: boolean;
   hover?: any;
 }
-class ResourceEvents extends Component<ResourceEventsProps, ResourceEventsState> {
+class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEventsState> {
   private eventContainer: HTMLDivElement | undefined;
   constructor(props: Readonly<ResourceEventsProps>) {
     super(props);

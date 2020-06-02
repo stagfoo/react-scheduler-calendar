@@ -31,7 +31,7 @@ class AgendaEventItem extends Component<AgendaEventItemProps, {}> {
     }
     const titleText = schedulerData.behaviors.getEventTextFunc(schedulerData, eventItem);
     const content = <EventItemPopover {...this.props} title={eventItem.title} startTime={eventItem.start}
-      endTime={eventItem.end} statusColor={bgColor}/>;
+      endTime={eventItem.end}/>;
     let eventItemTemplate = (
       <div
         className={roundCls + ' event-item'}

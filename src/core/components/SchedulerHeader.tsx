@@ -16,7 +16,7 @@ interface Props {
   goBack: noopType;
   goNext: noopType;
   onSelect: noopType;
-  rightCustomHeader?: object;
+  rightCustomHeader?: string | ReactNode;
 }
 
 interface State {
