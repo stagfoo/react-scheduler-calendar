@@ -135,17 +135,11 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               onTodayClick={this.handleTodayClick}
               onSelectDate={this.onSelectDate}
               onViewChange={this.onViewChange}
-              eventItemClick={this.eventClicked}
-              viewEventClick={this.ops1}
-              viewEventText='Delete'
-              viewEvent2Text='Detail'
-              viewEvent2Click={this.ops2}
               updateEventStart={this.updateEventStart}
               updateEventEnd={this.updateEventEnd}
               moveEvent={this.moveEvent}
               movingEvent={this.movingEvent}
               newEvent={this.newEvent}
-              subtitleGetter={this.subtitleGetter}
               dndSources={dndSources}
               toggleExpandFunc={this.toggleExpandFunc}
               renderEvent={this.renderEvent}
@@ -198,18 +192,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
-  eventClicked = (schedulerData: any, event: any) => {
-    alert(`You just clicked an event: {id: ${event.id}, title: ${event.title}}`);
-  };
-  ops1 = (schedulerData: any, event: any) => {
-    schedulerData.removeEventById(event.id);
-    this.setState({
-      viewModel: schedulerData,
-    });
-  };
-  ops2 = (schedulerData: any, event: any) => {
-    alert(`You just executed ops2 to event: {id: ${event.id}, title: ${event.title}}`);
-  };
+
   newEvent = (schedulerData: any, slotId: any, slotName: any, start: any, end: any, type: string, item: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to create a new event?
@@ -271,25 +254,18 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     });
   };
   moveEvent = (schedulerData: any, event: any, slotId: any, slotName: any, start: any, end: any) => {
-    // eslint-disable-next-line no-restricted-globals
-    // if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle:
-    // ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
     console.log(`{eventId: ${event.id}, eventTitle: ${event.title},
     newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`);
     schedulerData.moveEvent(event, slotId, slotName, start, end);
     this.setState({
       viewModel: schedulerData,
     });
-    // }
   };
   movingEvent = (schedulerData: any, slotId: any, slotName: any, newStart: any, newEnd: any,
                  action: any, type: any, item: any) => {
     // console.log('moving event', newStart, newEnd, action, type, item);
   };
 
-  subtitleGetter = (schedulerData: any, event: { resourceId: any; groupName: any }) => {
-    return schedulerData.isEventPerspective ? schedulerData.getResourceById(event.resourceId).name : event.groupName;
-  };
   toggleExpandFunc = (schedulerData: any, slotId: any) => {
     schedulerData.toggleExpandStatus(slotId);
     this.setState({
