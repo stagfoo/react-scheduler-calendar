@@ -119,7 +119,6 @@ table.scheduler-table tr:last-child td {
 
 .timeline-event {
     position: absolute;
-    background: #ff9800b5;
 }
 
 .day-event {
@@ -247,3 +246,7 @@ table.scheduler-table tr:last-child td {
     padding-right: 4px;
 }
 
+.event {
+    background-color: #ff9800b5;
+    height: 100%;
+}

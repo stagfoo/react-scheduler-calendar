@@ -90,9 +90,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     );
   }
 
-  renderEvent = (eventItem: any) => {
-    return (<div>render event<span>{eventItem.id}</span></div>);
-  };
+  renderEvent = (eventItem: any) => (<div className='event'>render event<span>{eventItem.id}</span></div>);
 
   handleConflict = (): void => {
     this.setState({ showBody: false });
