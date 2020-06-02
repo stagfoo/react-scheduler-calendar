@@ -126,10 +126,10 @@ class ResourceEvents extends Component {
       document.documentElement.addEventListener('mousemove', this.doDrag, false);
       document.documentElement.addEventListener('mouseup', this.stopDrag, false);
     }
-    document.onselectstart = function () {
+    document.onselectstart = function() {
       return false;
     };
-    document.ondragstart = function () {
+    document.ondragstart = function() {
       return false;
     };
   };
@@ -366,7 +366,7 @@ class ResourceEvents extends Component {
           const width = cellWidth - (index > 0 ? 5 : 6);
           const key = `${resourceEvents.slotId}_${headerItem.time}`;
           const summary = <Summary key={key} schedulerData={schedulerData} summary={headerItem.summary} left={left}
-                                   width={width} top={top}/>;
+            width={width} top={top}/>;
           eventList.push(summary);
         }
       }
@@ -374,11 +374,14 @@ class ResourceEvents extends Component {
 
     return (
       <tr>
-        <td style={{ width: rowWidth }}>
+        <td style={{ width: rowWidth, overflow: 'hidden' }}>
           {
             connectDropTarget(
-              <div ref={this.eventContainerRef} className="event-container"
-                   style={{ height: resourceEvents.rowHeight }}>
+              <div
+                ref={this.eventContainerRef}
+                className="event-container"
+                style={{ height: resourceEvents.rowHeight }}
+              >
                 {hoverArea}
                 {selectedArea}
                 {eventList}
