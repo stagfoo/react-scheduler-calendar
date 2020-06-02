@@ -11,7 +11,7 @@ import HeaderView from './components/HeaderView';
 import ResourceEvents from './components/ResourceEvents';
 import ResourceView from './components/ResourceView';
 import SchedulerHeader from './components/SchedulerHeader';
-import config from './constants/config';
+import DEFAULT_CONFIG from './constants/config';
 import DnDContext from './DnDContext';
 import { DnDSource } from './DnDSource';
 import styles from './styles/index.module.scss';
@@ -119,6 +119,16 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     this.eventDndSource = dndContext.getDndSource();
   }
 
+  static getDerivedStateFromProps(
+    props: SchedulerProps,
+    state: SchedulerState,
+  ) {
+    if (props.showBody !== state.showBody) {
+      return { showBody: props.showBody };
+    }
+    return null;
+  }
+
   onWindowResize = () => {
     const { schedulerData } = this.props;
     schedulerData._setDocumentWidth(document.documentElement.clientWidth);
@@ -182,6 +192,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   }
 
   handleHover(params: any): void {
+    const { config } = this.props.schedulerData;
     if (!(this.schedulerContent && this.schedulerView)) {
       return;
     }
@@ -241,16 +252,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   componentDidMount(): void {
     this.resolveScrollbarSize();
     this.scrollToSpecificTime();
-  }
-
-  static getDerivedStateFromProps(
-    props: SchedulerProps,
-    state: SchedulerState,
-  ) {
-    if (props.showBody !== state.showBody) {
-      return { showBody: props.showBody };
-    }
-    return null;
   }
 
   componentDidUpdate(props: SchedulerProps): void {
@@ -677,7 +678,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   };
   onViewChange = (e: any) => {
     const { onViewChange, schedulerData } = this.props;
-    const viewType = parseInt(e.target.value.charAt(0));
+    const viewType = parseInt(e.target.value.charAt(0), 10);
     const showAgenda = e.target.value.charAt(1) === '1';
     const isEventPerspective = e.target.value.charAt(2) === '1';
     onViewChange(schedulerData, {
@@ -718,5 +719,5 @@ export * from './DnDSource';
 export * from './DnDContext';
 export * from './components/AddMorePopover';
 export * from '../lib';
-export { config };
+export { DEFAULT_CONFIG };
 export default Scheduler;
