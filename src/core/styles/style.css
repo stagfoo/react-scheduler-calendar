@@ -252,4 +252,5 @@ table.scheduler-table tr:last-child td {
 .event {
     background-color: #ff9800b5;
     height: 100%;
+    border: 1px solid #108EE9;
 }
