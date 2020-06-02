@@ -732,7 +732,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         {endResizeDiv}
       </div>
     );
-    return schedulerData._isResizing() || !config.eventItemPopoverEnabled || !eventItem.showPopover ||
+    return schedulerData._isResizing() || !config.eventItemPopoverEnabled || eventItem.showPopover === false ||
     isDragging ? (
         <div style={{ position: 'relative' }}>
           {connectDragSource(eventElement)}
