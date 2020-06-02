@@ -246,6 +246,9 @@ table.scheduler-table tr:last-child td {
     padding-right: 4px;
 }
 
+.resource-list {
+ vertical-align: top
+}
 .event {
     background-color: #ff9800b5;
     height: 100%;

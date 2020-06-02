@@ -5,7 +5,7 @@ import ResourceEventsList from 'src/core/components/ResourceEventsList';
 import { getScrollSpeedRate } from 'src/core/utils/Util';
 import TimeLine from '../lib/TimeLine';
 import AgendaView from './components/AgendaView';
-import BodyView from './components/BodyView';
+import Background from 'src/core/components/Background';
 import EventItem from './components/EventItem';
 import HeaderView from './components/HeaderView';
 import ResourceEvents from './components/ResourceEvents';
@@ -322,7 +322,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         <tr>
           <td
             className="resource-list"
-            style={{ width: resourceTableWidth, verticalAlign: 'top' }}
+            style={{ width: resourceTableWidth }}
           >
             {renderResourceList ? (
               renderResourceList(
@@ -432,7 +432,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                       style={{ width: schedulerWidth }}
                       ref={this.schedulerContentBgTableRef}
                     >
-                      <BodyView {...this.props} />
+                      <Background
+                        config={config}
+                        cellWidth={schedulerData.getContentCellWidth()}
+                        renderData={schedulerData.renderData}
+                        headers={schedulerData.headers}
+                      />
                     </table>
                   </div>
                 </div>

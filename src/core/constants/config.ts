@@ -1,6 +1,6 @@
 import { SummaryPos } from './SummaryPos';
 
-export default {
+const config = {
   schedulerWidth: '100%',
   besidesWidth: 330,
   schedulerMaxHeight: 0,
@@ -69,3 +69,5 @@ export default {
   autoScrollingBaseSpeed: 50,
   autoScrollingThreshold: 60,
 };
+export type configType = typeof config;
+export default config;
