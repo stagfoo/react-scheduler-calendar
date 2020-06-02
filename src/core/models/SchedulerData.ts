@@ -341,7 +341,7 @@ export class SchedulerData {
     return this.isEventPerspective ? this.eventGroups : this.resources;
   }
 
-  getSlotById(slotId: any) {
+  getSlotById(slotId: any): any {
     const slots = this.getSlots();
     let slot;
     slots.forEach((item: any) => {
@@ -1048,7 +1048,7 @@ export class SchedulerData {
     this.renderData = initRenderData;
   }
 
-  _startResizing() {
+  startResizing() {
     this.resizing = true;
   }
 
