@@ -237,6 +237,7 @@ table.scheduler-table tr:last-child td {
     bottom: 0;
     position: absolute;
     background: #b5dbe2;
+    /*transition: left 0.1s;*/
 }
 
 .slot-cell {

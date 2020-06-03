@@ -1,4 +1,6 @@
 import React from 'react';
+import { isEqual } from 'lodash';
+
 import { CellUnits, DATETIME_FORMAT, SchedulerData, SummaryPos } from 'src/core';
 import { DnDTypes } from 'src/lib/DnDTypes';
 import { getPos } from '../utils/Util';
@@ -48,6 +50,10 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       width: 0,
     };
     this.DnDEventItem = props.dndSource.getDragSource();
+  }
+
+  shouldComponentUpdate(nextProps: any, nextState: any) {
+    return !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
   }
 
   componentDidMount() {
@@ -346,6 +352,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       config,
       localeMoment,
     } = schedulerData;
+    console.log('render', new Date().getTime());
     const { isSelecting, left, width } = this.state;
     const cellWidth = schedulerData.getContentCellWidth();
     const cellMaxEvents = schedulerData.getCellMaxEvents();
@@ -375,13 +382,6 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
         };
       }
       hoverArea = <div className={'hover-area'} style={hoverStyle}/>;
-      if (onHover) {
-        const hoverEventParams = {
-          pointer: this.state.hover.pointer,
-          movement: this.state.hover.movement,
-        };
-        onHover(hoverEventParams);
-      }
     }
     const eventList: React.ReactElement[] = [];
     resourceEvents.headerItems.forEach((headerItem: any, index: number) => {

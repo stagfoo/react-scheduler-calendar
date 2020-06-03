@@ -1,4 +1,5 @@
 import React from 'react';
+import { omit } from 'lodash';
 import { DropTarget, DropTargetConnector, DropTargetMonitor, XYCoord } from 'react-dnd';
 import { ViewTypes } from './constants/ViewTypes';
 import { CellUnits, DATETIME_FORMAT, DnDTypes } from './index';
@@ -115,18 +116,20 @@ export default class DnDContext {
         }
         action = 'Move';
       }
-      component.setState({
-        hover: {
-          leftIndex,
-          width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
-          item: draggingItem,
-          itemType: draggingItemType,
-          pointer: pointerPosition,
-          movement: {
-            x: pointerPosition!.x - this.lastHoverPosition!.x,
-            y: pointerPosition!.y - this.lastHoverPosition!.y,
-          },
+      const onHoverParams = {
+        leftIndex,
+        width: schedulerData.getSpan(newStart, newEnd, schedulerData.headers) * cellWidth,
+        item: draggingItem,
+        itemType: draggingItemType,
+        pointer: pointerPosition,
+        movement: {
+          x: pointerPosition!.x - this.lastHoverPosition!.x,
+          y: pointerPosition!.y - this.lastHoverPosition!.y,
         },
+      };
+      props.onHover(onHoverParams);
+      component.setState({
+        hover: omit(onHoverParams, ['pointer', 'movement']),
       });
       if (movingEvent) {
         movingEvent(schedulerData, slotId, slotName, newStart, newEnd, action, draggingItemType, draggingItem);
@@ -149,10 +152,10 @@ export default class DnDContext {
     if (!isDragging) {
       this.lastHoverPosition = null;
     }
+
     return {
       connectDropTarget: connect.dropTarget(),
       isOver: monitor.isOver({ shallow: true }),
-      clientOffset: monitor.getClientOffset(),
       isDragging,
     };
   }
