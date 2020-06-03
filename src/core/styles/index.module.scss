@@ -37,11 +37,16 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
+    border: 1px solid #c5c5c5;
     .schedulerTableHeader {
       display: flex;
+      border-bottom: 1px solid #c5c5c5;
       .resourceTitle {
-        border: 1px solid #c5c5c5;
-        //border-bottom: 1px solid #c5c5c5;
+        font-size: 16px;
+        font-weight: bold;
+        padding-left: 17px;
+        color: #222222;
+        border-right: 1px solid #c5c5c5;
       }
     }
     .schedulerTableBody {
@@ -143,17 +148,21 @@
         float: left;
       }
       .resourceList {
-        border: 1px solid #c5c5c5;
         border-top: none;
         margin: 0;
         padding: 0;
         float: left;
+        border-right: 1px solid #c5c5c5;
 
         & > li {
           list-style: none;
           border-bottom: 1px solid #c5c5c5;
+          padding-left: 10px;
+          font-weight: bold;
+          color: #666666;
+
           &:last-of-type {
-            border-bottom: none;
+            border-bottom-color: #c5c5c5;
           }
         }
       }
