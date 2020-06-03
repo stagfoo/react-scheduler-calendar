@@ -1,10 +1,12 @@
 import React from 'react';
-import { DnDTypes } from 'src/lib/DnDTypes';
 import { CellUnits, DATETIME_FORMAT, SchedulerData, SummaryPos } from 'src/core';
+import { DnDTypes } from 'src/lib/DnDTypes';
 import { getPos } from '../utils/Util';
 import SelectedArea from './SelectedArea';
 import Summary from './Summary';
+
 const supportTouch = 'ontouchstart' in window;
+
 interface ResourceEventsProps {
   resourceEvents?: any;
   schedulerData: SchedulerData;
@@ -23,6 +25,7 @@ interface ResourceEventsProps {
   connectDropTarget: (...args: any[]) => any;
   isOver?: boolean;
 }
+
 interface ResourceEventsState {
   startX?: number;
   left?: number;
@@ -32,8 +35,11 @@ interface ResourceEventsState {
   isSelecting?: boolean;
   hover?: any;
 }
+
 class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEventsState> {
   private eventContainer: HTMLDivElement | undefined;
+  private DnDEventItem: any;
+
   constructor(props: Readonly<ResourceEventsProps>) {
     super(props);
     this.state = {
@@ -41,7 +47,9 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       left: 0,
       width: 0,
     };
+    this.DnDEventItem = props.dndSource.getDragSource();
   }
+
   componentDidMount() {
     const { schedulerData } = this.props;
     const { config } = schedulerData;
@@ -53,15 +61,16 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       }
     }
   }
+
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps: ResourceEventsProps) {
     if (supportTouch) {
       // this.eventContainer.removeEventListener('touchstart', this.initDrag, false);
-    } else if (this.eventContainer)  {
+    } else if (this.eventContainer) {
       this.eventContainer.removeEventListener(
         'mousedown',
         this.initDrag,
-        false
+        false,
       );
     }
     if (nextProps.schedulerData.config.creatable) {
@@ -72,6 +81,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       }
     }
   }
+
   initDrag = (ev: MouseEvent | TouchEvent) => {
     const { isSelecting } = this.state;
     if (isSelecting) {
@@ -120,34 +130,34 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       document.documentElement.addEventListener(
         'touchmove',
         this.doDrag,
-        false
+        false,
       );
       document.documentElement.addEventListener(
         'touchend',
         this.stopDrag,
-        false
+        false,
       );
       document.documentElement.addEventListener(
         'touchcancel',
         this.cancelDrag,
-        false
+        false,
       );
     } else {
       document.documentElement.addEventListener(
         'mousemove',
         this.doDrag,
-        false
+        false,
       );
       document.documentElement.addEventListener(
         'mouseup',
         this.stopDrag,
-        false
+        false,
       );
     }
-    document.onselectstart = function() {
+    document.onselectstart = function () {
       return false;
     };
-    document.ondragstart = function() {
+    document.ondragstart = function () {
       return false;
     };
   };
@@ -193,28 +203,28 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       document.documentElement.removeEventListener(
         'touchmove',
         this.doDrag,
-        false
+        false,
       );
       document.documentElement.removeEventListener(
         'touchend',
         this.stopDrag.bind(this),
-        false
+        false,
       );
       document.documentElement.removeEventListener(
         'touchcancel',
         this.cancelDrag,
-        false
+        false,
       );
     } else {
       document.documentElement.removeEventListener(
         'mousemove',
         this.doDrag,
-        false
+        false,
       );
       document.documentElement.removeEventListener(
         'mouseup',
         this.stopDrag,
-        false
+        false,
       );
     }
     document.onselectstart = null;
@@ -275,11 +285,11 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
           slotId,
           slotName,
           startTime,
-          endTime
+          endTime,
         );
       } else {
         console.log(
-          'Conflict occurred, set conflictOccurred func in Scheduler to handle it'
+          'Conflict occurred, set conflictOccurred func in Scheduler to handle it',
         );
       }
     } else {
@@ -295,17 +305,17 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       document.documentElement.removeEventListener(
         'touchmove',
         this.doDrag,
-        false
+        false,
       );
       document.documentElement.removeEventListener(
         'touchend',
         this.stopDrag,
-        false
+        false,
       );
       document.documentElement.removeEventListener(
         'touchcancel',
         this.cancelDrag,
-        false
+        false,
       );
       document.onselectstart = null;
       document.ondragstart = null;
@@ -319,12 +329,12 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       });
     }
   };
+
   render() {
     const {
       resourceEvents,
       schedulerData,
       connectDropTarget,
-      dndSource,
       isOver,
       getHoverAreaStyle,
       onHover,
@@ -340,7 +350,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
     const cellWidth = schedulerData.getContentCellWidth();
     const cellMaxEvents = schedulerData.getCellMaxEvents();
     const rowWidth = schedulerData.getContentTableWidth();
-    const DnDEventItem = dndSource.getDragSource();
+    const DnDEventItem = this.DnDEventItem;
     const selectedArea = isSelecting ? (
       <SelectedArea
         style={{
@@ -350,7 +360,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
         }}
       />
     ) : (
-      <div />
+      <div/>
     );
     let hoverArea = null;
     if (isOver && this.state.hover) {
@@ -364,7 +374,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
           ...getHoverAreaStyle(this.state.hover),
         };
       }
-      hoverArea = <div className={'hover-area'} style={hoverStyle} />;
+      hoverArea = <div className={'hover-area'} style={hoverStyle}/>;
       if (onHover) {
         const hoverEventParams = {
           pointer: this.state.hover.pointer,
@@ -393,11 +403,11 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
             if (cellUnit === CellUnits.Hour) {
               durationStart = localeMoment(startDate).add(
                 config.dayStartFrom,
-                'hours'
+                'hours',
               );
               durationEnd = localeMoment(endDate).add(
                 config.dayStopTo + 1,
-                'hours'
+                'hours',
               );
             }
             const eventStart = localeMoment(evt.eventItem.start);
@@ -407,7 +417,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
             const leftOfEventItem = index * cellWidth + (index > 0 ? 2 : 3);
             const widthOfEventItem = Math.max(
               evt.span * cellWidth - (index > 0 ? 5 : 6),
-              0
+              0,
             );
             const top = marginTop + idx * config.eventItemLineHeight;
             const eventItem = (
@@ -461,12 +471,13 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
               {hoverArea}
               {selectedArea}
               {eventList}
-            </div>
+            </div>,
           )}
         </td>
       </tr>
     );
   }
+
   onAddMoreClick = (headerItem: any) => {
     const { onSetAddMoreState, resourceEvents, schedulerData } = this.props;
     if (onSetAddMoreState) {
@@ -492,4 +503,5 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
     this.eventContainer = element;
   };
 }
+
 export default ResourceEvents;

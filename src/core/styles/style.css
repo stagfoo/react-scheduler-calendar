@@ -96,6 +96,7 @@ table.scheduler-content-table {
 
 table.resource-table tr, table.scheduler-bg-table tr, table.scheduler-table tr {
     border-bottom: 1px solid #c5c5c5;
+    transition: height 0.2s;
 }
 
 table.resource-table th, table.scheduler-table th, table.resource-table td, table.scheduler-bg-table td, table.scheduler-table td {
@@ -152,6 +153,7 @@ table.scheduler-table tr:last-child td {
 
 .event-container {
     position: relative;
+    transition: height 0.2s;
 }
 
 .event-item {
