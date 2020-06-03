@@ -308,7 +308,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       };
     }
     const generateHeightStyles = (height: number) => ({
-      lineHeight: `${height}px`,
+      height: `${height}px`,
     });
 
     const resourceName = schedulerData.isEventPerspective
@@ -347,7 +347,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                 <div
                   className={styles.resourceTitle}
                   style={{
-                    ...generateHeightStyles(schedulerData.config.tableHeaderHeight),
                     width: resourceTableWidth,
                   }}
                   ref={this.schedulerResourceTitleRef}

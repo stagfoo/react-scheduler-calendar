@@ -152,6 +152,7 @@
       .schedulerView {
         float: left;
       }
+
       .resourceList {
         border-top: none;
         margin: 0;
@@ -180,5 +181,55 @@
     overflow-y: hidden;
     margin: 0;
     position: relative;
+  }
+}
+
+.header3-text {
+  font-size: 14px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  background-color: white;
+  border-bottom: none;
+  padding-top: 0 !important;
+
+  &:first-of-type {
+    border-left: none;
+  }
+}
+
+.scheduler-bg-table {
+  width: 100%;
+
+  tr {
+    td {
+      background-color: white;
+      cursor: pointer;
+
+      &:first-of-type {
+        border-left: none;
+      }
+
+      &:last-of-type {
+        border-right: none;
+      }
+    }
+  }
+
+  tr:first-of-type {
+    td {
+      border-top-color: #c5c5c5
+    }
+  }
+}
+
+.scheduler-cell {
+  .scheduler-view {
+    border-top: none;
+    border-right: 1px solid #c5c5c5;
+
+    & > div {
+      border-bottom: none !important;
+    }
   }
 }
