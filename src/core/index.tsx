@@ -275,8 +275,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const width = schedulerData.getSchedulerWidth();
     const cellWidth = schedulerData.getContentCellWidth();
     const resourceTableWidth = schedulerData.getResourceTableWidth();
-    const schedulerContainerWidth = width - resourceTableWidth + 1;
-    const schedulerWidth = schedulerData.getContentTableWidth() - 1;
+    const schedulerContainerWidth = width - resourceTableWidth;
+    const schedulerWidth = schedulerData.getContentTableWidth();
     const displayRenderData = renderData.filter((o: any) => o.render);
     this.resourceEventsSlots = displayRenderData.map(() => (React.createRef()));
     const contentScrollbarHeight = this.state.contentScrollbarHeight;
@@ -362,9 +362,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                     style={{
                       overflowX: 'scroll',
                       overflowY: 'hidden',
-                      borderBottom: '1px solid #e9e9e9',
                       height: config.tableHeaderHeight,
-                      margin: `0px 0px -${contentScrollbarHeight}px`,
                     }}
                     ref={this.schedulerHeadRef}
                     onMouseOver={this.onSchedulerHeadMouseOver}
@@ -373,8 +371,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   >
                     <div
                       style={{
-                        paddingRight: `${contentScrollbarWidth}px`,
-                        width: schedulerWidth + contentScrollbarWidth,
+                        // paddingRight: `${contentScrollbarWidth}px`,
+                        width: schedulerWidth,
                       }}
                     >
                       <table className="scheduler-bg-table">
@@ -395,7 +393,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
               <div
                 ref={this.schedulerViewRef}
                 className={`scheduler-table-body ${styles.schedulerTableBody}`}
-                style={{ width: `${width}px` }}
+                style={{ width: `${width + contentScrollbarWidth}px`, paddingRight: contentScrollbarWidth }}
               >
                 <div>
                   <ul
