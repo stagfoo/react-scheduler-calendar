@@ -355,7 +355,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                 </div>
                 <div
                   className={styles.timeHeaderContainer}
-                  style={{ width: schedulerContainerWidth }}
+                  style={{ width: schedulerContainerWidth - contentScrollbarWidth }}
                 >
                   <div
                     style={{
@@ -412,12 +412,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   </ul>
                   <div
                     className={classnames('scheduler-view', styles.schedulerView)}
-                    style={{ width: schedulerContainerWidth, verticalAlign: 'top' }}
+                    style={{ width: schedulerContainerWidth - contentScrollbarWidth, verticalAlign: 'top' }}
                   >
                     <div
+                      ref={this.schedulerContentRef}
                       className={styles.schedulerContent}
                       style={schedulerContentStyle}
-                      ref={this.schedulerContentRef}
                       onMouseOver={this.onSchedulerContentMouseOver}
                       onMouseOut={this.onSchedulerContentMouseOut}
                       onScroll={this.onSchedulerContentScroll}
