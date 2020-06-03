@@ -55,8 +55,6 @@
         }
 
         .scheduler-view {
-          border: 1px solid transparent;
-
           th.header3-text {
             padding-top: 10px;
           }
@@ -141,10 +139,15 @@
           padding: 0;
         }
       }
+      .schedulerView {
+        float: left;
+      }
       .resourceList {
         border: 1px solid #c5c5c5;
+        border-top: none;
         margin: 0;
         padding: 0;
+        float: left;
 
         & > li {
           list-style: none;
