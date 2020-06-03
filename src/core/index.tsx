@@ -308,7 +308,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       };
     }
     const generateHeightStyles = (height: number) => ({
-      height: `${height}px`,
       lineHeight: `${height}px`,
     });
 
@@ -356,7 +355,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                   {resourceName}
                 </div>
                 <div
-                  style={{ width: schedulerContainerWidth, verticalAlign: 'top' }}
+                  className={styles.timeHeaderContainer}
+                  style={{ width: schedulerContainerWidth }}
                 >
                   <div
                     style={{
