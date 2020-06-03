@@ -69,27 +69,6 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     }, 1000);
   }
 
-  renderResourceList(resourceName: string, renderData: any, listRef: any) {
-    return (
-      <div className={styles.resourceListWrapper}>
-        <div className={styles.resourceTitle} style={{
-          height: `${config.tableHeaderHeight}px`,
-          lineHeight: `${config.tableHeaderHeight}px`,
-          textAlign: 'center',
-        }}>{resourceName}</div>
-        <ul className={styles.resourceList} ref={listRef}>
-          {renderData.map((resource: any) => {
-            return (<li key={resource.slotId} className={styles.resourceItem} style={{
-              height: `${resource.rowHeight}px`,
-              lineHeight: `${resource.rowHeight}px`,
-              textAlign: 'center',
-            }}>{resource.slotName}</li>);
-          })}
-        </ul>
-      </div>
-    );
-  }
-
   renderEvent = (eventItem: any) => (<div className='event'>render event<span>{eventItem.id}</span></div>);
 
   handleConflict = (): void => {
@@ -129,7 +108,6 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
           <div className={styles.rightPane}>
             <Scheduler
               schedulerData={viewModel}
-              renderResourceList={this.renderResourceList}
               prevClick={this.prevClick}
               nextClick={this.nextClick}
               onTodayClick={this.handleTodayClick}
