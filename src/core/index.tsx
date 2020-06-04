@@ -399,79 +399,71 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                 className={classnames(styles.schedulerBoardScrollArea, 'scheduler-board-scroll-area')}
                 style={{ width, paddingRight: contentScrollbarWidth }}
               >
-                <table className={classnames(styles.schedulerBoard, '')} cellSpacing={0} cellPadding={0}>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <ul
-                          className={classnames(styles.resourceList, 'resource-list')}
-                          ref={this.schedulerResourceRef}
-                          style={{ width: resourceTableWidth }}
-                        >
-                          {renderData.map((resource: any) => (
-                            <li
-                              key={resource.slotId}
-                              className={styles.resourceItem}
-                              style={generateHeightStyles(resource.rowHeight)}
-                            >
-                              {resource.slotName}
-                            </li>
-                          ))}
-                        </ul>
-                      </td>
-                      <td>
-                        <div
-                          className={classnames('scheduler-view', styles.schedulerView)}
-                          style={{ width: schedulerContainerWidth - contentScrollbarWidth, verticalAlign: 'top' }}
-                        >
-                          <div
-                            ref={this.schedulerContentRef}
-                            className={styles.schedulerContent}
-                            style={schedulerContentStyle}
-                            onMouseOver={this.onSchedulerContentMouseOver}
-                            onMouseOut={this.onSchedulerContentMouseOut}
-                            onScroll={this.onSchedulerContentScroll}
-                          >
-                            <div style={{ width: schedulerWidth }}>
-                              <div className="scheduler-content-table-container">
-                                <table className="scheduler-content-table">
-                                  <tbody>
-                                    <ResourceEventsList
-                                      DndResourceEvents={this.DndResourceEvents}
-                                      eventDndSource={this.eventDndSource}
-                                      displayRenderData={displayRenderData}
-                                      onHover={this.handleHover.bind(this)}
-                                      {...this.props}
-                                    />
-                                  </tbody>
-                                </table>
-                              </div>
-                              <div className="scheduler-bg">
-                                <table
-                                  className="scheduler-bg-table"
-                                  style={{ width: schedulerWidth }}
-                                  ref={this.schedulerContentBgTableRef}
-                                >
-                                  <Background
-                                    config={config}
-                                    cellWidth={cellWidth}
-                                    renderData={schedulerData.renderData}
-                                    headers={schedulerData.headers}
-                                  />
-                                </table>
-                              </div>
-                            </div>
-                            <TimeLine
-                              maxWidth={schedulerData.getContentTableWidth()}
-                              startTime={start}
-                              endTime={end}
-                            />
-                          </div>
+                <div className={classnames(styles.schedulerBoard, 'scheduler-board')}>
+                  <ul
+                    className={classnames(styles.resourceList, 'resource-list')}
+                    ref={this.schedulerResourceRef}
+                    style={{ width: resourceTableWidth }}
+                  >
+                    {renderData.map((resource: any) => (
+                      <li
+                        key={resource.slotId}
+                        className={styles.resourceItem}
+                        style={generateHeightStyles(resource.rowHeight)}
+                      >
+                        {resource.slotName}
+                      </li>
+                    ))}
+                  </ul>
+                  <div
+                    className={classnames('scheduler-view', styles.schedulerView)}
+                    style={{ width: schedulerContainerWidth - contentScrollbarWidth, verticalAlign: 'top' }}
+                  >
+                    <div
+                      ref={this.schedulerContentRef}
+                      className={styles.schedulerContent}
+                      style={schedulerContentStyle}
+                      onMouseOver={this.onSchedulerContentMouseOver}
+                      onMouseOut={this.onSchedulerContentMouseOut}
+                      onScroll={this.onSchedulerContentScroll}
+                    >
+                      <div style={{ width: schedulerWidth }}>
+                        <div className="scheduler-content-table-container">
+                          <table className="scheduler-content-table">
+                            <tbody>
+                              <ResourceEventsList
+                                DndResourceEvents={this.DndResourceEvents}
+                                eventDndSource={this.eventDndSource}
+                                displayRenderData={displayRenderData}
+                                onHover={this.handleHover.bind(this)}
+                                {...this.props}
+                              />
+                            </tbody>
+                          </table>
                         </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        <div className="scheduler-bg">
+                          <table
+                            className="scheduler-bg-table"
+                            style={{ width: schedulerWidth }}
+                            ref={this.schedulerContentBgTableRef}
+                          >
+                            <Background
+                              config={config}
+                              cellWidth={cellWidth}
+                              renderData={schedulerData.renderData}
+                              headers={schedulerData.headers}
+                            />
+                          </table>
+                        </div>
+                      </div>
+                      <TimeLine
+                        maxWidth={schedulerData.getContentTableWidth()}
+                        startTime={start}
+                        endTime={end}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -482,8 +474,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
 
   resolveScrollbarSize = () => {
     const { schedulerData } = this.props;
-    let contentScrollbarHeight = 17;
-    let contentScrollbarWidth = 17;
+    const contentScrollbarHeight = 17;
+    const contentScrollbarWidth = 17;
     let resourceScrollbarHeight = 17;
     let resourceScrollbarWidth = 17;
     // if (this.schedulerView) {

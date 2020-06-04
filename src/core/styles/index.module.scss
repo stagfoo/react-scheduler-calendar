@@ -59,14 +59,11 @@
     .schedulerBoardScrollArea {
       flex: 1;
       overflow: hidden auto;
-      display: flex;
-      table.schedulerBoard {
+      .schedulerBoard {
         padding: 0;
         margin: 0;
         background-color: white;
-        tr td {
-          vertical-align: top;
-        }
+        display: flex;
       }
       :global {
         .calendar-action-header {
