@@ -50,7 +50,6 @@ export interface SchedulerProps {
 }
 
 interface SchedulerState {
-  contentHeight: any;
   contentScrollbarHeight: number;
   contentScrollbarWidth: number;
   resourceScrollbarHeight: number;
@@ -96,7 +95,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     this.currentArea = -1;
     schedulerData._setDocumentWidth(document.documentElement.clientWidth);
     this.state = {
-      contentHeight: schedulerData.getSchedulerContentDesiredHeight(),
       contentScrollbarHeight: 17,
       contentScrollbarWidth: 17,
       resourceScrollbarHeight: 17,
@@ -283,7 +281,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const contentScrollbarWidth = this.state.contentScrollbarWidth;
     const resourceScrollbarHeight = this.state.resourceScrollbarHeight;
     const resourceScrollbarWidth = this.state.resourceScrollbarWidth;
-    const contentHeight = this.state.contentHeight;
     const resourcePaddingBottom =
       resourceScrollbarHeight === 0 ? contentScrollbarHeight : 0;
     const contentPaddingBottom =
@@ -435,7 +432,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                             onMouseOut={this.onSchedulerContentMouseOut}
                             onScroll={this.onSchedulerContentScroll}
                           >
-                            <div style={{ width: schedulerWidth, height: contentHeight }}>
+                            <div style={{ width: schedulerWidth }}>
                               <div className="scheduler-content-table-container">
                                 <table className="scheduler-content-table">
                                   <tbody>
@@ -489,7 +486,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let contentScrollbarWidth = 17;
     let resourceScrollbarHeight = 17;
     let resourceScrollbarWidth = 17;
-    let contentHeight = schedulerData.getSchedulerContentDesiredHeight();
     // if (this.schedulerView) {
     //   contentScrollbarHeight =
     //     this.schedulerView.offsetHeight - this.schedulerView.clientHeight;
@@ -503,12 +499,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       resourceScrollbarWidth =
         this.schedulerResource.offsetWidth - this.schedulerResource.clientWidth;
     }
-    if (
-      !!this.schedulerContentBgTable &&
-      !!this.schedulerContentBgTable.offsetHeight
-    ) {
-      contentHeight = this.schedulerContentBgTable.offsetHeight;
-    }
     let tmpState = {};
     let needSet = false;
     if (contentScrollbarHeight !== this.state.contentScrollbarHeight) {
@@ -520,10 +510,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     }
     if (contentScrollbarWidth !== this.state.contentScrollbarWidth) {
       tmpState = { ...tmpState, contentScrollbarWidth };
-      needSet = true;
-    }
-    if (contentHeight !== this.state.contentHeight) {
-      tmpState = { ...tmpState, contentHeight };
       needSet = true;
     }
     if (resourceScrollbarHeight !== this.state.resourceScrollbarHeight) {
