@@ -346,7 +346,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
               style={{ width: `${width}px` }}
             >
               <div
-                className={classnames(styles.schedulerTableHeader, 'scheduler-table-header')}>
+                className={classnames(styles.schedulerTableHeader, 'scheduler-table-header')}
+                style={{ width: width - contentScrollbarWidth }}
+              >
                 <div
                   className={classnames(styles.resourceTitle, 'resource-title')}
                   style={{
@@ -397,10 +399,10 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
               </div>
               <div
                 ref={this.schedulerViewRef}
-                className={classnames(styles.schedulerTableBody, 'scheduler-table-body')}
-                style={{ width: `${width}px`, paddingRight: contentScrollbarWidth }}
+                className={classnames(styles.schedulerBoardScrollArea, 'scheduler-board-scroll-area')}
+                style={{ width, paddingRight: contentScrollbarWidth }}
               >
-                <table cellSpacing={0} cellPadding={0}>
+                <table className={classnames(styles.schedulerBoard, '')} cellSpacing={0} cellPadding={0}>
                   <tbody>
                     <tr>
                       <td>
@@ -473,8 +475,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                     </tr>
                   </tbody>
                 </table>
-                <div>
-                </div>
               </div>
             </div>
           )}
