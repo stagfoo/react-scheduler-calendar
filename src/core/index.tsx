@@ -337,12 +337,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)}/>
         <div id="RBS-Scheduler-root"
           className={classnames(styles.schedulerWrapper, 'scheduler-wrapper')}>
-          <div className="scheduler-header" style={{ width: `${width}px` }}>
+          <div className="scheduler-header" style={{ width: `${width - contentScrollbarWidth}px` }}>
             {schedulerHeader}
           </div>
           {showBody && (
             <div
               className={classnames(styles.schedulerBody, 'scheduler-body')}
+              style={{ width: `${width}px` }}
             >
               <div
                 className={classnames(styles.schedulerTableHeader, 'scheduler-table-header')}>
@@ -397,7 +398,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
               <div
                 ref={this.schedulerViewRef}
                 className={classnames(styles.schedulerTableBody, 'scheduler-table-body')}
-                style={{ width: `${width + contentScrollbarWidth}px`, paddingRight: contentScrollbarWidth }}
+                style={{ width: `${width}px`, paddingRight: contentScrollbarWidth }}
               >
                 <table cellSpacing={0} cellPadding={0}>
                   <tbody>
@@ -489,12 +490,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let resourceScrollbarHeight = 17;
     let resourceScrollbarWidth = 17;
     let contentHeight = schedulerData.getSchedulerContentDesiredHeight();
-    if (this.schedulerView) {
-      contentScrollbarHeight =
-        this.schedulerView.offsetHeight - this.schedulerView.clientHeight;
-      contentScrollbarWidth =
-        this.schedulerView.offsetWidth - this.schedulerView.clientWidth;
-    }
+    // if (this.schedulerView) {
+    //   contentScrollbarHeight =
+    //     this.schedulerView.offsetHeight - this.schedulerView.clientHeight;
+    //   contentScrollbarWidth =
+    //     this.schedulerView.offsetWidth - this.schedulerView.clientWidth;
+    // }
     if (this.schedulerResource) {
       resourceScrollbarHeight =
         this.schedulerResource.offsetHeight -
