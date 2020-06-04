@@ -58,12 +58,38 @@
     }
     .schedulerBoardScrollArea {
       flex: 1;
-      overflow: hidden auto;
+      overflow-x: hidden;
+      overflow-y: auto;
       .schedulerBoard {
         padding: 0;
         margin: 0;
-        background-color: white;
         display: flex;
+
+        .resourceList {
+          border-top: none;
+          margin: 0;
+          padding: 0;
+          border-right: 1px solid #c5c5c5;
+          border-left: 1px solid #c5c5c5;
+          border-top: 1px solid transparent;
+          background-color: white;
+
+          & > li {
+            list-style: none;
+            border-bottom: 1px solid #c5c5c5;
+            padding-left: 10px;
+            font-weight: bold;
+            color: #666666;
+            transition: height 0.2s;
+
+            &:last-of-type {
+              border-bottom-color: #c5c5c5;
+            }
+          }
+        }
+        .schedulerView {
+          background-color: white;
+        }
       }
       :global {
         .calendar-action-header {
@@ -154,28 +180,6 @@
         .scheduler-cell {
           margin: 0;
           padding: 0;
-        }
-      }
-
-      .resourceList {
-        border-top: none;
-        margin: 0;
-        padding: 0;
-        border-right: 1px solid #c5c5c5;
-        border-left: 1px solid #c5c5c5;
-        border-top: 1px solid transparent;
-
-        & > li {
-          list-style: none;
-          border-bottom: 1px solid #c5c5c5;
-          padding-left: 10px;
-          font-weight: bold;
-          color: #666666;
-          transition: height 0.2s;
-
-          &:last-of-type {
-            border-bottom-color: #c5c5c5;
-          }
         }
       }
     }

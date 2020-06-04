@@ -397,7 +397,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
               <div
                 ref={this.schedulerViewRef}
                 className={classnames(styles.schedulerBoardScrollArea, 'scheduler-board-scroll-area')}
-                style={{ width, paddingRight: contentScrollbarWidth }}
+                style={{ width }}
               >
                 <div className={classnames(styles.schedulerBoard, 'scheduler-board')}>
                   <ul
