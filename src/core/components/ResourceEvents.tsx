@@ -1,5 +1,5 @@
 import React from 'react';
-import { isEqual } from 'lodash';
+import { isEqual, omit } from 'lodash';
 
 import { CellUnits, DATETIME_FORMAT, SchedulerData, SummaryPos } from 'src/core';
 import { DnDTypes } from 'src/lib/DnDTypes';
@@ -53,7 +53,9 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
   }
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
-    return !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
+    const omitProps = ['resourceEvents', 'dndSource'];
+    return !isEqual(omit(nextProps, omitProps), omit(this.props, omitProps))
+      || !isEqual(nextState, this.state);
   }
 
   componentDidMount() {
@@ -352,7 +354,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       config,
       localeMoment,
     } = schedulerData;
-    console.log('render', new Date().getTime());
+    // console.log('render', new Date().getTime());
     const { isSelecting, left, width } = this.state;
     const cellWidth = schedulerData.getContentCellWidth();
     const cellMaxEvents = schedulerData.getCellMaxEvents();

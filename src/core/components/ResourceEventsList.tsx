@@ -1,4 +1,5 @@
-import React from 'react';
+import { isEqual, pick } from 'lodash';
+import React, { Component } from 'react';
 import { SchedulerProps } from 'src/core/index';
 
 interface RequiredProps {
@@ -10,21 +11,34 @@ interface RequiredProps {
 }
 
 type Props = RequiredProps & Partial<SchedulerProps>;
-export const ResourceEventsList: React.FC<Props> = (props) => {
-  const { displayRenderData, schedulerData, onHover, DndResourceEvents, eventDndSource, ...rest } = props;
-  const resourceEventsList = displayRenderData.map((item: any, index: number) => (
-    <DndResourceEvents
-      key={item.slotId}
-      resourceEvents={item}
-      dndSource={eventDndSource}
-      schedulerData={schedulerData}
-      onHover={onHover}
-      {...rest}
-    />
-  ));
-  return <>
-    {resourceEventsList}
-  </>;
-};
+
+class ResourceEventsList extends Component<Props, {}> {
+  constructor(props: Readonly<Props>) {
+    super(props);
+  }
+
+  shouldComponentUpdate(nextProps: any, nextState: any) {
+    const omitProps = ['resourceEvents', 'displayRenderData'];
+    return !isEqual(pick(nextProps, omitProps), pick(this.props, omitProps))
+      || !isEqual(nextState, this.state);
+  }
+
+  render() {
+    const { displayRenderData, schedulerData, onHover, DndResourceEvents, eventDndSource, ...rest } = this.props;
+    const resourceEventsList = displayRenderData.map((item: any, index: number) => (
+      <DndResourceEvents
+        key={item.slotId}
+        resourceEvents={item}
+        dndSource={eventDndSource}
+        schedulerData={schedulerData}
+        onHover={onHover}
+        {...rest}
+      />
+    ));
+    return <>
+      {resourceEventsList}
+    </>;
+  }
+}
 
 export default ResourceEventsList;

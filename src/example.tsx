@@ -93,9 +93,6 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
         <CustomDragLayer/>
         <div className={styles.content}>
           <div className={styles.leftPane}>
-            <div>
-              <button onClick={this.handleConflict}>drop conflict</button>
-            </div>
             <div className={styles.jobList}>
               {dndList}
             </div>

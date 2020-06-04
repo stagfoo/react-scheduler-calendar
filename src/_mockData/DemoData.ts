@@ -1,8 +1,8 @@
 import moment from 'moment';
 
-const todayDate = moment().format('YYYY-MM-DD');
+const todayDate = (i: number) => moment().startOf('day').add(i, 'hour');
 const DemoData = {
-  resources: new Array(20).fill(0).map((_, index) => (
+  resources: new Array(10).fill(0).map((_, index) => (
     {
       id: `r${index}`,
       name: `Resource${index}`,
@@ -120,126 +120,21 @@ const DemoData = {
       title: 'R1 has many tasks 6',
     },
   ],
-  eventsForTaskView: [
-    {
-      id: 1,
-      start: `${todayDate} 09:30:00`,
-      end: `${todayDate} 13:30:00`,
-      resourceId: 'r1',
-      title: 'I am finished',
-      bgColor: '#D9D9D9',
-      groupId: 1,
-      groupName: 'Job1',
-      item: {},
-    },
-    // {
-    //   id: 2,
-    //   start: `${todayDate} 17:30:00`,
-    //   end: `${todayDate} 19:30:00`,
-    //   resourceId: 'r2',
-    //   title: 'I am not resizable',
-    //   resizable: false,
-    //   groupId: 2,
-    //   groupName: 'Job2',
-    // },
-    // {
-    //   id: 3,
-    //   start: '2017-12-19 12:30:00',
-    //   end: '2017-12-20 23:30:00',
-    //   resourceId: 'r3',
-    //   title: 'I am not movable',
-    //   movable: false,
-    //   groupId: 3,
-    //   groupName: 'Job3',
-    // },
-    // {
-    //   id: 7,
-    //   start: '2017-12-19 15:40:00',
-    //   end: '2017-12-20 23:30:00',
-    //   resourceId: 'r7',
-    //   title: 'I am exceptional',
-    //   bgColor: '#FA9E95',
-    //   groupId: 4,
-    //   groupName: 'Job4',
-    // },
-    // {
-    //   id: 4,
-    //   start: '2017-12-20 14:30:00',
-    //   end: '2017-12-21 23:30:00',
-    //   resourceId: 'r4',
-    //   title: 'I am not start-resizable',
-    //   startResizable: false,
-    //   groupId: 1,
-    //   groupName: 'Job1',
-    // },
-    // {
-    //   id: 5,
-    //   start: '2017-12-21 15:30:00',
-    //   end: '2017-12-22 23:30:00',
-    //   resourceId: 'r5',
-    //   title: 'I am not end-resizable',
-    //   endResizable: false,
-    //   groupId: 3,
-    //   groupName: 'Job3',
-    // },
-    // {
-    //   id: 9,
-    //   start: '2017-12-21 16:30:00',
-    //   end: '2017-12-21 23:30:00',
-    //   resourceId: 'r1',
-    //   title: 'R1 has many tasks',
-    //   groupId: 4,
-    //   groupName: 'Job4',
-    // },
-    // {
-    //   id: 6,
-    //   start: '2017-12-22 15:35:00',
-    //   end: '2017-12-23 23:30:00',
-    //   resourceId: 'r6',
-    //   title: 'I am normal',
-    //   groupId: 1,
-    //   groupName: 'Job1',
-    // },
-    // {
-    //   id: 8,
-    //   start: '2017-12-25 15:50:00',
-    //   end: '2017-12-26 23:30:00',
-    //   resourceId: 'r1',
-    //   title: 'I am locked',
-    //   movable: false,
-    //   resizable: false,
-    //   bgColor: 'red',
-    //   groupId: 1,
-    //   groupName: 'Job1',
-    // },
-    // {
-    //   id: 10,
-    //   start: '2017-12-26 18:30:00',
-    //   end: '2017-12-26 23:30:00',
-    //   resourceId: 'r2',
-    //   title: 'R2 has many tasks',
-    //   groupId: 4,
-    //   groupName: 'Job4',
-    // },
-    // {
-    //   id: 11,
-    //   start: '2017-12-27 18:30:00',
-    //   end: '2017-12-27 23:30:00',
-    //   resourceId: 'r14',
-    //   title: 'R4 has many tasks',
-    //   groupId: 4,
-    //   groupName: 'Job4',
-    // },
-    // {
-    //   id: 12,
-    //   start: '2017-12-28 18:30:00',
-    //   end: '2017-12-28 23:30:00',
-    //   resourceId: 'r6',
-    //   title: 'R6 has many tasks',
-    //   groupId: 3,
-    //   groupName: 'Job3',
-    // },
-  ],
+  eventsForTaskView: new Array(20).fill(0).map((_: any, i: any) => (
+    new Array(8).fill(0).map((_, j) => (
+      {
+        id: `${i}-${j}`,
+        start: `${todayDate(j * 3).format('YYYY-MM-DD HH:mm:ss')}`,
+        end: `${todayDate(j * 3 + 1.5).format('YYYY-MM-DD HH:mm:ss')}`,
+        resourceId: `r${i}`,
+        title: 'I am finished',
+        bgColor: '#D9D9D9',
+        groupId: 1,
+        groupName: 'Job1',
+        item: {},
+      }
+    ))
+  )).flat(),
   eventsForCustomEventStyle: [
     {
       id: 1,
@@ -348,5 +243,5 @@ const DemoData = {
     },
   ],
 };
-
+console.log(DemoData.eventsForTaskView);
 export default DemoData;
