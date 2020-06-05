@@ -122,6 +122,15 @@ table.scheduler-table tr:last-child td {
 
 .timeline-event {
     position: absolute;
+    transition-property: height, left, width, top;
+    transition-duration: .2s;
+}
+.timeline-event.isResizing {
+    transition-property: height, top;
+}
+.timeline-event >div {
+    transition-property: height;
+    transition-duration: .2s;
 }
 
 .day-event {
@@ -153,7 +162,8 @@ table.scheduler-table tr:last-child td {
 
 .event-container {
     position: relative;
-    transition: height 0.2s;
+    transition-property: height;
+    transition-duration: .2s;
 }
 
 .event-item {

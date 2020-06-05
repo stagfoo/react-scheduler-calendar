@@ -1,4 +1,5 @@
 import { Popover } from 'antd';
+import classNames from 'classnames';
 import React, { Component } from 'react';
 import { CellUnits, DATETIME_FORMAT, SchedulerData } from 'src/core';
 import { DnDTypes } from 'src/lib/DnDTypes';
@@ -36,6 +37,7 @@ interface EventItemState {
   startX?: number;
   endX?: number;
   width: number;
+  isResizing: boolean;
 }
 
 class EventItem extends Component<EventItemProps, EventItemState> {
@@ -52,6 +54,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       left,
       top,
       width,
+      isResizing: false,
     };
   }
 
@@ -160,10 +163,13 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       newWidth = maxWidth;
       newLeft = 3;
     }
-    this.setState({ left: newLeft, width: newWidth });
+    this.setState({ left: newLeft, width: newWidth, isResizing: true });
   };
   stopStartDrag = (ev: MouseEvent | TouchEvent) => {
     ev.stopPropagation();
+    this.setState({
+      isResizing: false,
+    });
     if (supportTouch) {
       this.startResizer!.removeEventListener(
         'touchmove',
@@ -345,6 +351,9 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
   };
   cancelStartDrag = (ev: MouseEvent | TouchEvent) => {
+    this.setState({
+      isResizing: false,
+    });
     ev.stopPropagation();
     this.startResizer!.removeEventListener('touchmove', this.doStartDrag, false);
     this.startResizer!.removeEventListener(
@@ -425,6 +434,9 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     };
   };
   doEndDrag = (ev: MouseEvent | TouchEvent) => {
+    this.setState({
+      isResizing: true,
+    });
     ev.stopPropagation();
     let clientX = 0;
     if (supportTouch) {
@@ -451,9 +463,12 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     } else if (newWidth > maxWidth) {
       newWidth = maxWidth;
     }
-    this.setState({ width: newWidth });
+    this.setState({ width: newWidth, isResizing: true });
   };
   stopEndDrag = (ev: MouseEvent | TouchEvent) => {
+    this.setState({
+      isResizing: false,
+    });
     ev.stopPropagation();
     if (supportTouch) {
       this.endResizer!.removeEventListener('touchmove', this.doEndDrag, false);
@@ -626,6 +641,9 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
   };
   cancelEndDrag = (ev: MouseEvent | TouchEvent) => {
+    this.setState({
+      isResizing: false,
+    });
     ev.stopPropagation();
     this.endResizer!.removeEventListener('touchmove', this.doEndDrag, false);
     this.endResizer!.removeEventListener('touchend', this.stopEndDrag, false);
@@ -726,7 +744,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
     const eventElement = (
       <div
-        className="timeline-event"
+        className={classNames({ isResizing: this.state.isResizing }, 'timeline-event')}
         style={{ left, width, top, opacity: isDragging ? 0.2 : 1 }}
         onClick={() => {
           if (eventItemClick) {
@@ -734,7 +752,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
           }
         }}
       >
-        {eventItemTemplate}
+        {connectDragSource(eventItemTemplate)}
         {startResizeDiv}
         {endResizeDiv}
       </div>
@@ -742,7 +760,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     return schedulerData._isResizing() || !config.eventItemPopoverEnabled || eventItem.showPopover === false ||
     isDragging ? (
         <div style={{ position: 'relative' }}>
-          {connectDragSource(eventElement)}
+          {eventElement}
         </div>
       ) : (
         <Popover
@@ -751,7 +769,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
           trigger="hover"
           style={{ position: 'relative' }}
         >
-          {connectDragSource(eventElement)}
+          {eventElement}
         </Popover>
       );
   }

@@ -1,9 +1,8 @@
-import { Card } from 'antd';
 import moment from 'moment';
 import React, { Component } from 'react';
 import { DnDTypes } from 'src/lib';
 import Scheduler, { DnDSource, SchedulerData, ViewTypes } from './';
-import DemoData from './_mockData/DemoData';
+import DemoData, { todayDate } from './_mockData/DemoData';
 import styles from './core/styles/index.module.scss';
 import './core/styles/style.css';
 import CustomDragLayer from './lib/CustomDragLayer';
@@ -23,6 +22,7 @@ interface CalendarSchedulerState {
 }
 
 class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
+  private events = DemoData.eventsOfOverlap;
   constructor(props: any) {
     super(props);
     const newConfig: Partial<typeof config> = {
@@ -42,7 +42,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     );
     schedulerData.localeMoment.locale('en');
     schedulerData.setResources(DemoData.resources);
-    schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setEvents(this.events);
     schedulerData.setScrollToSpecialMoment(true);
     this.state = {
       viewModel: schedulerData,
@@ -97,9 +97,64 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               {dndList}
             </div>
             <div className={styles.jobDetail}>
-              <Card className={styles.jobDetailCard} title={'Job Detail'}>
-                Job Detail here.
-              </Card>
+              <button onClick={() => {
+                viewModel.setEvents([...this.events]);
+                this.setState({
+                  viewModel,
+                });
+              }}>
+                Reset
+              </button>
+              <button onClick={() => {
+                viewModel.addEvent(
+                  {
+                    id: new Date().getTime(),
+                    start: `${todayDate(9).format('YYYY-MM-DD HH:mm:ss')}`,
+                    end: `${todayDate(11.5).format('YYYY-MM-DD HH:mm:ss')}`,
+                    // start: `${todayDate(10.5).format('YYYY-MM-DD HH:mm:ss')}`,
+                    // end: `${todayDate(12.5).format('YYYY-MM-DD HH:mm:ss')}`,
+                    // start: `${todayDate(12.5).format('YYYY-MM-DD HH:mm:ss')}`,
+                    // end: `${todayDate(14).format('YYYY-MM-DD HH:mm:ss')}`,
+                    resourceId: 'r1',
+                    title: 'I am finished',
+                    bgColor: '#D9D9D9',
+                    groupId: 1,
+                    groupName: 'Job1',
+                    item: {},
+                  }
+                );
+                this.setState({
+                  viewModel,
+                });
+              }}>
+                Add Event
+              </button>
+              <button onClick={() => {
+                const events = [...this.events];
+                events[0] = {
+                  ...events[0],
+                  end: `${todayDate(13).format('YYYY-MM-DD HH:mm:ss')}`,
+                };
+                viewModel.setEvents(events);
+                this.setState({
+                  viewModel,
+                });
+              }}>
+                Increase Event Duration
+              </button>
+              <button onClick={() => {
+                const events = [...this.events];
+                events[0] = {
+                  ...events[0],
+                  end: `${todayDate(11).format('YYYY-MM-DD HH:mm:ss')}`,
+                };
+                viewModel.setEvents(events);
+                this.setState({
+                  viewModel,
+                });
+              }}>
+                Decrease Event Duration
+              </button>
             </div>
           </div>
           <div className={styles.rightPane}>
@@ -129,7 +184,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
 
   prevClick = (schedulerData: any) => {
     // schedulerData.prev();
-    schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setEvents(this.events);
     this.setState({
       viewModel: schedulerData,
       showBody: false,
@@ -141,14 +196,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   };
   nextClick = (schedulerData: any) => {
     // schedulerData.next();
-    schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setEvents(this.events);
     this.setState({
       viewModel: schedulerData,
     });
   };
 
   handleTodayClick = (schedulerData: any) => {
-    schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setEvents(this.events);
     this.setState({
       viewModel: schedulerData,
     });
@@ -156,14 +211,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   onViewChange = (schedulerData: any, view: any) => {
     schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
     schedulerData.config.creatable = !view.isEventPerspective;
-    schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setEvents(this.events);
     this.setState({
       viewModel: schedulerData,
     });
   };
   onSelectDate = (schedulerData: any, date: any) => {
     // schedulerData.setDate(date);
-    schedulerData.setEvents(DemoData.eventsForTaskView);
+    schedulerData.setEvents(this.events);
     this.setState({
       viewModel: schedulerData,
     });

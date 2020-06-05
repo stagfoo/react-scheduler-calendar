@@ -80,7 +80,8 @@
             padding-left: 10px;
             font-weight: bold;
             color: #666666;
-            transition: height 0.2s;
+            transition-property: height, max-height;
+            transition-duration: .2s;
 
             &:last-of-type {
               border-bottom-color: #c5c5c5;

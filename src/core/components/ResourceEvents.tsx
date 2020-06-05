@@ -53,7 +53,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
   }
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
-    const omitProps = ['resourceEvents', 'dndSource'];
+    const omitProps = ['dndSource'];
     return !isEqual(omit(nextProps, omitProps), omit(this.props, omitProps))
       || !isEqual(nextState, this.state);
   }

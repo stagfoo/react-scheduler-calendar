@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const todayDate = (i: number) => moment().startOf('day').add(i, 'hour');
+export const todayDate = (i: number) => moment().startOf('day').add(i, 'hour');
 const DemoData = {
   resources: new Array(10).fill(0).map((_, index) => (
     {
@@ -241,6 +241,30 @@ const DemoData = {
       title: 'R1 has many tasks 4',
       type: 3,
     },
+  ],
+  eventsOfOverlap: [
+    {
+      id: '1',
+      start: `${todayDate(10).format('YYYY-MM-DD HH:mm:ss')}`,
+      end: `${todayDate(12).format('YYYY-MM-DD HH:mm:ss')}`,
+      resourceId: 'r1',
+      title: 'I am finished',
+      bgColor: '#D9D9D9',
+      groupId: 1,
+      groupName: 'Job1',
+      item: {},
+    },
+    {
+      id: '2',
+      start: `${todayDate(12).format('YYYY-MM-DD HH:mm:ss')}`,
+      end: `${todayDate(14).format('YYYY-MM-DD HH:mm:ss')}`,
+      resourceId: 'r1',
+      title: 'I am finished',
+      bgColor: '#D9D9D9',
+      groupId: 1,
+      groupName: 'Job1',
+      item: {},
+    }
   ],
 };
 console.log(DemoData.eventsForTaskView);
