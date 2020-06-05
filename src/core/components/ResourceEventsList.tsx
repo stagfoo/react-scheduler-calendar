@@ -18,8 +18,8 @@ class ResourceEventsList extends Component<Props, {}> {
   }
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
-    const omitProps = ['resourceEvents', 'displayRenderData'];
-    return !isEqual(pick(nextProps, omitProps), pick(this.props, omitProps))
+    const pickedProps = ['resourceEvents', 'displayRenderData', 'renderEvent'];
+    return !isEqual(pick(nextProps, pickedProps), pick(this.props, pickedProps))
       || !isEqual(nextState, this.state);
   }
 
