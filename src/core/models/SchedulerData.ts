@@ -908,27 +908,25 @@ export class SchedulerData {
     }
   }
 
-  _compare(event1: any, event2: any) {
-    const start1 = this.localeMoment(event1.start);
-    const start2 = this.localeMoment(event2.start);
-    if (start1 !== start2) {
-      return start1 < start2 ? -1 : 1;
-    }
-
-    const end1 = this.localeMoment(event1.end);
-    const end2 = this.localeMoment(event2.end);
-    if (end1 !== end2) {
-      return end1 < end2 ? -1 : 1;
-    }
-
-    return event1.id < event2.id ? -1 : 1;
-  }
-
   _createRenderData() {
     const initRenderData = this._createInitRenderData(
       this.isEventPerspective, this.eventGroups, this.resources, this.headers
     );
-    // this.events.sort(this._compare);
+    this.events.sort((event1: any, event2: any) => {
+      const start1 = this.localeMoment(event1.start);
+      const start2 = this.localeMoment(event2.start);
+      if (start1 !== start2) {
+        return start1 < start2 ? -1 : 1;
+      }
+
+      const end1 = this.localeMoment(event1.end);
+      const end2 = this.localeMoment(event2.end);
+      if (end1 !== end2) {
+        return end1 < end2 ? -1 : 1;
+      }
+
+      return event1.id < event2.id ? -1 : 1;
+    });
     const cellMaxEventsCount = this.getCellMaxEvents();
     const cellMaxEventsCountValue = 30;
 
