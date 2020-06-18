@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { configType } from 'src/core/constants/config';
+
 interface BackgroundProps {
   renderData: any;
   headers: any;
@@ -11,6 +12,7 @@ class Background extends Component<BackgroundProps, {}> {
   constructor(props: Readonly<BackgroundProps>) {
     super(props);
   }
+
   render() {
     const { renderData, headers, config, cellWidth } = this.props;
     const displayRenderData = renderData.filter((o: any) => o.render);
@@ -30,8 +32,10 @@ class Background extends Component<BackgroundProps, {}> {
         if (item.groupOnly) {
           style = { ...style, backgroundColor: config.groupOnlySlotColor };
         }
+
+        const className = `bg-td-${index % (60 / cellWidth)}`;
         return (
-          <td key={key} style={style}/>
+          <td key={key} style={style} className={className}/>
         );
       });
       return (
@@ -43,4 +47,5 @@ class Background extends Component<BackgroundProps, {}> {
     return <tbody>{tableRows}</tbody>;
   }
 }
+
 export default Background;
