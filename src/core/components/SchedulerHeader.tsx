@@ -2,22 +2,31 @@ import { CalendarOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons
 import { Button, Calendar, Col, Popover, Radio, Row } from 'antd';
 import moment from 'moment';
 import React, { ReactNode } from 'react';
-import { SchedulerData } from 'src/core';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 type noopType = (args: any) => any;
 
+interface HeaderViewConfig {
+  viewType: string;
+  showAgenda: boolean;
+  isEventPerspective: boolean;
+  dateLabel: string;
+}
+
 interface Props {
   title?: string | ReactNode;
-  schedulerData: SchedulerData;
   onViewChange: noopType;
   goToToday: noopType;
   goBack: noopType;
   goNext: noopType;
   onSelect: noopType;
   rightCustomHeader?: string | ReactNode;
+  selectDate: string;
+  localeMoment: typeof moment;
+  headerView: HeaderViewConfig;
+  config: any;
 }
 
 interface State {
@@ -44,7 +53,7 @@ class SchedulerHeader extends React.Component<Props, State> {
   }
 
   renderPopover = () => {
-    const { schedulerData: { localeMoment, selectDate }, onSelect } = this.props;
+    const { onSelect, localeMoment, selectDate } = this.props;
     return (
       <div className="popover-calendar">
         <Calendar
@@ -64,11 +73,12 @@ class SchedulerHeader extends React.Component<Props, State> {
   };
 
   render() {
-    const { title, schedulerData, onViewChange, goToToday, goNext, goBack, rightCustomHeader } = this.props;
-    const { config, viewType, showAgenda, isEventPerspective } = schedulerData;
+    const {
+      title, onViewChange, goToToday, goNext, goBack, rightCustomHeader, config, headerView,
+    } = this.props;
+    const { dateLabel, viewType, showAgenda, isEventPerspective } = headerView;
     const defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}`;
     const calendarPopoverEnabled = config.calendarPopoverEnabled;
-    const dateLabel = schedulerData.getDateLabel();
 
     return (
       <Row align="middle" justify="space-between" style={{ marginBottom: '7px' }}>

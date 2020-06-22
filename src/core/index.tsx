@@ -316,17 +316,23 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       ? config.taskName
       : config.resourceName;
     let schedulerHeader = <div/>;
+    const { selectDate, viewType, showAgenda, isEventPerspective } = schedulerData;
+    const dateLabel = schedulerData.getDateLabel();
+    const headerView = { viewType, showAgenda, isEventPerspective, dateLabel };
     if (config.headerEnabled) {
       schedulerHeader = (
         <SchedulerHeader
           title={leftCustomHeader}
-          schedulerData={schedulerData}
           onViewChange={this.onViewChange}
           goToToday={this.goToToday}
           goBack={this.goBack}
           goNext={this.goNext}
           onSelect={this.onSelect}
           rightCustomHeader={rightCustomHeader}
+          selectDate={selectDate}
+          localeMoment={localeMoment}
+          headerView={headerView}
+          config={config}
         />
       );
     }
