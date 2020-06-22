@@ -2,6 +2,7 @@ import { CalendarOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons
 import { Button, Calendar, Col, Popover, Radio, Row } from 'antd';
 import moment from 'moment';
 import React, { ReactNode } from 'react';
+import { SchedulerData } from 'src/core';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -10,7 +11,7 @@ type noopType = (args: any) => any;
 
 interface Props {
   title?: string | ReactNode;
-  schedulerData: any;
+  schedulerData: SchedulerData;
   onViewChange: noopType;
   goToToday: noopType;
   goBack: noopType;

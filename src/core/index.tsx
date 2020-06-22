@@ -5,6 +5,7 @@ import React, { Component, ReactNode } from 'react';
 import Background from 'src/core/components/Background';
 import DnDObserver from 'src/core/components/DnDObserver';
 import ResourceEventsList from 'src/core/components/ResourceEventsList';
+import { SchedulerData } from 'src/core/models/SchedulerData';
 import { getScrollSpeedRate } from 'src/core/utils/Util';
 import TimeLine from '../lib/TimeLine';
 import EventItem from './components/EventItem';
@@ -18,7 +19,7 @@ import styles from './styles/index.module.scss';
 import './styles/style.css';
 
 export interface SchedulerProps {
-  schedulerData: any;
+  schedulerData: SchedulerData;
   prevClick: (...args: any[]) => any;
   nextClick: (...args: any[]) => any;
   onTodayClick: (...args: any[]) => any;

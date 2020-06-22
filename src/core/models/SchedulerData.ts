@@ -171,7 +171,7 @@ export class SchedulerData {
     this._createRenderData();
   }
 
-  setDate(date = moment().format(DATE_FORMAT)) {
+  setDate(date: string | moment.Moment = moment().format(DATE_FORMAT)) {
     this._resolveDate(0, date);
     this.events = [];
     this._createHeaders();
@@ -1060,5 +1060,3 @@ export class SchedulerData {
     return this.resizing;
   }
 }
-
-

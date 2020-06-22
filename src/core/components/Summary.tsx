@@ -1,9 +1,9 @@
 import { TextAlignProperty } from 'csstype';
 import React, { Component } from 'react';
-import { SummaryPos } from '../index';
+import { SchedulerData, SummaryPos } from '../index';
 
 interface SummaryProps {
-  schedulerData: any;
+  schedulerData: SchedulerData;
   summary: any;
   left: number;
   width: number;

@@ -1,10 +1,10 @@
 import { isEqual, pick } from 'lodash';
 import React, { Component } from 'react';
-import { SchedulerProps } from 'src/core/index';
+import { SchedulerData, SchedulerProps } from 'src/core/index';
 
 interface RequiredProps {
   displayRenderData: any[];
-  schedulerData: any;
+  schedulerData: SchedulerData;
   onHover: (args: any) => void;
   DndResourceEvents: any;
   eventDndSource: any;

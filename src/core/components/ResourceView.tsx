@@ -1,9 +1,10 @@
 import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import React, { Component } from 'react';
+import { SchedulerData } from 'src/core';
 import TechnicianCard from '../../technicianCard';
 
 interface ResourceViewProps {
-  schedulerData: any;
+  schedulerData: SchedulerData;
   contentScrollbarHeight: number;
   slotClickedFunc?: (...args: any[]) => any;
   slotItemTemplateResolver?: (...args: any[]) => any;
