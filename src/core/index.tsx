@@ -337,6 +337,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       );
     }
     const { showBody } = this.props;
+    const { headers, cellUnit, getTableHeaderHeight, getMinuteStepsInHour } = schedulerData;
     return (
       <>
         <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)}/>
@@ -388,13 +389,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                     >
                       <table className="scheduler-bg-table">
                         <HeaderView
-                          headers={schedulerData.headers}
-                          cellUnit={schedulerData.cellUnit}
+                          headers={headers}
+                          cellUnit={cellUnit}
                           localeMoment={localeMoment}
-                          config={schedulerData.config}
+                          config={config}
                           cellWidth={cellWidth}
-                          headerHeight={schedulerData.getTableHeaderHeight()}
-                          minuteStepsInHour={schedulerData.getMinuteStepsInHour()}
+                          headerHeight={getTableHeaderHeight()}
+                          minuteStepsInHour={getMinuteStepsInHour()}
                         />
                       </table>
                     </div>
