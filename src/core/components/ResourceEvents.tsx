@@ -450,7 +450,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
           const summary = (
             <Summary
               key={key}
-              schedulerData={schedulerData}
+              schedulerDataConfig={schedulerData.config}
               summary={headerItem.summary}
               left={leftOfSummary}
               width={widthOfSummary}

@@ -1,9 +1,9 @@
 import { TextAlignProperty } from 'csstype';
 import React, { Component } from 'react';
-import { SchedulerData, SummaryPos } from '../index';
+import { SummaryPos } from '../index';
 
 interface SummaryProps {
-  schedulerData: SchedulerData;
+  schedulerDataConfig: any;
   summary: any;
   left: number;
   width: number;
@@ -16,8 +16,7 @@ class Summary extends Component<SummaryProps, {}> {
   }
 
   render() {
-    const { summary, left, width, top, schedulerData } = this.props;
-    const { config } = schedulerData;
+    const { summary, left, width, top, schedulerDataConfig: config } = this.props;
     let color = config.summaryColor;
     if (summary.color) {
       color = summary.color;
