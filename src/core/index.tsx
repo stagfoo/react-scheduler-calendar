@@ -337,7 +337,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       );
     }
     const { showBody } = this.props;
-    const { headers, cellUnit, getTableHeaderHeight, getMinuteStepsInHour } = schedulerData;
+    const { headers, cellUnit } = schedulerData;
     return (
       <>
         <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)}/>
@@ -394,8 +394,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                           localeMoment={localeMoment}
                           config={config}
                           cellWidth={cellWidth}
-                          headerHeight={getTableHeaderHeight()}
-                          minuteStepsInHour={getMinuteStepsInHour()}
+                          headerHeight={schedulerData.getTableHeaderHeight()}
+                          minuteStepsInHour={schedulerData.getMinuteStepsInHour()}
                         />
                       </table>
                     </div>
