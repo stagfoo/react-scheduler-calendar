@@ -23,7 +23,7 @@
     "release": "np --no-publish",
     "build:demo": "webpack --config ./example/config/webpack.conf.js",
     "start:demo": "webpack-dev-server --config ./example/config/webpack.conf.js",
-    "deploy:demo": "gh-pages -d ./example/build"
+    "deploy:demo": "gh-pages -d ./example/dist"
   },
   "dependencies": {
     "moment": "^2.26.0",
