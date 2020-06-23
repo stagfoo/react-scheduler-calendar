@@ -1,16 +1,16 @@
 import moment from 'moment';
 import React, { Component } from 'react';
+import Scheduler, { DnDSource, SchedulerData, ViewTypes } from 'src';
+import DemoData, { todayDate } from 'src/_mockData/DemoData';
+import styles from 'src/core/styles/index.module.scss';
+import 'src/core/styles/style.css';
 import { DnDTypes } from 'src/lib';
-import Scheduler, { DnDSource, SchedulerData, ViewTypes } from './';
-import DemoData, { todayDate } from './_mockData/DemoData';
-import styles from './core/styles/index.module.scss';
-import './core/styles/style.css';
-import CustomDragLayer from './lib/CustomDragLayer';
-import ResourceItem from './lib/ResourceItem';
-import ResourceList from './lib/ResourceList';
-import TaskItem from './lib/TaskItem';
-import TaskList from './lib/TaskList';
-import withDragDropContext from './lib/withDnDContext';
+import ResourceItem from 'src/lib/ResourceItem';
+import ResourceList from 'src/lib/ResourceList';
+import withDragDropContext from 'src/lib/withDnDContext';
+import CustomDragLayer from './components/CustomDragLayer';
+import TaskItem from './components/TaskItem';
+import TaskList from './components/TaskList';
 
 import config from './overrideConfig';
 
@@ -23,6 +23,7 @@ interface CalendarSchedulerState {
 
 class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   private events = DemoData.eventsOfOverlap;
+
   constructor(props: any) {
     super(props);
     const newConfig: Partial<typeof config> = {
@@ -121,7 +122,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
                     groupId: 1,
                     groupName: 'Job1',
                     item: {},
-                  }
+                  },
                 );
                 this.setState({
                   viewModel,

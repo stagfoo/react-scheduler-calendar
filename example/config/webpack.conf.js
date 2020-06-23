@@ -1,22 +1,21 @@
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const path = require('path');
 const distPath = path.resolve(__dirname, '../dist');
 const srcPath = path.resolve(__dirname, '../src');
-const base = require('./webpack.base.conf');
+const publicPath = path.resolve(__dirname, '../public');
+const base = require('../../config/webpack.base.conf');
 
 module.exports = merge(base, {
-  mode: 'development',
-  devtool: 'eval-source-map',
-  entry: path.join(srcPath, 'App.tsx'),
-  output: {
-    path: distPath,
-    filename: '[name].bundle.js'
-  },
+  mode: "development",
+  entry: path.join(srcPath, 'index.js'),
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.PUBLIC_URL': '/',
+    }),
     new HtmlWebpackPlugin({
-      template: path.join(srcPath, 'index.html'),
+      template: path.join(publicPath, 'index.html'),
       filename: "index.html",
       minify: {
         removeAttributeQuotes: true,

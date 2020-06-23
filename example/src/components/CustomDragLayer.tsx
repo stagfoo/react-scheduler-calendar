@@ -2,7 +2,7 @@ import { Identifier } from 'dnd-core';
 import React from 'react';
 import { DragLayer, XYCoord } from 'react-dnd';
 
-import EventCard from '../eventCard';
+import EventCard from 'src/eventCard';
 
 const layerStyles: React.CSSProperties = {
   position: 'fixed',
