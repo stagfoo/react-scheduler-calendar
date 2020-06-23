@@ -28,7 +28,7 @@ export class SchedulerData {
   constructor(date = moment().format(DATE_FORMAT), viewType = ViewTypes.Week,
               showAgenda = false, isEventPerspective = false,
               newConfig?: object, newBehaviors?: object,
-              localeMoment = undefined) {
+              localeMoment = moment) {
     this.resources = [];
     this.events = [];
     this.eventGroups = [];
@@ -40,11 +40,7 @@ export class SchedulerData {
     this.resizing = false;
     this.scrollToSpecialMoment = false;
     this.documentWidth = 0;
-
-    this.localeMoment = moment;
-    if (localeMoment) {
-      this.localeMoment = localeMoment;
-    }
+    this.localeMoment = localeMoment;
     this.config = newConfig === undefined ? config : { ...config, ...newConfig };
     this._validateMinuteStep(this.config.minuteStep);
     this.behaviors = newBehaviors === undefined ? behaviors : { ...behaviors, ...newBehaviors };
@@ -260,7 +256,7 @@ export class SchedulerData {
     let isExpanded = false;
     const expandedMap = new Map();
     this.renderData.forEach((item: any) => {
-      if (slotEntered === false) {
+      if (!slotEntered) {
         if (item.slotId === slotId && item.hasChildren) {
           slotEntered = true;
 
