@@ -10,6 +10,9 @@
 
     .leftPane {
       overflow: auto;
+      ul {
+        padding: 0;
+      }
     }
 
     .rightPane {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 
-import EventCard from 'example/src/components/eventCard';
+import TaskCard from '../components/TaskCard';
 
 interface TaskItemProps {
   task: object;
@@ -32,7 +32,7 @@ class TaskItem extends Component<any, {}> {
         {
           connectDragSource(
             <div>
-              <EventCard name={task.name}/>
+              <TaskCard name={task.name}/>
             </div>,
           )}
       </>

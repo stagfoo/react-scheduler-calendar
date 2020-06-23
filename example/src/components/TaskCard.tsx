@@ -4,8 +4,8 @@ interface Props {
   name: string;
 }
 
-export const EventCard: React.FC<Props> = (props) => (
-  <div style={{ backgroundColor: 'white', padding: 20 }}>
+export const TaskCard: React.FC<Props> = (props) => (
+  <div style={{ border: '1px solid #0a0000', padding: 20 }}>
     <div>
       {props.name}
     </div>
@@ -17,4 +17,4 @@ export const EventCard: React.FC<Props> = (props) => (
   </div>
 );
 
-export default EventCard;
+export default TaskCard;
