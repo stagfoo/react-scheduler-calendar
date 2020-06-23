@@ -8,12 +8,13 @@ const publicPath = path.resolve(__dirname, '../public');
 const base = require('../../config/webpack.base.conf');
 
 module.exports = merge(base, {
-  mode: "development",
+  mode: "production",
   entry: path.join(srcPath, 'index.js'),
+  output: {
+    path: distPath,
+    filename: '[name].bundle.js'
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.PUBLIC_URL': '/',
-    }),
     new HtmlWebpackPlugin({
       template: path.join(publicPath, 'index.html'),
       filename: "index.html",

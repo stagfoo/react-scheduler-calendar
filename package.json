@@ -18,12 +18,12 @@
     "test:update": "jest -u",
     "test:coverage": "jest --coverage",
     "generate:declaration": "tsc --declaration --allowJs --emitDeclarationOnly --outDir ./dist",
+    "prepare": "yarn run build",
     "build": "yarn generate:declaration && webpack --config ./config/webpack.prod.conf.js",
+    "release": "np --no-publish",
     "build:demo": "webpack --config ./example/config/webpack.conf.js",
     "start:demo": "webpack-dev-server --config ./example/config/webpack.conf.js",
-    "prepare": "yarn run build",
-    "deploy:demo": "cd example && yarn deploy",
-    "release": "np --no-publish"
+    "deploy:demo": "gh-pages -d ./example/build"
   },
   "dependencies": {
     "moment": "^2.26.0",
@@ -72,6 +72,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
     "file-loader": "^6.0.0",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.0.1",
     "jest-environment-jsdom": "^26.0.1",
