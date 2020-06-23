@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`resource card should render correctly 1`] = `
-<div>
-  <ForwardRef(UserOutlined) />
-  name
-</div>
-`;
-
 exports[`resourceCard should render correctly 1`] = `
 <div>
   <ForwardRef(UserOutlined) />
