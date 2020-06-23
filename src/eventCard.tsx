@@ -4,7 +4,7 @@ interface Props {
   name: string;
 }
 
-export const JobCard: React.FC<Props> = (props) => (
+export const EventCard: React.FC<Props> = (props) => (
   <div style={{ backgroundColor: 'white', padding: 20 }}>
     <div>
       {props.name}
@@ -17,4 +17,4 @@ export const JobCard: React.FC<Props> = (props) => (
   </div>
 );
 
-export default JobCard;
+export default EventCard;

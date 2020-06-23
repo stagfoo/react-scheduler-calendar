@@ -60,7 +60,7 @@ export default {
   displayWeekend: true,
   defaultExpanded: true,
 
-  resourceName: 'Technicians',
+  resourceName: 'Resources',
   taskName: 'Task Name',
   agendaViewHeader: 'Agenda',
   addMorePopoverHeaderFormat: 'MMM D, YYYY dddd',

@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import 'src/setupTest';
-import TechnicianCard from '../technicianCard';
+import ResourceCard from 'src/resourceCard';
 
-describe('technician card', () => {
+describe('resource card', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<TechnicianCard name={'name'}/>);
+    const wrapper = shallow(<ResourceCard name={'name'}/>);
     expect(wrapper).toMatchSnapshot();
   });
 });

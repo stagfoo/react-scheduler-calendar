@@ -1,7 +1,7 @@
 import { MinusSquareOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import React, { Component } from 'react';
 import { SchedulerData } from 'src/core';
-import TechnicianCard from '../../technicianCard';
+import ResourceCard from '../../resourceCard';
 
 interface ResourceViewProps {
   schedulerData: SchedulerData;
@@ -69,7 +69,7 @@ class ResourceView extends Component<ResourceViewProps, {}> {
         <span className="slot-cell">
           {indents}
           <span className="slot-text">
-            <TechnicianCard name={item.slotName}/>
+            <ResourceCard name={item.slotName}/>
           </span>
         </span>
       );

@@ -2,7 +2,7 @@ import { Identifier } from 'dnd-core';
 import React from 'react';
 import { DragLayer, XYCoord } from 'react-dnd';
 
-import JobCard from '../jobCard';
+import EventCard from '../eventCard';
 
 const layerStyles: React.CSSProperties = {
   position: 'fixed',
@@ -44,7 +44,7 @@ const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     if (itemType === 'task') {
       return item &&
         <div style={{ display: 'inline-block', transform: 'scale(0.7)', transformOrigin: '0 0', background: '#f0b56f', width: 300 }}>
-          <JobCard name={item.name}/>
+          <EventCard name={item.name}/>
         </div>;
     }
   }
