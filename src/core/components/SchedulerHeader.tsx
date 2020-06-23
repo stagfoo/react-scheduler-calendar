@@ -25,7 +25,7 @@ interface Props {
   rightCustomHeader?: string | ReactNode;
   selectDate: string;
   localeMoment: typeof moment;
-  headerView: HeaderViewConfig;
+  headerGroupView: HeaderViewConfig;
   config: any;
 }
 
@@ -74,9 +74,9 @@ class SchedulerHeader extends React.Component<Props, State> {
 
   render() {
     const {
-      title, onViewChange, goToToday, goNext, goBack, rightCustomHeader, config, headerView,
+      title, onViewChange, goToToday, goNext, goBack, rightCustomHeader, config, headerGroupView,
     } = this.props;
-    const { dateLabel, viewType, showAgenda, isEventPerspective } = headerView;
+    const { dateLabel, viewType, showAgenda, isEventPerspective } = headerGroupView;
     const defaultValue = `${viewType}${showAgenda ? 1 : 0}${isEventPerspective ? 1 : 0}`;
     const calendarPopoverEnabled = config.calendarPopoverEnabled;
 

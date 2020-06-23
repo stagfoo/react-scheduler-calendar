@@ -318,7 +318,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let schedulerHeader = <div/>;
     const { selectDate, viewType, showAgenda, isEventPerspective } = schedulerData;
     const dateLabel = schedulerData.getDateLabel();
-    const headerView = { viewType, showAgenda, isEventPerspective, dateLabel };
+    const headerGroupView = { viewType, showAgenda, isEventPerspective, dateLabel };
     if (config.headerEnabled) {
       schedulerHeader = (
         <SchedulerHeader
@@ -331,7 +331,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
           rightCustomHeader={rightCustomHeader}
           selectDate={selectDate}
           localeMoment={localeMoment}
-          headerView={headerView}
+          headerGroupView={headerGroupView}
           config={config}
         />
       );
