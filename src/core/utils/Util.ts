@@ -9,6 +9,5 @@ export const getPos = (element: HTMLElement | null) => {
   return { x, y };
 };
 
-export const getScrollSpeedRate = (distance: number, maxDistance: number) => {
-  return Math.exp((maxDistance - distance) / maxDistance * 2);
-};
+export const getScrollSpeedRate = (distance: number, maxDistance: number) =>
+  Math.exp((maxDistance - distance) / maxDistance * 2);
