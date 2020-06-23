@@ -23,7 +23,8 @@
     "release": "np --no-publish",
     "build:demo": "webpack --config ./example/config/webpack.conf.js",
     "start:demo": "webpack-dev-server --config ./example/config/webpack.conf.js",
-    "deploy:demo": "gh-pages -d ./example/dist"
+    "deploy:demo": "gh-pages -d ./example/dist",
+    "sonar-check": "./sonar-check.sh"
   },
   "dependencies": {
     "moment": "^2.26.0",
@@ -83,6 +84,7 @@
     "rrule": "^2.6.4",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "sonar-scanner": "^3.1.0",
     "terser-webpack-plugin": "^3.0.2",
     "ts-loader": "^7.0.5",
     "typescript": "^3.6.4",

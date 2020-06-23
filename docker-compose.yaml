@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  sonarqube:
+    container_name: sonarqube-scheduler
+    image: sonarqube:7.9-community
+    ports:
+      - "9005:9000"
