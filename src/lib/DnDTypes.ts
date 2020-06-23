@@ -1,5 +1,5 @@
-export const DnDTypes = {
-  TASK: 'task',
-  RESOURCE: 'resource',
-  EVENT: 'event',
-};
+export enum DnDTypes {
+  TASK = 'task',
+  RESOURCE = 'resource',
+  EVENT = 'event',
+}

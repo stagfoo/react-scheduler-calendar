@@ -4,7 +4,7 @@ import { DATETIME_FORMAT, DnDTypes, ViewTypes } from './index';
 export class DnDSource {
   private resolveDragObjFunc: (args: any) => any;
   private DecoratedComponent: any;
-  private dndType: string;
+  private dndType: DnDTypes;
   private dragSource: any;
 
   constructor(resolveDragObjFunc: (args: any) => any, DecoratedComponent: any, dndType = DnDTypes.EVENT) {

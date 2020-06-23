@@ -15,9 +15,9 @@ import withDragDropContext from './lib/withDnDContext';
 import config from './overrideConfig';
 
 interface CalendarSchedulerState {
-  viewModel: any;
-  taskDndSource: any;
-  resourceDndSource: any;
+  viewModel: SchedulerData;
+  taskDndSource: DnDSource;
+  resourceDndSource: DnDSource;
   showBody: boolean;
 }
 

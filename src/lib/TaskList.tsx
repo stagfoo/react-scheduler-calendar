@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { DnDSource, SchedulerData } from 'src/core';
 
 interface TaskListProps {
-  schedulerData: object;
+  schedulerData: SchedulerData;
   newEvent: (...args: any[]) => any;
-  taskDndSource: object;
+  taskDndSource: DnDSource;
 }
 
 class TaskList extends Component<any, {}> {
