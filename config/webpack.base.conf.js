@@ -1,6 +1,5 @@
 const path = require('path');
 const root = path.resolve(__dirname, '..');
-const srcPath = path.resolve(root, 'src');
 
 module.exports = {
   module: {
@@ -12,7 +11,7 @@ module.exports = {
       },
       {
         test: /\.jsx$|\.es6$|\.js$/,
-        loaders: ['babel-loader'],
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -26,8 +25,9 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              },
             },
           },
           {
