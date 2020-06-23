@@ -38,3 +38,7 @@ jobs:
     - run: yarn install
     - run: yarn test
     - run: yarn run build --if-present
+    - name: Build Demo
+      run: yarn build:demo
+   - name: Deploy Demo to github page
+      run: yarn deploy:demo
