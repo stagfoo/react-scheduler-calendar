@@ -1,9 +1,7 @@
-import { shallow, configure } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import SelectedArea from '../SelectedArea';
-
-configure({ adapter: new Adapter() });
+import '../../../setupTest';
 
 describe('selected area', () => {
   it('should render correctly', () => {
