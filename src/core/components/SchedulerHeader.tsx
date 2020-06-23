@@ -15,7 +15,7 @@ interface HeaderViewConfig {
   dateLabel: string;
 }
 
-interface Props {
+export interface Props {
   title?: string | ReactNode;
   onViewChange: noopType;
   goToToday: noopType;

@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selected area should render correctly 1`] = `
+<Row
+  align="middle"
+  gutter={0}
+  justify="space-between"
+  style={
+    Object {
+      "marginBottom": "7px",
+    }
+  }
+>
+  header
+  <Col>
+    <Memo(RadioGroup)
+      defaultValue="viewType00"
+      onChange={[MockFunction]}
+    />
+  </Col>
+  <Col>
+    <div
+      className="header2-text calendar-action-header"
+    >
+      <Button
+        block={false}
+        ghost={false}
+        htmlType="button"
+        loading={false}
+        onClick={[MockFunction]}
+        style={
+          Object {
+            "marginRight": "24px",
+          }
+        }
+      >
+        Today
+      </Button>
+      <ForwardRef(LeftOutlined)
+        className="icon-nav"
+        onClick={[MockFunction]}
+        style={
+          Object {
+            "marginRight": "4px",
+          }
+        }
+      />
+      <ForwardRef(RightOutlined)
+        className="icon-nav"
+        onClick={[MockFunction]}
+        style={
+          Object {
+            "marginLeft": "4px",
+          }
+        }
+      />
+      <span
+        className="header2-text-label"
+      >
+        dateLabel
+      </span>
+    </div>
+  </Col>
+  customHeader
+</Row>
+`;
