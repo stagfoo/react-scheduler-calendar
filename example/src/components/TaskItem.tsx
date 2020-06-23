@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 
-import EventCard from '../../../src/eventCard';
+import EventCard from 'example/src/components/eventCard';
 
 interface TaskItemProps {
   task: object;

@@ -8,11 +8,11 @@ import { DnDTypes } from 'src/lib';
 import ResourceItem from 'src/lib/ResourceItem';
 import ResourceList from 'src/lib/ResourceList';
 import withDragDropContext from 'src/lib/withDnDContext';
-import CustomDragLayer from './components/CustomDragLayer';
-import TaskItem from './components/TaskItem';
-import TaskList from './components/TaskList';
+import CustomDragLayer from '../components/CustomDragLayer';
+import TaskItem from '../components/TaskItem';
+import TaskList from '../components/TaskList';
 
-import config from './overrideConfig';
+import config from '../overrideConfig';
 
 interface CalendarSchedulerState {
   viewModel: SchedulerData;
@@ -26,20 +26,12 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
 
   constructor(props: any) {
     super(props);
-    const newConfig: Partial<typeof config> = {
-      nonWorkingTimeHeadBgColor: '#fff',
-      nonWorkingTimeHeadColor: '#222',
-      eventItemHeight: 59,
-      eventItemLineHeight: 59,
-      dayCellWidth: 30,
-      besidesWidth: 470,
-    };
     const schedulerData = new SchedulerData(
       moment().format('YYYY-MM-DD'),
       ViewTypes.Day,
       false,
       false,
-      { ...config, ...newConfig },
+      config,
     );
     schedulerData.localeMoment.locale('en');
     schedulerData.setResources(DemoData.resources);
@@ -64,12 +56,6 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     };
   }
 
-  componentDidMount(): void {
-    setTimeout(() => {
-      this.setState({ showBody: true });
-    }, 1000);
-  }
-
   renderEvent = (eventItem: any) => (<div className='event'>render event<span>{eventItem.id}</span></div>);
 
   handleConflict = (): void => {
@@ -82,103 +68,28 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
 
   render() {
     const { viewModel, taskDndSource, resourceDndSource, showBody } = this.state;
-    const dndList = viewModel.isEventPerspective ? (
-      <ResourceList schedulerData={viewModel} newEvent={this.newEvent} resourceDndSource={resourceDndSource}/>
-    ) : (
-      <TaskList schedulerData={viewModel} newEvent={this.newEvent} taskDndSource={taskDndSource}/>
-    );
-    // register the external DnDSources
     const dndSources = [taskDndSource, resourceDndSource];
     return (
       <div className={styles.container}>
         <CustomDragLayer/>
-        <div className={styles.content}>
-          <div className={styles.leftPane}>
-            <div className={styles.jobList}>
-              {dndList}
-            </div>
-            <div className={styles.jobDetail}>
-              <button onClick={() => {
-                viewModel.setEvents([...this.events]);
-                this.setState({
-                  viewModel,
-                });
-              }}>
-                Reset
-              </button>
-              <button onClick={() => {
-                viewModel.addEvent(
-                  {
-                    id: new Date().getTime(),
-                    start: `${todayDate(9).format('YYYY-MM-DD HH:mm:ss')}`,
-                    end: `${todayDate(11.5).format('YYYY-MM-DD HH:mm:ss')}`,
-                    // start: `${todayDate(10.5).format('YYYY-MM-DD HH:mm:ss')}`,
-                    // end: `${todayDate(12.5).format('YYYY-MM-DD HH:mm:ss')}`,
-                    // start: `${todayDate(12.5).format('YYYY-MM-DD HH:mm:ss')}`,
-                    // end: `${todayDate(14).format('YYYY-MM-DD HH:mm:ss')}`,
-                    resourceId: 'r1',
-                    title: 'I am finished',
-                    bgColor: '#D9D9D9',
-                    groupId: 1,
-                    groupName: 'Job1',
-                    item: {},
-                  },
-                );
-                this.setState({
-                  viewModel,
-                });
-              }}>
-                Add Event
-              </button>
-              <button onClick={() => {
-                const events = [...this.events];
-                events[0] = {
-                  ...events[0],
-                  end: `${todayDate(13).format('YYYY-MM-DD HH:mm:ss')}`,
-                };
-                viewModel.setEvents(events);
-                this.setState({
-                  viewModel,
-                });
-              }}>
-                Increase Event Duration
-              </button>
-              <button onClick={() => {
-                const events = [...this.events];
-                events[0] = {
-                  ...events[0],
-                  end: `${todayDate(11).format('YYYY-MM-DD HH:mm:ss')}`,
-                };
-                viewModel.setEvents(events);
-                this.setState({
-                  viewModel,
-                });
-              }}>
-                Decrease Event Duration
-              </button>
-            </div>
-          </div>
-          <div className={styles.rightPane}>
-            <Scheduler
-              schedulerData={viewModel}
-              prevClick={this.prevClick}
-              nextClick={this.nextClick}
-              onTodayClick={this.handleTodayClick}
-              onSelectDate={this.onSelectDate}
-              onViewChange={this.onViewChange}
-              updateEventStart={this.updateEventStart}
-              updateEventEnd={this.updateEventEnd}
-              moveEvent={this.moveEvent}
-              movingEvent={this.movingEvent}
-              newEvent={this.newEvent}
-              dndSources={dndSources}
-              toggleExpandFunc={this.toggleExpandFunc}
-              renderEvent={this.renderEvent}
-              eventItemClick={console.log}
-              showBody={showBody}
-            />
-          </div>
-        </div>
+        <Scheduler
+          schedulerData={viewModel}
+          prevClick={this.prevClick}
+          nextClick={this.nextClick}
+          onTodayClick={this.handleTodayClick}
+          onSelectDate={this.onSelectDate}
+          onViewChange={this.onViewChange}
+          updateEventStart={this.updateEventStart}
+          updateEventEnd={this.updateEventEnd}
+          moveEvent={this.moveEvent}
+          movingEvent={this.movingEvent}
+          newEvent={this.newEvent}
+          dndSources={dndSources}
+          toggleExpandFunc={this.toggleExpandFunc}
+          renderEvent={this.renderEvent}
+          eventItemClick={console.log}
+          showBody={showBody}
+        />
       </div>
     );
   }

@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+  overflow: hidden;
+
+  .content {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .leftPane {
+      overflow: auto;
+    }
+
+    .rightPane {
+      height: 100%;
+      flex: auto;
+      padding-left: 20px;
+    }
+  }
+
+}
