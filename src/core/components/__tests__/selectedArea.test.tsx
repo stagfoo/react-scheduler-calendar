@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import SelectedArea from '../SelectedArea';
-import '../../../setupTest';
+import 'src/setupTest';
 
 describe('selected area', () => {
   it('should render correctly', () => {
