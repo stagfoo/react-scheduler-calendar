@@ -16,12 +16,11 @@ module.exports = {
   snapshotSerializers: [
     "enzyme-to-json/serializer"
   ],
-  testEnvironment: "node",
   testMatch: [
     "src/**/__tests__/**/*.[jt]s?(x)",
     "**/?(*.)+(spec|test).[tj]s?(x)"
   ],
   transform: {
     "^.+\\.[jt]sx?$": "babel-jest"
-  },
+  }
 };

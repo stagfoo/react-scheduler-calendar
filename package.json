@@ -72,6 +72,7 @@
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.0.1",
+    "jest-environment-jsdom": "^26.0.1",
     "node-sass": "^4.14.1",
     "np": "^6.2.3",
     "react": "^16.12.0",
