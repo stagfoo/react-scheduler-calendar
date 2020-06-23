@@ -6,3 +6,10 @@ exports[`resource card should render correctly 1`] = `
   name
 </div>
 `;
+
+exports[`resourceCard should render correctly 1`] = `
+<div>
+  <ForwardRef(UserOutlined) />
+  name
+</div>
+`;
