@@ -109,3 +109,6 @@ dist
 
 example/build
 **.DS_Store
+
+#sonarqube
+.scannerwork/
