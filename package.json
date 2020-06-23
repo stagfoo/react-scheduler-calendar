@@ -15,6 +15,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:update": "jest -u",
+    "test:coverage": "jest --coverage",
     "generate:declaration": "tsc --declaration --allowJs --emitDeclarationOnly --outDir ./dist",
     "build": "yarn generate:declaration && webpack --config ./config/webpack.prod.conf.js",
     "start:dev": "webpack-dev-server --config ./config/webpack.dev.conf.js",
