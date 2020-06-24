@@ -10,11 +10,7 @@ interface SummaryProps {
   top: number;
 }
 
-class Summary extends Component<SummaryProps, {}> {
-  constructor(props: SummaryProps) {
-    super(props);
-  }
-
+class Summary extends Component<SummaryProps> {
   render() {
     const { summary, left, width, top, schedulerDataConfig: config } = this.props;
     let color = config.summaryColor;

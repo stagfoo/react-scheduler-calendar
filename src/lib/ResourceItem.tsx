@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 
 interface ResourceItemProps {
-  resource: object;
+  resource: Record<string, unknown>;
 }
 
-class ResourceItem extends Component<any, {}> {
-  constructor(props: any) {
-    super(props);
-  }
-
+class ResourceItem extends Component<any> {
   public componentDidMount() {
     const { connectDragPreview } = this.props;
     if (connectDragPreview) {

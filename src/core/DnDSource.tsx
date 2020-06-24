@@ -15,8 +15,8 @@ export class DnDSource {
   }
 
   getDragSpec = () => ({
-    beginDrag: (props: any, monitor: DragSourceMonitor, component: any) => this.resolveDragObjFunc(props),
-    endDrag: (props: any, monitor: DragSourceMonitor, component: any) => {
+    beginDrag: (props: any) => this.resolveDragObjFunc(props),
+    endDrag: (props: any, monitor: DragSourceMonitor) => {
       if (!monitor.didDrop()) {
         return;
       }

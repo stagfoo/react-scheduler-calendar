@@ -24,12 +24,12 @@ describe('selected area', () => {
       selectDate: '2020-04-22 10:00:00',
       localeMoment: moment,
       headerGroupView: {
-        viewType: 'viewType',
+        viewType: 1,
         showAgenda: false,
         isEventPerspective: false,
         dateLabel: 'dateLabel',
       },
-      config: {views: []},
+      config: { views: [] },
     };
   });
 

@@ -453,10 +453,10 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         false,
       );
     }
-    document.onselectstart = function () {
+    document.onselectstart = function() {
       return false;
     };
-    document.ondragstart = function () {
+    document.ondragstart = function() {
       return false;
     };
   };

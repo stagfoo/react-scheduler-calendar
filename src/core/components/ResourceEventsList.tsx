@@ -1,6 +1,6 @@
 import { isEqual, pick } from 'lodash';
 import React, { Component } from 'react';
-import { SchedulerData, SchedulerProps } from 'src/core/index';
+import { SchedulerData, SchedulerProps } from 'src/core';
 
 interface RequiredProps {
   displayRenderData: any[];
@@ -12,11 +12,7 @@ interface RequiredProps {
 
 type Props = RequiredProps & Partial<SchedulerProps>;
 
-class ResourceEventsList extends Component<Props, {}> {
-  constructor(props: Readonly<Props>) {
-    super(props);
-  }
-
+class ResourceEventsList extends Component<Props> {
   shouldComponentUpdate(nextProps: any, nextState: any) {
     const pickedProps = ['resourceEvents', 'displayRenderData', 'renderEvent'];
     return !isEqual(pick(nextProps, pickedProps), pick(this.props, pickedProps)) ||

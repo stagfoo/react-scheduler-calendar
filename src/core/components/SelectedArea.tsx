@@ -5,10 +5,6 @@ interface SelectedAreaProps {
 }
 
 class SelectedArea extends Component<SelectedAreaProps> {
-  constructor(props: SelectedAreaProps) {
-    super(props);
-  }
-
   render() {
     const { style } = this.props;
     return (

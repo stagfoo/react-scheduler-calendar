@@ -25,10 +25,15 @@ export class SchedulerData {
   public renderData: any;
   public headers: any;
 
-  constructor(date = moment().format(DATE_FORMAT), viewType = ViewTypes.Week,
-    showAgenda = false, isEventPerspective = false,
-    newConfig?: object, newBehaviors?: object,
-    localeMoment = moment) {
+  constructor(
+    date = moment().format(DATE_FORMAT),
+    viewType = ViewTypes.Week,
+    showAgenda = false,
+    isEventPerspective = false,
+    newConfig?: Record<string, unknown>,
+    newBehaviors?: Record<string, unknown>,
+    localeMoment = moment,
+  ) {
     this.resources = [];
     this.events = [];
     this.eventGroups = [];
@@ -1033,8 +1038,8 @@ export class SchedulerData {
             (cellMaxEventsCount <= cellMaxEventsCountValue && resourceEvents.rowMaxCount > cellMaxEventsCount)
               ? cellMaxEventsCount : resourceEvents.rowMaxCount;
           const newRowHeight =
-            (rowsCount + 1) * this.config.eventItemLineHeight
-            + (this.config.creatable && !this.config.checkConflict ? 20 : 2);
+            (rowsCount + 1) * this.config.eventItemLineHeight +
+            (this.config.creatable && !this.config.checkConflict ? 20 : 2);
           if (newRowHeight > resourceEvents.rowHeight) {
             resourceEvents.rowHeight = newRowHeight;
           }

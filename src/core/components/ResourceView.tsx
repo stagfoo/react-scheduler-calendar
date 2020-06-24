@@ -11,11 +11,7 @@ interface ResourceViewProps {
   toggleExpandFunc?: (...args: any[]) => any;
 }
 
-class ResourceView extends Component<ResourceViewProps, {}> {
-  constructor(props: ResourceViewProps) {
-    super(props);
-  }
-
+class ResourceView extends Component<ResourceViewProps> {
   handleClick = (toggleExpandFunc: ((...args: any[]) => any) | undefined, schedulerData: SchedulerData, item: any) => {
     return () => {
       if (toggleExpandFunc) {

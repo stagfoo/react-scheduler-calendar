@@ -1,8 +1,7 @@
 import { CellUnits, DATE_FORMAT, ViewTypes } from '../../core/index';
 
 // getSummary func example
-export const getSummary = (schedulerData, headerEvents, slotId, slotName, headerStart, headerEnd) =>
-  ({ text: 'Summary', color: 'red', fontSize: '1.2rem' });
+export const getSummary = () => ({ text: 'Summary', color: 'red', fontSize: '1.2rem' });
 
 // getCustomDate example
 export const getCustomDate = (schedulerData, num, date = undefined) => {

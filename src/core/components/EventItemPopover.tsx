@@ -9,11 +9,7 @@ interface EventItemPopoverProps {
   localeMoment: any;
 }
 
-class EventItemPopover extends Component<EventItemPopoverProps, {}> {
-  constructor(props: Readonly<EventItemPopoverProps>) {
-    super(props);
-  }
-
+class EventItemPopover extends Component<EventItemPopoverProps> {
   render() {
     const {
       localeMoment,

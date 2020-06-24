@@ -16,10 +16,6 @@ export interface HeaderViewProps {
 }
 
 export class HeaderView extends React.Component<HeaderViewProps> {
-  constructor(props: Readonly<HeaderViewProps>) {
-    super(props);
-  }
-
   render() {
     const {
       headers, headerHeight, cellUnit, cellWidth, config,

@@ -14,7 +14,7 @@ exports[`selected area should render correctly 1`] = `
   header
   <Col>
     <Memo(RadioGroup)
-      defaultValue="viewType00"
+      defaultValue="100"
       onChange={[MockFunction]}
     />
   </Col>
