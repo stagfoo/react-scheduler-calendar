@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import moment from 'moment';
 import React from 'react';
 import 'src/setupTest';
+import { views } from 'src/core/components/_mockData/config';
 import Header, { Props } from '../Header';
 
 describe('selected area', () => {
@@ -29,7 +30,7 @@ describe('selected area', () => {
         isEventPerspective: false,
         dateLabel: 'dateLabel',
       },
-      config: { views: [] },
+      config: { views, calendarPopoverEnabled: true },
     };
   });
 
