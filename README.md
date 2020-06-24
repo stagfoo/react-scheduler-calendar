@@ -44,6 +44,23 @@ class Example extends React.Component {
 }
 ```
 
+
+## Setup Sonar Server In Local
+
+```shell script
+make start
+```
+Goto [http://localhost:9005/projects?sort=-analysis_date](http://localhost:9005/projects?sort=-analysis_date) to view the main interface.
+
+Since there is no test report upload for any project at present, you cannot see any analysis results, so you need to upload the test report first.
+
+```shell script
+yarn sonar-check
+```
+
+After running this command, you will see `react-scheduler-calendar` Analysis report.
+
+
 ## License
 
 MIT © [NGC-AB](https://github.com/NGC-AB)
