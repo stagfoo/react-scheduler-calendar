@@ -11,7 +11,7 @@ import TimeLine from '../lib/TimeLine';
 import EventItem from './components/EventItem';
 import HeaderView from './components/HeaderView';
 import ResourceEvents from './components/ResourceEvents';
-import SchedulerHeader from './components/SchedulerHeader';
+import Header from 'src/core/components/Header';
 import DEFAULT_CONFIG from './constants/config';
 import DnDContext from './DnDContext';
 import { DnDSource } from './DnDSource';
@@ -309,7 +309,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const headerGroupView = { viewType, showAgenda, isEventPerspective, dateLabel };
     if (config.headerEnabled) {
       schedulerHeader = (
-        <SchedulerHeader
+        <Header
           title={leftCustomHeader}
           onViewChange={this.onViewChange}
           goToToday={this.goToToday}

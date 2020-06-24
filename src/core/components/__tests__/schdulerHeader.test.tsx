@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import moment from 'moment';
 import React from 'react';
 import 'src/setupTest';
-import SchedulerHeader, { Props } from '../SchedulerHeader';
+import Header, { Props } from '../Header';
 
 describe('selected area', () => {
   let props: Props;
@@ -34,7 +34,7 @@ describe('selected area', () => {
   });
 
   it('should render correctly', () => {
-    const wrapper = shallow(<SchedulerHeader {...props}/>);
+    const wrapper = shallow(<Header {...props}/>);
     expect(wrapper).toMatchSnapshot();
   });
 });

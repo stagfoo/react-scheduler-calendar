@@ -33,7 +33,7 @@ interface State {
   visible: boolean;
 }
 
-class SchedulerHeader extends React.Component<Props, State> {
+class Header extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -119,4 +119,4 @@ class SchedulerHeader extends React.Component<Props, State> {
   }
 }
 
-export default SchedulerHeader;
+export default Header;
