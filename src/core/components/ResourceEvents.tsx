@@ -281,7 +281,6 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       const { conflictOccurred } = this.props;
       if (conflictOccurred) {
         conflictOccurred(
-          schedulerData,
           'New',
           {
             id: undefined,

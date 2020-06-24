@@ -77,7 +77,7 @@ export class DnDSource {
       if (hasConflict) {
         const { conflictOccurred } = props;
         if (conflictOccurred) {
-          conflictOccurred(schedulerData, action, item, type, slotId, slotName, newStart, newEnd);
+          conflictOccurred(action, item, type, slotId, slotName, newStart, newEnd);
         } else {
           console.log('Conflict occurred, set conflictOccurred func in Scheduler to handle it');
         }

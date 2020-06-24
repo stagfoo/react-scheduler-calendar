@@ -325,7 +325,6 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       });
       if (conflictOccurred) {
         conflictOccurred(
-          schedulerData,
           'StartResize',
           eventItem,
           DnDTypes.EVENT,
@@ -641,7 +640,6 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       });
       if (conflictOccurred) {
         conflictOccurred(
-          schedulerData,
           'EndResize',
           eventItem,
           DnDTypes.EVENT,
