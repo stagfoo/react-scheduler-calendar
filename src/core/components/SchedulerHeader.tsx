@@ -9,7 +9,7 @@ const RadioGroup = Radio.Group;
 type noopType = (args: any) => any;
 
 interface HeaderViewConfig {
-  viewType: string | number;
+  viewType: number;
   showAgenda: boolean;
   isEventPerspective: boolean;
   dateLabel: string;
