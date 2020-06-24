@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -46,3 +46,24 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./example/dist
         force_orphan: true
+    - name: Slack Failure Notification
+      if: ${{ failure() }}
+      uses: rtCamp/action-slack-notify@v2.0.2
+      env:
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+        SLACK_COLOR: '#FF0000'
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_TITLE: "Failed: ${{github.job}}"
+        SLACK_USERNAME: GithubAction
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    - name: Slack Success Notification
+      if: ${{ success() }}
+      uses: rtCamp/action-slack-notify@v2.0.2
+      env:
+        SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+        SLACK_COLOR: '#00FF00'
+        SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_TITLE: "Success: ${{github.job}}"
+        SLACK_USERNAME: GithubAction
+        MSG_MINIMAL: true
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
