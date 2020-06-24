@@ -31,7 +31,6 @@ export class HeaderView extends React.Component<HeaderViewProps> {
       headers.forEach((item: any, index: number) => {
         if (index % minuteStepsInHour === 0) {
           const datetime = localeMoment(item.time);
-          const isCurrentTime = datetime.isSame(new Date(), 'hour');
           style = item.nonWorkingTime
             ? {
               width: cellWidth * minuteStepsInHour,

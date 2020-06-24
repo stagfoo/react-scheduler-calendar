@@ -10,17 +10,21 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
+
     .schedulerTableHeader {
       display: flex;
       background: white;
+
       .timeHeaderContainer {
         vertical-align: top;
         border: 1px solid #c5c5c5;
         border-left: none;
+
         .timeHeaderScrollArea {
           overflow: hidden;
         }
       }
+
       .resourceTitle {
         font-size: 16px;
         font-weight: bold;
@@ -29,17 +33,18 @@
         border: 1px solid #c5c5c5;
       }
     }
+
     .schedulerBoardScrollArea {
       flex: 1;
       overflow-x: hidden;
       overflow-y: auto;
+
       .schedulerBoard {
         padding: 0;
         margin: 0;
         display: flex;
 
         .resourceList {
-          border-top: none;
           margin: 0;
           padding: 0;
           border-right: 1px solid #c5c5c5;
@@ -61,10 +66,12 @@
             }
           }
         }
+
         .schedulerView {
           background-color: white;
         }
       }
+
       :global {
         .calendar-action-header {
           color: #222222;
@@ -124,7 +131,7 @@
             }
 
             th.header3-text {
-              font-family: Open Sans;
+              font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif, Open Sans;
               font-style: normal;
               font-weight: 600;
               font-size: 14px;

@@ -120,7 +120,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
     }
     const { schedulerData } = this.props;
     const cellWidth = schedulerData.getContentCellWidth();
-    const pos = getPos(this.eventContainer!);
+    const pos = getPos(this.eventContainer);
     const startX = clientX - pos.x;
     const leftIndex = Math.floor(startX / cellWidth);
     const left = leftIndex * cellWidth;
@@ -345,7 +345,6 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       connectDropTarget,
       isOver,
       getHoverAreaStyle,
-      onHover,
     } = this.props;
     const {
       cellUnit,
@@ -354,7 +353,6 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       config,
       localeMoment,
     } = schedulerData;
-    // console.log('render', new Date().getTime());
     const { isSelecting, left, width } = this.state;
     const cellWidth = schedulerData.getContentCellWidth();
     const cellMaxEvents = schedulerData.getCellMaxEvents();

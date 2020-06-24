@@ -16,7 +16,6 @@ class EventItemPopover extends Component<EventItemPopoverProps, {}> {
 
   render() {
     const {
-      eventItem,
       localeMoment,
       config,
       title,

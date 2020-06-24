@@ -259,7 +259,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     if (
       count !== 0 &&
       cellUnit !== CellUnits.Hour &&
-      config.displayWeekend === false
+      !config.displayWeekend
     ) {
       if (count > 0) {
         let tempCount = 0;
@@ -572,7 +572,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     if (
       count !== 0 &&
       cellUnit !== CellUnits.Hour &&
-      config.displayWeekend === false
+      !config.displayWeekend
     ) {
       if (count > 0) {
         let tempCount = 0;
@@ -684,7 +684,6 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       eventItem,
       isStart,
       isEnd,
-      isInPopover,
       eventItemClick,
       schedulerData,
       isDragging,
@@ -694,21 +693,10 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     } = this.props;
     const { config, localeMoment } = schedulerData;
     const { left, width, top } = this.state;
-    const roundCls = isStart
-      ? isEnd
-        ? 'round-all'
-        : 'round-head'
-      : isEnd
-        ? 'round-tail'
-        : 'round-none';
     let bgColor = config.defaultEventBgColor;
     if (eventItem.bgColor) {
       bgColor = eventItem.bgColor;
     }
-    const titleText = schedulerData.behaviors.getEventTextFunc(
-      schedulerData,
-      eventItem,
-    );
     const content = (
       <EventItemPopover
         localeMoment={localeMoment}
@@ -719,10 +707,6 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         endTime={eventItem.end}
       />
     );
-    const start = localeMoment(eventItem.start);
-    const eventTitle = isInPopover
-      ? `${start.format('HH:mm')} ${titleText}`
-      : titleText;
     let startResizeDiv = <div/>;
     if (this.startResizable(this.props)) {
       startResizeDiv = (
@@ -773,7 +757,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         {endResizeDiv}
       </div>
     );
-    return schedulerData._isResizing() || !config.eventItemPopoverEnabled || eventItem.showPopover === false ||
+    return schedulerData._isResizing() || !config.eventItemPopoverEnabled || !eventItem.showPopover ||
     isDragging ? (
         <div style={{ position: 'relative' }}>
           {eventElement}
@@ -810,13 +794,13 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         // if (this.startResizable(props))
         //     this.startResizer!.addEventListener('touchstart', this.initStartDrag, false);
       } else {
-        this.startResizer!.removeEventListener(
+        this.startResizer.removeEventListener(
           'mousedown',
           this.initStartDrag,
           false,
         );
         if (this.startResizable(props)) {
-          this.startResizer!.addEventListener(
+          this.startResizer.addEventListener(
             'mousedown',
             this.initStartDrag,
             false,
@@ -830,13 +814,13 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         // if (this.endResizable(props))
         //     this.endResizer!.addEventListener('touchstart', this.initEndDrag, false);
       } else {
-        this.endResizer!.removeEventListener(
+        this.endResizer.removeEventListener(
           'mousedown',
           this.initEndDrag,
           false,
         );
         if (this.endResizable(props)) {
-          this.endResizer!.addEventListener(
+          this.endResizer.addEventListener(
             'mousedown',
             this.initEndDrag,
             false,

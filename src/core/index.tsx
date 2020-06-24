@@ -481,7 +481,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   }
 
   resolveScrollbarSize = () => {
-    const { schedulerData } = this.props;
     let contentScrollbarHeight = 17;
     let contentScrollbarWidth = 17;
     let resourceScrollbarHeight = 17;

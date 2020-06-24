@@ -16,6 +16,14 @@ class ResourceView extends Component<ResourceViewProps, {}> {
     super(props);
   }
 
+  handleClick = (toggleExpandFunc: ((...args: any[]) => any) | undefined, schedulerData: SchedulerData, item: any) => {
+    return () => {
+      if (toggleExpandFunc) {
+        toggleExpandFunc(schedulerData, item.slotId);
+      }
+    };
+  };
+
   render() {
     const {
       schedulerData,
@@ -35,20 +43,12 @@ class ResourceView extends Component<ResourceViewProps, {}> {
         indent = item.expanded ? (
           <MinusSquareOutlined
             key={`es${item.indent}`}
-            onClick={() => {
-              if (toggleExpandFunc) {
-                toggleExpandFunc(schedulerData, item.slotId);
-              }
-            }}
+            onClick={this.handleClick(toggleExpandFunc, schedulerData, item)}
           />
         ) : (
           <PlusSquareOutlined
             key={`es${item.indent}`}
-            onClick={() => {
-              if (toggleExpandFunc) {
-                toggleExpandFunc(schedulerData, item.slotId);
-              }
-            }}
+            onClick={this.handleClick(toggleExpandFunc, schedulerData, item)}
           />
         );
       }
