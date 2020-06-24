@@ -303,23 +303,16 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     if (config.checkConflict) {
       const start = localeMoment(newStart);
       const end = localeMoment(eventItem.end);
-      events.forEach((e: any) => {
-        if (
-          schedulerData._getEventSlotId(e) === slotId &&
-          e.id !== eventItem.id
-        ) {
-          const eStart = localeMoment(e.start);
-          const eEnd = localeMoment(e.end);
-          if (
-            (start >= eStart && start < eEnd) ||
-            (end > eStart && end <= eEnd) ||
-            (eStart >= start && eStart < end) ||
-            (eEnd > start && eEnd <= end)
-          ) {
-            hasConflict = true;
-          }
-        }
-      });
+      hasConflict = this.checkEventsConflict(
+        events,
+        schedulerData,
+        slotId,
+        eventItem,
+        localeMoment,
+        start,
+        end,
+        hasConflict,
+      );
     }
     if (hasConflict) {
       this.setState({
@@ -350,6 +343,36 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       }
     }
   };
+
+  checkEventsConflict = (
+    events: any,
+    schedulerData: SchedulerData,
+    slotId: string,
+    eventItem: any,
+    localeMoment: any,
+    start: string,
+    end: string,
+    hasConflict: boolean) => {
+    events.forEach((e: any) => {
+      if (
+        schedulerData._getEventSlotId(e) === slotId &&
+        e.id !== eventItem.id
+      ) {
+        const eStart = localeMoment(e.start);
+        const eEnd = localeMoment(e.end);
+        if (
+          (start >= eStart && start < eEnd) ||
+          (end > eStart && end <= eEnd) ||
+          (eStart >= start && eStart < end) ||
+          (eEnd > start && eEnd <= end)
+        ) {
+          hasConflict = true;
+        }
+      }
+    });
+    return hasConflict;
+  };
+
   cancelStartDrag = (ev: MouseEvent | TouchEvent) => {
     this.setState({
       isResizing: false,
@@ -426,10 +449,10 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         false,
       );
     }
-    document.onselectstart = function() {
+    document.onselectstart = function () {
       return false;
     };
-    document.ondragstart = function() {
+    document.ondragstart = function () {
       return false;
     };
   };
@@ -593,23 +616,16 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     if (config.checkConflict) {
       const start = localeMoment(eventItem.start);
       const end = localeMoment(newEnd);
-      events.forEach((e: any) => {
-        if (
-          schedulerData._getEventSlotId(e) === slotId &&
-          e.id !== eventItem.id
-        ) {
-          const eStart = localeMoment(e.start);
-          const eEnd = localeMoment(e.end);
-          if (
-            (start >= eStart && start < eEnd) ||
-            (end > eStart && end <= eEnd) ||
-            (eStart >= start && eStart < end) ||
-            (eEnd > start && eEnd <= end)
-          ) {
-            hasConflict = true;
-          }
-        }
-      });
+      hasConflict = this.checkEventsConflict(
+        events,
+        schedulerData,
+        slotId,
+        eventItem,
+        localeMoment,
+        start,
+        end,
+        hasConflict,
+      );
     }
     if (hasConflict) {
       this.setState({

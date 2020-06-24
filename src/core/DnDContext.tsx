@@ -24,7 +24,6 @@ export default class DnDContext {
       this.lastHoverPosition = null;
       const { schedulerData, resourceEvents } = props;
       const { cellUnit, localeMoment } = schedulerData;
-      const type = monitor.getItemType();
       const pos = getPos(component.eventContainer);
       const cellWidth = schedulerData.getContentCellWidth();
       let point = monitor.getSourceClientOffset();
