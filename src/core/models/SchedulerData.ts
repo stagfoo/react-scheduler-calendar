@@ -26,9 +26,9 @@ export class SchedulerData {
   public headers: any;
 
   constructor(date = moment().format(DATE_FORMAT), viewType = ViewTypes.Week,
-              showAgenda = false, isEventPerspective = false,
-              newConfig?: object, newBehaviors?: object,
-              localeMoment = moment) {
+    showAgenda = false, isEventPerspective = false,
+    newConfig?: object, newBehaviors?: object,
+    localeMoment = moment) {
     this.resources = [];
     this.events = [];
     this.eventGroups = [];
@@ -298,17 +298,17 @@ export class SchedulerData {
   }
 
   getSchedulerWidth() {
-    const baseWidth = this.documentWidth - this.config.besidesWidth > 0 ?
-      this.documentWidth - this.config.besidesWidth : 0;
-    return this.isSchedulerResponsive() ?
-      Math.round(baseWidth * Number(this.config.schedulerWidth.slice(0, -1)) / 100) : this.config.schedulerWidth;
+    const baseWidth = this.documentWidth - this.config.besidesWidth > 0
+      ? this.documentWidth - this.config.besidesWidth : 0;
+    return this.isSchedulerResponsive()
+      ? Math.round(baseWidth * Number(this.config.schedulerWidth.slice(0, -1)) / 100) : this.config.schedulerWidth;
   }
 
   getResourceTableWidth() {
     const resourceTableConfigWidth = this.getResourceTableConfigWidth();
     const schedulerWidth = this.getSchedulerWidth();
-    let resourceTableWidth = this.isResourceViewResponsive() ?
-      Math.round(schedulerWidth * Number(resourceTableConfigWidth.slice(0, -1)) / 100) : resourceTableConfigWidth;
+    let resourceTableWidth = this.isResourceViewResponsive()
+      ? Math.round(schedulerWidth * Number(resourceTableConfigWidth.slice(0, -1)) / 100) : resourceTableConfigWidth;
     if (this.isSchedulerResponsive() && (this.getContentTableWidth() + resourceTableWidth < schedulerWidth)) {
       resourceTableWidth = schedulerWidth - this.getContentTableWidth();
     }
@@ -318,8 +318,8 @@ export class SchedulerData {
   getContentCellWidth() {
     const contentCellConfigWidth = this.getContentCellConfigWidth();
     const schedulerWidth = this.getSchedulerWidth();
-    return this.isContentViewResponsive() ?
-      Math.round(schedulerWidth * Number(contentCellConfigWidth.slice(0, -1)) / 100)
+    return this.isContentViewResponsive()
+      ? Math.round(schedulerWidth * Number(contentCellConfigWidth.slice(0, -1)) / 100)
       : contentCellConfigWidth;
   }
 
@@ -378,8 +378,8 @@ export class SchedulerData {
       this.viewType === ViewTypes.Day ? this.config.dayMaxEvents : (
         this.viewType === ViewTypes.Month ? this.config.monthMaxEvents : (
           this.viewType === ViewTypes.Year ? this.config.yearMaxEvents : (
-            this.viewType === ViewTypes.Quarter ? this.config.quarterMaxEvents :
-              this.config.customMaxEvents
+            this.viewType === ViewTypes.Quarter ? this.config.quarterMaxEvents
+              : this.config.customMaxEvents
           )
         )
       )
@@ -470,8 +470,8 @@ export class SchedulerData {
       this.viewType === ViewTypes.Day ? this.config.dayResourceTableWidth : (
         this.viewType === ViewTypes.Month ? this.config.monthResourceTableWidth : (
           this.viewType === ViewTypes.Year ? this.config.yearResourceTableWidth : (
-            this.viewType === ViewTypes.Quarter ? this.config.quarterResourceTableWidth :
-              this.config.customResourceTableWidth
+            this.viewType === ViewTypes.Quarter ? this.config.quarterResourceTableWidth
+              : this.config.customResourceTableWidth
           )
         )
       )
@@ -483,8 +483,8 @@ export class SchedulerData {
       this.viewType === ViewTypes.Day ? this.config.dayCellWidth : (
         this.viewType === ViewTypes.Month ? this.config.monthCellWidth : (
           this.viewType === ViewTypes.Year ? this.config.yearCellWidth : (
-            this.viewType === ViewTypes.Quarter ? this.config.quarterCellWidth :
-              this.config.customCellWidth
+            this.viewType === ViewTypes.Quarter ? this.config.quarterCellWidth
+              : this.config.customCellWidth
           )
         )
       )
@@ -575,8 +575,8 @@ export class SchedulerData {
       newEvents.forEach((newEvent) => {
         const eventStart = this.localeMoment(newEvent.start);
         const eventEnd = this.localeMoment(newEvent.end);
-        if (this.isEventInTimeWindow(eventStart, eventEnd, windowStart, windowEnd)
-          && (!oldDtstart || eventStart >= oldDtstart)) {
+        if (this.isEventInTimeWindow(eventStart, eventEnd, windowStart, windowEnd) &&
+          (!oldDtstart || eventStart >= oldDtstart)) {
           this._attachEvent(newEvent);
         }
       });
@@ -610,9 +610,9 @@ export class SchedulerData {
         : this.localeMoment(this.startDate).add(num, 'years').format(DATE_FORMAT);
       this.endDate = this.localeMoment(this.startDate).endOf('year').format(DATE_FORMAT);
     } else if (
-      this.viewType === ViewTypes.Custom
-      || this.viewType === ViewTypes.Custom1
-      || this.viewType === ViewTypes.Custom2
+      this.viewType === ViewTypes.Custom ||
+      this.viewType === ViewTypes.Custom1 ||
+      this.viewType === ViewTypes.Custom2
     ) {
       if (this.behaviors.getCustomDateFunc) {
         const customDate = this.behaviors.getCustomDateFunc(this, num, date);
@@ -680,8 +680,8 @@ export class SchedulerData {
         this.viewType === ViewTypes.Day ? start.add(1, 'days').format(DATETIME_FORMAT) : (
           this.viewType === ViewTypes.Month ? start.add(1, 'months').format(DATETIME_FORMAT) : (
             this.viewType === ViewTypes.Year ? start.add(1, 'years').format(DATETIME_FORMAT) : (
-              this.viewType === ViewTypes.Quarter ? start.add(1, 'quarters').format(DATETIME_FORMAT) :
-                this.localeMoment(this.endDate).add(1, 'days').format(DATETIME_FORMAT)
+              this.viewType === ViewTypes.Quarter ? start.add(1, 'quarters').format(DATETIME_FORMAT)
+                : this.localeMoment(this.endDate).add(1, 'days').format(DATETIME_FORMAT)
             )
           )
         )
@@ -752,8 +752,8 @@ export class SchedulerData {
         groupOnly: slot.groupOnly,
         hasSummary: false,
         rowMaxCount: 0,
-        rowHeight: this.config.nonAgendaSlotMinHeight !== 0 ?
-          this.config.nonAgendaSlotMinHeight : this.config.eventItemLineHeight + 2,
+        rowHeight: this.config.nonAgendaSlotMinHeight !== 0
+          ? this.config.nonAgendaSlotMinHeight : this.config.eventItemLineHeight + 2,
         headerItems: headerEvents,
         indent: 0,
         hasChildren: false,
@@ -946,8 +946,8 @@ export class SchedulerData {
             if (header.count > resourceEvents.rowMaxCount) {
               resourceEvents.rowMaxCount = header.count;
               const rowsCount = (
-                cellMaxEventsCount <= cellMaxEventsCountValue
-                && resourceEvents.rowMaxCount > cellMaxEventsCount
+                cellMaxEventsCount <= cellMaxEventsCountValue &&
+                resourceEvents.rowMaxCount > cellMaxEventsCount
               ) ? cellMaxEventsCount : resourceEvents.rowMaxCount;
               const newRowHeight = rowsCount * this.config.eventItemLineHeight +
                 (this.config.creatable && !this.config.checkConflict ? 20 : 2);
@@ -1030,8 +1030,8 @@ export class SchedulerData {
         resourceEvents.hasSummary = hasSummary;
         if (hasSummary) {
           const rowsCount =
-            (cellMaxEventsCount <= cellMaxEventsCountValue && resourceEvents.rowMaxCount > cellMaxEventsCount) ?
-              cellMaxEventsCount : resourceEvents.rowMaxCount;
+            (cellMaxEventsCount <= cellMaxEventsCountValue && resourceEvents.rowMaxCount > cellMaxEventsCount)
+              ? cellMaxEventsCount : resourceEvents.rowMaxCount;
           const newRowHeight =
             (rowsCount + 1) * this.config.eventItemLineHeight
             + (this.config.creatable && !this.config.checkConflict ? 20 : 2);

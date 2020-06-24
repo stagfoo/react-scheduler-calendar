@@ -19,8 +19,8 @@ class ResourceEventsList extends Component<Props, {}> {
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
     const pickedProps = ['resourceEvents', 'displayRenderData', 'renderEvent'];
-    return !isEqual(pick(nextProps, pickedProps), pick(this.props, pickedProps))
-      || !isEqual(nextState, this.state);
+    return !isEqual(pick(nextProps, pickedProps), pick(this.props, pickedProps)) ||
+      !isEqual(nextState, this.state);
   }
 
   render() {

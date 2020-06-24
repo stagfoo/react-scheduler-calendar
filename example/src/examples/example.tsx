@@ -195,6 +195,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       this.setState({ showBody: true });
     }, 2000);
   };
+
   nextClick = (schedulerData: any) => {
     // schedulerData.next();
     schedulerData.setEvents(this.events);
@@ -209,6 +210,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   onViewChange = (schedulerData: any, view: any) => {
     schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
     schedulerData.config.creatable = !view.isEventPerspective;
@@ -217,6 +219,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   onSelectDate = (schedulerData: any, date: any) => {
     // schedulerData.setDate(date);
     schedulerData.setEvents(this.events);
@@ -265,6 +268,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       });
     }
   };
+
   updateEventStart = (schedulerData: any, event: any, newStart: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to adjust the start of the event? {eventId: ${event.id},
@@ -275,6 +279,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   updateEventEnd = (schedulerData: any, event: any, newEnd: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to adjust the end of the event? {eventId: ${event.id},
@@ -285,6 +290,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   moveEvent = (schedulerData: any, event: any, slotId: any, slotName: any, start: any, end: any) => {
     console.log(`{eventId: ${event.id}, eventTitle: ${event.title},
     newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`);
@@ -293,8 +299,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   movingEvent = (schedulerData: any, slotId: any, slotName: any, newStart: any, newEnd: any,
-                 action: any, type: any, item: any) => {
+    action: any, type: any, item: any) => {
     // console.log('moving event', newStart, newEnd, action, type, item);
   };
 

@@ -12,8 +12,8 @@ export const getCustomDate = (schedulerData, num, date = undefined) => {
     selectDate = date;
   }
 
-  let startDate = num === 0 ? selectDate :
-    schedulerData.localeMoment(selectDate).add(2 * num, 'days').format(DATE_FORMAT);
+  let startDate = num === 0 ? selectDate
+    : schedulerData.localeMoment(selectDate).add(2 * num, 'days').format(DATE_FORMAT);
   let endDate = schedulerData.localeMoment(startDate).add(1, 'days').format(DATE_FORMAT);
   let cellUnit = CellUnits.Hour;
   if (viewType === ViewTypes.Custom1) {
@@ -23,8 +23,8 @@ export const getCustomDate = (schedulerData, num, date = undefined) => {
     cellUnit = CellUnits.Day;
   } else if (viewType === ViewTypes.Custom2) {
     const firstDayOfMonth = schedulerData.localeMoment(selectDate).startOf('month').format(DATE_FORMAT);
-    startDate = num === 0 ? firstDayOfMonth :
-      schedulerData.localeMoment(firstDayOfMonth).add(2 * num, 'months').format(DATE_FORMAT);
+    startDate = num === 0 ? firstDayOfMonth
+      : schedulerData.localeMoment(firstDayOfMonth).add(2 * num, 'months').format(DATE_FORMAT);
     endDate = schedulerData.localeMoment(startDate).add(1, 'months').endOf('month').format(DATE_FORMAT);
     cellUnit = CellUnits.Day;
   }

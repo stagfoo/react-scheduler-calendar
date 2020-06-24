@@ -264,7 +264,7 @@ const DemoData = {
       groupId: 1,
       groupName: 'Job1',
       item: {},
-    }
+    },
   ],
 };
 console.log(DemoData.eventsForTaskView);

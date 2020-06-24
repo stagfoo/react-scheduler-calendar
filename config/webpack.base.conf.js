@@ -12,7 +12,7 @@ module.exports = {
       {
         test: /\.jsx$|\.es6$|\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
@@ -26,7 +26,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
               },
             },
           },

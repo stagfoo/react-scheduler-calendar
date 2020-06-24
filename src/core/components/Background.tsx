@@ -8,11 +8,7 @@ interface BackgroundProps {
   cellWidth: number;
 }
 
-class Background extends Component<BackgroundProps, {}> {
-  constructor(props: Readonly<BackgroundProps>) {
-    super(props);
-  }
-
+class Background extends Component<BackgroundProps> {
   render() {
     const { renderData, headers, config, cellWidth } = this.props;
     const displayRenderData = renderData.filter((o: any) => o.render);

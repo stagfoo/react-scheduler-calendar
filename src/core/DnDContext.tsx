@@ -161,5 +161,6 @@ export default class DnDContext {
 
   getDropTarget = () => DropTarget(
     Array.from(this.sourceMap.keys()), this.getDropSpec(), this.getDropCollect.bind(this))(this.DecoratedComponent);
+
   getDndSource = (dndType = DnDTypes.EVENT) => this.sourceMap.get(dndType);
 }

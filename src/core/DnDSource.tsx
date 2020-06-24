@@ -104,10 +104,12 @@ export class DnDSource {
         (item.movable === undefined || item.movable);
     },
   });
+
   getDragCollect = (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging(),
     connectDragPreview: connect.dragPreview(),
   });
+
   getDragSource = () => this.dragSource;
 }

@@ -54,8 +54,8 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
     const omitProps = ['dndSource'];
-    return !isEqual(omit(nextProps, omitProps), omit(this.props, omitProps))
-      || !isEqual(nextState, this.state);
+    return !isEqual(omit(nextProps, omitProps), omit(this.props, omitProps)) ||
+      !isEqual(nextState, this.state);
   }
 
   componentDidMount() {
@@ -162,13 +162,14 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
         false,
       );
     }
-    document.onselectstart = function () {
+    document.onselectstart = function() {
       return false;
     };
-    document.ondragstart = function () {
+    document.ondragstart = function() {
       return false;
     };
   };
+
   doDrag = (ev: MouseEvent | TouchEvent) => {
     ev.stopPropagation();
     let clientX = 0;
@@ -202,6 +203,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       isSelecting: true,
     });
   };
+
   stopDrag = (ev: MouseEvent | TouchEvent) => {
     ev.stopPropagation();
     const { schedulerData, newEvent, resourceEvents } = this.props;
@@ -306,6 +308,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       }
     }
   };
+
   cancelDrag = (ev: MouseEvent | TouchEvent) => {
     ev.stopPropagation();
     const { isSelecting } = this.state;
@@ -499,6 +502,7 @@ class ResourceEvents extends React.Component<ResourceEventsProps, ResourceEvents
       }
     }
   };
+
   eventContainerRef = (element: HTMLDivElement) => {
     this.eventContainer = element;
   };

@@ -8,7 +8,6 @@ interface ResourceListProps {
 }
 
 class ResourceList extends Component<any, {}> {
-
   render() {
     const { schedulerData, newEvent, resourceDndSource } = this.props;
     const DnDResourceItem = resourceDndSource.getDragSource();

@@ -77,6 +77,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     up: false,
     down: false,
   };
+
   private DndResourceEvents: any;
   private eventDndSource: any;
 
@@ -226,15 +227,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         schedulerContentBound.right - pointerX, config.autoScrollingThreshold);
     }
 
-    if (pointerY - schedulerViewBound.top < (config.autoScrollingThreshold + 30)
-      && this.schedulerBoardScrollArea.scrollTop > 0) {
+    if (pointerY - schedulerViewBound.top < (config.autoScrollingThreshold + 30) &&
+      this.schedulerBoardScrollArea.scrollTop > 0) {
       scrollTop = Math.max(0, this.schedulerBoardScrollArea.scrollTop - baseScrollDistance * getScrollSpeedRate(
         pointerY - schedulerViewBound.top, config.autoScrollingThreshold + 30),
       );
     } else if (
       schedulerViewBound.bottom - pointerY < config.autoScrollingThreshold &&
-      this.schedulerBoardScrollArea.scrollTop < this.schedulerBoardScrollArea.scrollHeight
-      - this.schedulerBoardScrollArea.clientHeight
+      this.schedulerBoardScrollArea.scrollTop < this.schedulerBoardScrollArea.scrollHeight -
+      this.schedulerBoardScrollArea.clientHeight
     ) {
       scrollTop = this.schedulerBoardScrollArea.scrollTop + baseScrollDistance * getScrollSpeedRate(
         schedulerViewBound.bottom - pointerY, config.autoScrollingThreshold,
@@ -282,27 +283,14 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     const contentScrollbarHeight = this.state.contentScrollbarHeight;
     const contentScrollbarWidth = this.state.contentScrollbarWidth;
     const resourceScrollbarHeight = this.state.resourceScrollbarHeight;
-    const resourceScrollbarWidth = this.state.resourceScrollbarWidth;
-    const resourcePaddingBottom =
-      resourceScrollbarHeight === 0 ? contentScrollbarHeight : 0;
     const contentPaddingBottom =
       contentScrollbarHeight === 0 ? resourceScrollbarHeight : 0;
     let schedulerContentStyle: React.CSSProperties = {
       paddingBottom: contentPaddingBottom,
     };
-    let resourceContentStyle: React.CSSProperties = {
-      overflowX: 'auto',
-      overflowY: 'auto',
-      width: resourceTableWidth + resourceScrollbarWidth - 2,
-      margin: `0px -${contentScrollbarWidth}px 0px 0px`,
-    };
     if (config.schedulerMaxHeight > 0) {
       schedulerContentStyle = {
         ...schedulerContentStyle,
-        maxHeight: config.schedulerMaxHeight - config.tableHeaderHeight,
-      };
-      resourceContentStyle = {
-        ...resourceContentStyle,
         maxHeight: config.schedulerMaxHeight - config.tableHeaderHeight,
       };
     }
@@ -487,11 +475,11 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     let resourceScrollbarWidth = 17;
     if (this.schedulerBoardScrollArea) {
       contentScrollbarHeight =
-        Math.max(this.schedulerBoardScrollArea.offsetHeight
-          - this.schedulerBoardScrollArea.clientHeight, contentScrollbarHeight);
+        Math.max(this.schedulerBoardScrollArea.offsetHeight -
+          this.schedulerBoardScrollArea.clientHeight, contentScrollbarHeight);
       contentScrollbarWidth =
-        Math.max(this.schedulerBoardScrollArea.offsetWidth
-          - this.schedulerBoardScrollArea.clientWidth, contentScrollbarWidth);
+        Math.max(this.schedulerBoardScrollArea.offsetWidth -
+          this.schedulerBoardScrollArea.clientWidth, contentScrollbarWidth);
     }
     if (this.schedulerResource) {
       resourceScrollbarHeight =
@@ -531,15 +519,19 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       this.setState(tmpState);
     }
   };
+
   schedulerHeadRef = (element: HTMLDivElement) => {
     this.schedulerHead = element;
   };
+
   onSchedulerHeadMouseOver = () => {
     this.currentArea = 2;
   };
+
   onSchedulerHeadMouseOut = () => {
     this.currentArea = -1;
   };
+
   onSchedulerHeadScroll = () => {
     if (!this.schedulerHead) {
       return;
@@ -551,6 +543,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       this.schedulerContent.scrollLeft = this.schedulerHead.scrollLeft;
     }
   };
+
   schedulerResourceRef = (element: HTMLUListElement) => {
     this.schedulerResource = element;
   };
@@ -558,12 +551,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   schedulerBoardScrollAreaRef = (element: HTMLDivElement) => {
     this.schedulerBoardScrollArea = element;
   };
+
   onSchedulerResourceMouseOver = () => {
     this.currentArea = 1;
   };
+
   onSchedulerResourceMouseOut = () => {
     this.currentArea = -1;
   };
+
   onSchedulerResourceScroll = () => {
     if (
       (this.currentArea === 1 || this.currentArea === -1) &&
@@ -572,18 +568,23 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       this.schedulerContent.scrollTop = this.schedulerResource.scrollTop;
     }
   };
+
   schedulerContentRef = (element: HTMLDivElement) => {
     this.schedulerContent = element;
   };
+
   schedulerContentBgTableRef = (element: HTMLTableElement) => {
     this.schedulerContentBgTable = element;
   };
+
   onSchedulerContentMouseOver = () => {
     this.currentArea = 0;
   };
+
   onSchedulerContentMouseOut = () => {
     this.currentArea = -1;
   };
+
   onSchedulerContentScroll = () => {
     if (
       this.schedulerHead &&
@@ -652,6 +653,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       scrollTop: this.schedulerContent.scrollTop,
     });
   };
+
   onViewChange = (e: any) => {
     const { onViewChange, schedulerData } = this.props;
     const viewType = parseInt(e.target.value.charAt(0), 10);
@@ -663,21 +665,25 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       isEventPerspective,
     });
   };
+
   goToToday = () => {
     const { onTodayClick, schedulerData } = this.props;
     schedulerData.setDate();
     onTodayClick(schedulerData);
   };
+
   goNext = () => {
     const { nextClick, schedulerData } = this.props;
     schedulerData.next();
     nextClick(schedulerData);
   };
+
   goBack = () => {
     const { prevClick, schedulerData } = this.props;
     schedulerData.prev();
     prevClick(schedulerData);
   };
+
   onSelect = (date: moment.Moment) => {
     const { onSelectDate, schedulerData } = this.props;
     schedulerData.setDate(date);

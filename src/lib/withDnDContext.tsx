@@ -10,5 +10,4 @@ export const withDnDContext = <P extends {}>(PureComponent: React.ComponentType<
   );
 };
 
-
 export default withDnDContext;

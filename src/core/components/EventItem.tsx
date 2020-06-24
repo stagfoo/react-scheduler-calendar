@@ -44,6 +44,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
   static defaultProps: Partial<EventItemProps> = {
     renderEvent: (eventItem: any) => (<div className='event'>render event<span>{eventItem.id}</span></div>),
   };
+
   private startResizer: HTMLDivElement | undefined;
   private endResizer: HTMLDivElement | undefined;
 
@@ -134,6 +135,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       return false;
     };
   };
+
   doStartDrag = (ev: MouseEvent | TouchEvent) => {
     ev.stopPropagation();
     let clientX = 0;
@@ -165,6 +167,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
     this.setState({ left: newLeft, width: newWidth, isResizing: true });
   };
+
   stopStartDrag = (ev: MouseEvent | TouchEvent) => {
     ev.stopPropagation();
     this.setState({
@@ -399,6 +402,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       width,
     });
   };
+
   initEndDrag = (ev: MouseEvent | TouchEvent) => {
     const { schedulerData, eventItem } = this.props;
     const slotId = schedulerData._getEventSlotId(eventItem);
@@ -456,6 +460,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       return false;
     };
   };
+
   doEndDrag = (ev: MouseEvent | TouchEvent) => {
     this.setState({
       isResizing: true,
@@ -488,6 +493,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
     this.setState({ width: newWidth, isResizing: true });
   };
+
   stopEndDrag = (ev: MouseEvent | TouchEvent) => {
     this.setState({
       isResizing: false,
@@ -656,6 +662,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       }
     }
   };
+
   cancelEndDrag = (ev: MouseEvent | TouchEvent) => {
     this.setState({
       isResizing: false,
@@ -781,12 +788,14 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       (eventItem.resizable === undefined || eventItem.resizable) && (eventItem.startResizable === undefined ||
         eventItem.startResizable !== false));
   };
+
   endResizable = (props: EventItemProps) => {
     const { eventItem, isInPopover, schedulerData } = props;
     const { config } = schedulerData;
-    return (config.endResizable && !isInPopover && (eventItem.resizable === undefined || eventItem.resizable)
-      && (eventItem.endResizable === undefined || eventItem.endResizable !== false));
+    return (config.endResizable && !isInPopover && (eventItem.resizable === undefined || eventItem.resizable) &&
+      (eventItem.endResizable === undefined || eventItem.endResizable !== false));
   };
+
   subscribeResizeEvent = (props: EventItemProps) => {
     if (this.startResizer) {
       if (supportTouch) {
