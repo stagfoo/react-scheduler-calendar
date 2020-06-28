@@ -5,6 +5,12 @@ import { views } from 'src/core/components/_mockData/config';
 import 'src/setupTest';
 import Header, { Props } from '../Header';
 
+jest.mock('moment', () => {
+  return () => ({
+    format: jest.fn(() => '2020-04-14'),
+  });
+});
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
