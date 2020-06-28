@@ -16,7 +16,20 @@ exports[`selected area should render correctly 1`] = `
     <Memo(RadioGroup)
       defaultValue="100"
       onChange={[MockFunction]}
-    />
+    >
+      <ForwardRef(RadioButton)
+        key="011"
+        value="011"
+      >
+        <span
+          style={
+            Object {
+              "margin": "0px 8px",
+            }
+          }
+        />
+      </ForwardRef(RadioButton)>
+    </Memo(RadioGroup)>
   </Col>
   <Col>
     <div
@@ -54,11 +67,47 @@ exports[`selected area should render correctly 1`] = `
           }
         }
       />
-      <span
-        className="header2-text-label"
+      <Popover
+        content={
+          <div
+            className="popover-calendar"
+          >
+            <Calendar
+              fullscreen={false}
+              onSelect={[Function]}
+              value={"2020-04-22T02:00:00.000Z"}
+            />
+          </div>
+        }
+        mouseEnterDelay={0.1}
+        mouseLeaveDelay={0.1}
+        onVisibleChange={[Function]}
+        overlayStyle={Object {}}
+        placement="bottomRight"
+        transitionName="zoom-big"
+        trigger="click"
+        visible={false}
       >
-        dateLabel
-      </span>
+        <span
+          className="header2-text-label"
+          style={
+            Object {
+              "cursor": "pointer",
+              "marginLeft": "16px",
+            }
+          }
+        >
+          <ForwardRef(CalendarOutlined)
+            className="icon-nav"
+            style={
+              Object {
+                "marginRight": "8px",
+              }
+            }
+          />
+          Invalid date
+        </span>
+      </Popover>
     </div>
   </Col>
   customHeader
