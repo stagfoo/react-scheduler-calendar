@@ -29,7 +29,7 @@ module.exports = merge(base, {
     host: '0.0.0.0',
     contentBase: distPath,
     compress: false,
-    port: 9000,
+    port: 8000,
     historyApiFallback: true,
     hot: true,
     open: true,
