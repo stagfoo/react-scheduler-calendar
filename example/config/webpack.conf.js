@@ -10,9 +10,10 @@ const base = require('../../config/webpack.base.conf');
 module.exports = merge(base, {
   mode: "production",
   entry: path.join(srcPath, 'index.js'),
+  devtool: 'eval-source-map',
   output: {
     path: distPath,
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
