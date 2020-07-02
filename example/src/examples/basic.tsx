@@ -1,16 +1,14 @@
 import moment from 'moment';
 import React, { Component } from 'react';
 import Scheduler, { DnDSource, SchedulerData, ViewTypes } from 'src';
-import DemoData, { todayDate } from 'src/_mockData/DemoData';
+import DemoData from 'src/_mockData/DemoData';
 import styles from 'src/core/styles/index.module.scss';
 import 'src/core/styles/style.css';
 import { DnDTypes } from 'src/lib';
 import ResourceItem from 'src/lib/ResourceItem';
-import ResourceList from 'src/lib/ResourceList';
 import withDragDropContext from 'src/lib/withDnDContext';
 import CustomDragLayer from '../components/CustomDragLayer';
 import TaskItem from '../components/TaskItem';
-import TaskList from '../components/TaskList';
 
 import config from '../overrideConfig';
 
@@ -21,7 +19,7 @@ interface CalendarSchedulerState {
   showBody: boolean;
 }
 
-class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
+class CalendarScheduler extends Component<Record<string, unknown>, CalendarSchedulerState> {
   private events = DemoData.eventsOfOverlap;
 
   constructor(props: any) {
@@ -57,6 +55,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
   }
 
   renderEvent = (eventItem: any) => (<div className='event'>render event<span>{eventItem.id}</span></div>);
+  renderResource = (resource: any) => (<div className='event'>render event<span>{resource}</span></div>);
 
   handleConflict = (): void => {
     this.setState({ showBody: false });
@@ -89,6 +88,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
           renderEvent={this.renderEvent}
           eventItemClick={console.log}
           showBody={showBody}
+          renderResource={this.renderResource}
         />
       </div>
     );
@@ -106,6 +106,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       this.setState({ showBody: true });
     }, 2000);
   };
+
   nextClick = (schedulerData: any) => {
     // schedulerData.next();
     schedulerData.setEvents(this.events);
@@ -120,6 +121,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   onViewChange = (schedulerData: any, view: any) => {
     schedulerData.setViewType(view.viewType, view.showAgenda, view.isEventPerspective);
     schedulerData.config.creatable = !view.isEventPerspective;
@@ -128,6 +130,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   onSelectDate = (schedulerData: any, date: any) => {
     // schedulerData.setDate(date);
     schedulerData.setEvents(this.events);
@@ -176,6 +179,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       });
     }
   };
+
   updateEventStart = (schedulerData: any, event: any, newStart: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to adjust the start of the event? {eventId: ${event.id},
@@ -186,6 +190,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   updateEventEnd = (schedulerData: any, event: any, newEnd: any) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`Do you want to adjust the end of the event? {eventId: ${event.id},
@@ -196,6 +201,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   moveEvent = (schedulerData: any, event: any, slotId: any, slotName: any, start: any, end: any) => {
     console.log(`{eventId: ${event.id}, eventTitle: ${event.title},
     newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`);
@@ -204,8 +210,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       viewModel: schedulerData,
     });
   };
+
   movingEvent = (schedulerData: any, slotId: any, slotName: any, newStart: any, newEnd: any,
-                 action: any, type: any, item: any) => {
+    action: any, type: any, item: any) => {
     // console.log('moving event', newStart, newEnd, action, type, item);
   };
 

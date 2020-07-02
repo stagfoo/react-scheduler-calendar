@@ -70,7 +70,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     }, 1000);
   }
 
-  renderEvent = (eventItem: any) => (<div className='event'>render event<span>{eventItem.id}</span></div>);
+  renderEvent = (eventItem: any) => <div className='event'>render event<span>{eventItem.id}</span></div>;
+
+  renderResource = (resource: any) => <span>{resource.slotName}</span>;
 
   handleConflict = (): void => {
     this.setState({ showBody: false });
@@ -160,6 +162,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
           </div>
           <div className={styles.rightPane}>
             <Scheduler
+              renderResource={this.renderResource}
               schedulerData={viewModel}
               prevClick={this.prevClick}
               nextClick={this.nextClick}

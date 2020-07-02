@@ -48,6 +48,7 @@ export interface SchedulerProps {
   renderEvent?: (eventItem: any) => any;
   getHoverAreaStyle?: (hoverParams: any) => any;
   showBody?: boolean;
+  renderResource?: (...args: any[]) => React.ReactElement;
 }
 
 interface SchedulerState {
@@ -263,13 +264,12 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       schedulerData,
       leftCustomHeader,
       rightCustomHeader,
+      renderResource,
+      showBody,
     } = this.props;
     const {
-      renderData,
-      config,
-      startDate,
-      endDate,
-      localeMoment,
+      renderData, config, startDate, endDate, localeMoment, selectDate,
+      viewType, showAgenda, isEventPerspective, headers, cellUnit,
     } = schedulerData;
     const start = localeMoment(startDate).startOf('day');
     const end = localeMoment(endDate).endOf('day');
@@ -304,7 +304,6 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       ? config.taskName
       : config.resourceName;
     let schedulerHeader = <div/>;
-    const { selectDate, viewType, showAgenda, isEventPerspective } = schedulerData;
     const dateLabel = schedulerData.getDateLabel();
     const headerGroupView = { viewType, showAgenda, isEventPerspective, dateLabel };
     if (config.headerEnabled) {
@@ -324,8 +323,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         />
       );
     }
-    const { showBody } = this.props;
-    const { headers, cellUnit } = schedulerData;
+
     return (
       <>
         <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)}/>
@@ -407,7 +405,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                         className={styles.resourceItem}
                         style={generateHeightStyles(resource.rowHeight)}
                       >
-                        {resource.slotName}
+                        {renderResource ? renderResource(resource) : resource.slotName}
                       </li>
                     ))}
                   </ul>
