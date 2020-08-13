@@ -435,20 +435,14 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                             </tbody>
                           </table>
                         </div>
-                        <div className="scheduler-bg">
-                          <table
-                            className="scheduler-bg-table"
-                            style={{ width: schedulerWidth }}
-                            ref={this.schedulerContentBgTableRef}
-                          >
-                            <Background
-                              config={config}
-                              cellWidth={cellWidth}
-                              renderData={schedulerData.renderData}
-                              headers={schedulerData.headers}
-                            />
-                          </table>
-                        </div>
+                        <Background
+                          schedulerContentBgTableRef={this.schedulerContentBgTableRef}
+                          config={config}
+                          cellWidth={cellWidth}
+                          renderData={schedulerData.renderData}
+                          headers={schedulerData.headers}
+                          width={schedulerWidth}
+                        />
                       </div>
                       <TimeLine
                         maxWidth={schedulerData.getContentTableWidth()}

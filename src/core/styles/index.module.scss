@@ -191,8 +191,8 @@
 .scheduler-bg-table {
   width: 100%;
 
-  tr {
-    td {
+  div.bg-table-row {
+    div.bg-table-cell {
       background-color: white;
       cursor: pointer;
 
