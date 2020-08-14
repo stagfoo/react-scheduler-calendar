@@ -1,8 +1,10 @@
+import classnames from 'classnames';
 import moment from 'moment';
 import React from 'react';
+import { configType } from 'src/core/constants/config';
 
 import { CellUnits } from 'src/core';
-import { configType } from 'src/core/constants/config';
+import styles from './index.module.scss';
 
 export interface HeaderViewProps {
   headers: any;
@@ -37,6 +39,7 @@ export class HeaderView extends React.Component<HeaderViewProps> {
           if (index === headers.length - minuteStepsInHour) {
             style = item.nonWorkingTime
               ? {
+                width: cellWidth * minuteStepsInHour,
                 color: config.nonWorkingTimeHeadColor,
                 backgroundColor: config.nonWorkingTimeHeadBgColor,
               }
@@ -54,12 +57,12 @@ export class HeaderView extends React.Component<HeaderViewProps> {
             );
           } else {
             const pList = pFormattedList.map((p: any, i: number) => (
-              <div key={i}>{p}</div>
+              <div key={i} className={classnames(styles.time)}>{p}</div>
             ));
             element = (
-              <th key={item.time} className="header3-text" style={style}>
-                <div>{pList}</div>
-              </th>
+              <div key={item.time} className={classnames(styles.timeSlot, 'header3-text')} style={style}>
+                {pList}
+              </div>
             );
           }
           headerList.push(element);
@@ -94,19 +97,19 @@ export class HeaderView extends React.Component<HeaderViewProps> {
           );
         }
         const pList = pFormattedList.map((p: any, i: number) => (
-          <div key={i}>{p}</div>
+          <div key={i} className={classnames(styles.time)}>{p}</div>
         ));
         return (
-          <th key={item.time} className="header3-text" style={style}>
-            <div>{pList}</div>
-          </th>
+          <div key={item.time} className={classnames(styles.timeSlot, 'header3-text')} style={style}>
+            {pList}
+          </div>
         );
       });
     }
     return (
-      <thead>
-        <tr style={{ height: headerHeight }}>{headerList}</tr>
-      </thead>
+      <div className={classnames(styles.schedulerHeader)} style={{ height: headerHeight }}>
+        {headerList}
+      </div>
     );
   }
 }

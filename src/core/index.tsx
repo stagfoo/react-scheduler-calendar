@@ -4,14 +4,14 @@ import React, { Component, ReactNode } from 'react';
 
 import Background from 'src/core/components/background';
 import DnDObserver from 'src/core/components/DnDObserver';
+import Header from 'src/core/components/Header';
 import ResourceEventsList from 'src/core/components/ResourceEventsList';
 import { SchedulerData } from 'src/core/models/SchedulerData';
 import { getScrollSpeedRate } from 'src/core/utils/Util';
 import TimeLine from '../lib/TimeLine';
 import EventItem from './components/EventItem';
-import HeaderView from './components/HeaderView';
+import HeaderView from './components/headerView';
 import ResourceEvents from './components/ResourceEvents';
-import Header from 'src/core/components/Header';
 import DEFAULT_CONFIG from './constants/config';
 import DnDContext from './DnDContext';
 import { DnDSource } from './DnDSource';
@@ -328,7 +328,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       <>
         <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)}/>
         <div id="RBS-Scheduler-root"
-          className={classnames(styles.schedulerWrapper, 'scheduler-wrapper')}>
+             className={classnames(styles.schedulerWrapper, 'scheduler-wrapper')}>
           <div className="scheduler-header" style={{ width: `${width - contentScrollbarWidth}px` }}>
             {schedulerHeader}
           </div>
@@ -373,17 +373,15 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                         width: schedulerWidth,
                       }}
                     >
-                      <table className="scheduler-bg-table">
-                        <HeaderView
-                          headers={headers}
-                          cellUnit={cellUnit}
-                          localeMoment={localeMoment}
-                          config={config}
-                          cellWidth={cellWidth}
-                          headerHeight={schedulerData.getTableHeaderHeight()}
-                          minuteStepsInHour={schedulerData.getMinuteStepsInHour()}
-                        />
-                      </table>
+                      <HeaderView
+                        headers={headers}
+                        cellUnit={cellUnit}
+                        localeMoment={localeMoment}
+                        config={config}
+                        cellWidth={cellWidth}
+                        headerHeight={schedulerData.getTableHeaderHeight()}
+                        minuteStepsInHour={schedulerData.getMinuteStepsInHour()}
+                      />
                     </div>
                   </div>
                 </div>
@@ -425,13 +423,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                         <div className="scheduler-content-table-container">
                           <table className="scheduler-content-table">
                             <tbody>
-                              <ResourceEventsList
-                                DndResourceEvents={this.DndResourceEvents}
-                                eventDndSource={this.eventDndSource}
-                                displayRenderData={displayRenderData}
-                                onHover={this.handleHover.bind(this)}
-                                {...this.props}
-                              />
+                            <ResourceEventsList
+                              DndResourceEvents={this.DndResourceEvents}
+                              eventDndSource={this.eventDndSource}
+                              displayRenderData={displayRenderData}
+                              onHover={this.handleHover.bind(this)}
+                              {...this.props}
+                            />
                             </tbody>
                           </table>
                         </div>

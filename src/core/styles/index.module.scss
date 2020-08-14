@@ -22,7 +22,6 @@
 
         .timeHeaderScrollArea {
           overflow: hidden;
-          margin-left: -1px;
         }
       }
 
@@ -81,9 +80,6 @@
         }
 
         .scheduler-view {
-          th.header3-text {
-            padding-top: 10px;
-          }
 
           .event-item {
             user-select: none;
@@ -132,16 +128,6 @@
               border: none;
             }
 
-            th.header3-text {
-              font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif, Open Sans;
-              font-style: normal;
-              font-weight: 600;
-              font-size: 14px;
-              line-height: 16px;
-              letter-spacing: 0.53px;
-              text-transform: uppercase;
-            }
-
             div.header2-text {
               background-color: white;
               margin: 10px 0;
@@ -173,20 +159,6 @@
     overflow-y: hidden;
     margin: 0;
     position: relative;
-  }
-}
-
-.header3-text {
-  font-size: 14px;
-  text-align: center;
-  height: 40px;
-  line-height: 40px;
-  background-color: white;
-  border-bottom: none;
-  padding-top: 0 !important;
-
-  &:first-of-type {
-    border-left: none;
   }
 }
 

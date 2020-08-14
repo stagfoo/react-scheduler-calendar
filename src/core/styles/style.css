@@ -9,9 +9,6 @@
     font-weight: 500;
 }
 
-.header3-text {
-    font-weight: 500;
-}
 
 .base-text {
     font-size: 12px;
@@ -75,7 +72,7 @@
     margin-top: 1px;
 }
 
-table.resource-table, table.scheduler-bg-table, table.scheduler-table {
+table.resource-table, table.scheduler-table {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -102,12 +99,6 @@ table.resource-table tr, div.scheduler-bg-table div.div.bg-table-row{
 table.resource-table th, table.scheduler-table th, table.resource-table td {
     border-right: 1px solid #e9e9e9;;
     border-bottom: 1px solid #c5c5c5;
-}
-
-table.scheduler-bg-table th {
-    vertical-align: middle;
-    border-right: 1px solid #e9e9e9;
-    text-align: center;
 }
 
 table.resource-table tr th:last-child, /*table.scheduler-bg-table tr th:last-child, */
