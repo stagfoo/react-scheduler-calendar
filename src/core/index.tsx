@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import moment from 'moment';
 import React, { Component, ReactNode } from 'react';
 
-import Background from 'src/core/components/Background';
+import Background from 'src/core/components/background';
 import DnDObserver from 'src/core/components/DnDObserver';
 import ResourceEventsList from 'src/core/components/ResourceEventsList';
 import { SchedulerData } from 'src/core/models/SchedulerData';

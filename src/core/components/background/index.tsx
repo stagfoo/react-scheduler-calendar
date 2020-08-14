@@ -1,5 +1,7 @@
+import classnames from 'classnames';
 import React, { Component } from 'react';
 import { configType } from 'src/core/constants/config';
+import styles from './index.module.scss';
 
 interface BackgroundProps {
   renderData: any;
@@ -28,13 +30,13 @@ class Background extends Component<BackgroundProps> {
           style = { ...style, backgroundColor: config.groupOnlySlotColor };
         }
 
-        const className = `bg-table-cell bg-td-${index % (60 / cellWidth)}`;
+        const className = `${classnames(styles.bgTableCell)} bg-table-cell bg-td-${index % (60 / cellWidth)}`;
         return (
           <div key={key} style={style} className={className}/>
         );
       });
       return (
-        <div className='bg-table-row' key={item.slotId} style={{ height: item.rowHeight }}>
+        <div className={classnames(styles.bgTableRow, 'bg-table-row')} key={item.slotId} style={{ height: item.rowHeight }}>
           {rowCells}
         </div>
       );
@@ -42,7 +44,7 @@ class Background extends Component<BackgroundProps> {
     return (
       <div className="scheduler-bg">
         <div
-          className="scheduler-bg-table"
+          className={styles.schedulerBackGroundTable}
           style={{ width }}
           ref={schedulerContentBgTableRef}
         >

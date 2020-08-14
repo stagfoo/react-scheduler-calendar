@@ -190,31 +190,6 @@
   }
 }
 
-.scheduler-bg-table {
-  width: 100%;
-
-  div.bg-table-row {
-    div.bg-table-cell {
-      background-color: white;
-      cursor: pointer;
-
-      &:first-of-type {
-        border-left: none;
-      }
-
-      &:last-of-type {
-        border-right: none;
-      }
-    }
-  }
-
-  tr:first-of-type {
-    td {
-      border-top-color: #c5c5c5
-    }
-  }
-}
-
 .scheduler-cell {
   .scheduler-view {
     border-top: none;
