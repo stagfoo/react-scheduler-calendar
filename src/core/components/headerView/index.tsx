@@ -60,7 +60,7 @@ export class HeaderView extends React.Component<HeaderViewProps> {
               <div key={i} className={classnames(styles.time)}>{p}</div>
             ));
             element = (
-              <div key={item.time} className={classnames(styles.timeSlot, 'header3-text')} style={style}>
+              <div key={item.time} className={classnames(styles.timeSlot)} style={style}>
                 {pList}
               </div>
             );
@@ -100,7 +100,7 @@ export class HeaderView extends React.Component<HeaderViewProps> {
           <div key={i} className={classnames(styles.time)}>{p}</div>
         ));
         return (
-          <div key={item.time} className={classnames(styles.timeSlot, 'header3-text')} style={style}>
+          <div key={item.time} className={classnames(styles.timeSlot)} style={style}>
             {pList}
           </div>
         );
