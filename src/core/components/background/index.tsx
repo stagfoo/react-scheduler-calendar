@@ -36,20 +36,21 @@ class Background extends Component<BackgroundProps> {
         );
       });
       return (
-        <div className={classnames(styles.bgTableRow, 'bg-table-row')} key={item.slotId} style={{ height: item.rowHeight }}>
+        <div className={classnames(styles.bgTableRow, 'bg-table-row')}
+          key={item.slotId}
+          style={{ height: item.rowHeight }}
+        >
           {rowCells}
         </div>
       );
     });
     return (
-      <div className="scheduler-bg">
-        <div
-          className={styles.schedulerBackGroundTable}
-          style={{ width }}
-          ref={schedulerContentBgTableRef}
-        >
-          {tableRows}
-        </div>
+      <div
+        className={classnames(styles.schedulerBackGroundTable, 'scheduler-bg-table')}
+        style={{ width }}
+        ref={schedulerContentBgTableRef}
+      >
+        {tableRows}
       </div>
     );
   }

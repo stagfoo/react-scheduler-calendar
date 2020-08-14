@@ -62,15 +62,6 @@
 .scheduler-content-table tr td {
     padding: 0;
 }
-.scheduler-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    margin-top: 1px;
-}
 
 table.resource-table, table.scheduler-table {
     width: 100%;
@@ -91,7 +82,7 @@ table.scheduler-content-table {
     border-spacing: 0;
 }
 
-table.resource-table tr, div.scheduler-bg-table div.div.bg-table-row{
+table.resource-table tr{
     border-bottom: 1px solid #c5c5c5;
     transition: height 0.2s;
 }

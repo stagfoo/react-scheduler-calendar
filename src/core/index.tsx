@@ -328,7 +328,8 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
       <>
         <DnDObserver onDraggingChanged={this.handleDraggingChanged.bind(this)}/>
         <div id="RBS-Scheduler-root"
-             className={classnames(styles.schedulerWrapper, 'scheduler-wrapper')}>
+          className={classnames(styles.schedulerWrapper, 'scheduler-wrapper')}
+        >
           <div className="scheduler-header" style={{ width: `${width - contentScrollbarWidth}px` }}>
             {schedulerHeader}
           </div>
@@ -423,13 +424,13 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
                         <div className="scheduler-content-table-container">
                           <table className="scheduler-content-table">
                             <tbody>
-                            <ResourceEventsList
-                              DndResourceEvents={this.DndResourceEvents}
-                              eventDndSource={this.eventDndSource}
-                              displayRenderData={displayRenderData}
-                              onHover={this.handleHover.bind(this)}
-                              {...this.props}
-                            />
+                              <ResourceEventsList
+                                DndResourceEvents={this.DndResourceEvents}
+                                eventDndSource={this.eventDndSource}
+                                displayRenderData={displayRenderData}
+                                onHover={this.handleHover.bind(this)}
+                                {...this.props}
+                              />
                             </tbody>
                           </table>
                         </div>

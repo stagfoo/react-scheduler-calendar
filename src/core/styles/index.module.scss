@@ -136,16 +136,6 @@
           }
         }
 
-        .scheduler-bg-table {
-          td {
-            pointer-events: none;
-
-            &:hover {
-              background-color: #7f7f7f !important;
-            }
-          }
-        }
-
         .scheduler-cell {
           margin: 0;
           padding: 0;
