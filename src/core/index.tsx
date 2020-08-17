@@ -45,7 +45,7 @@ export interface SchedulerProps {
   onScrollRight?: (...args: any[]) => any;
   onScrollTop?: (...args: any[]) => any;
   onScrollBottom?: (...args: any[]) => any;
-  renderEvent?: (eventItem: any) => any;
+  renderEvent?: (eventItem: any, isDragging: boolean) => any;
   getHoverAreaStyle?: (hoverParams: any) => any;
   showBody?: boolean;
   renderResource?: (...args: any[]) => React.ReactElement;

@@ -732,7 +732,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
     let eventItemTemplate = (
       <div key={eventItem.id} style={{ height: config.eventItemHeight }}>
-        {renderEvent!(eventItem)}
+        {renderEvent!(eventItem, isDragging)}
       </div>
     );
     if (eventItemTemplateResolver) {
