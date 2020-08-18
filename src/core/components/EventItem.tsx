@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React, { Component } from 'react';
 import { DragElementWrapper, DragSourceOptions } from 'react-dnd';
 import { CellUnits, DATETIME_FORMAT, SchedulerData } from 'src/core';
-import EventResizer, { EventResizerProps } from 'src/core/components/EventResizer';
+import EventResizer from 'src/core/components/EventResizer';
 import { DnDTypes } from 'src/lib/DnDTypes';
 import EventItemPopover from './EventItemPopover';
 
