@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { Component } from 'react';
 import { DragElementWrapper, DragSourceOptions } from 'react-dnd';
 import { CellUnits, DATETIME_FORMAT, SchedulerData } from 'src/core';
+import EventResizer, { EventResizerProps } from 'src/core/components/EventResizer';
 import { DnDTypes } from 'src/lib/DnDTypes';
 import EventItemPopover from './EventItemPopover';
 
@@ -30,6 +31,8 @@ interface EventItemProps {
   conflictOccurred?: (...args: any[]) => any;
   eventItemTemplateResolver?: (...args: any[]) => any;
   renderEvent?: (eventItem: any, connectDragSource: DragElementWrapper<DragSourceOptions>) => React.ReactElement;
+  renderStartResizer: (DefaultResizer: typeof EventResizer, props: EventResizerProps) => JSX.Element;
+  renderEndResizer: (DefaultResizer: typeof EventResizer, props: EventResizerProps) => JSX.Element;
 }
 
 interface EventItemState {
@@ -685,6 +688,31 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     });
   };
 
+  renderResizer = () => {
+    const { renderStartResizer, renderEndResizer } = this.props;
+    let startResizeDiv = <div/>;
+    let endResizeDiv = <div/>;
+    if (this.startResizable(this.props)) {
+      const startResizerProps = {
+        className: 'event-start-resizer',
+        resizerRef: (ref: HTMLDivElement | null) => (this.startResizer = ref as HTMLDivElement),
+      };
+      startResizeDiv = renderStartResizer
+        ? renderStartResizer(EventResizer, startResizerProps)
+        : (<EventResizer {...startResizerProps} />);
+    }
+    if (this.endResizable(this.props)) {
+      const endResizerProps = {
+        className: 'event-end-resizer',
+        resizerRef: (ref: HTMLDivElement | null) => (this.endResizer = ref as HTMLDivElement),
+      };
+      endResizeDiv = renderEndResizer
+        ? renderEndResizer(EventResizer, endResizerProps)
+        : (<EventResizer {...endResizerProps} />);
+    }
+    return [startResizeDiv, endResizeDiv];
+  }
+
   render() {
     const {
       eventItem,
@@ -713,24 +741,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         endTime={eventItem.end}
       />
     );
-    let startResizeDiv = <div/>;
-    if (this.startResizable(this.props)) {
-      startResizeDiv = (
-        <div
-          className="event-resizer event-start-resizer"
-          ref={(ref) => (this.startResizer = ref as HTMLDivElement)}
-        />
-      );
-    }
-    let endResizeDiv = <div/>;
-    if (this.endResizable(this.props)) {
-      endResizeDiv = (
-        <div
-          className="event-resizer event-end-resizer"
-          ref={(ref) => (this.endResizer = ref as HTMLDivElement)}
-        />
-      );
-    }
+
     let eventItemTemplate = (
       <div key={eventItem.id} style={{ height: config.eventItemHeight }}>
         {renderEvent!(eventItem, connectDragSource)}
@@ -759,8 +770,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
         }}
       >
         {eventItemTemplate}
-        {startResizeDiv}
-        {endResizeDiv}
+        {this.renderResizer()}
       </div>
     );
     return schedulerData._isResizing() || !config.eventItemPopoverEnabled || !eventItem.showPopover ||

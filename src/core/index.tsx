@@ -5,6 +5,7 @@ import { DragElementWrapper, DragSourceOptions } from 'react-dnd';
 
 import Background from 'src/core/components/background';
 import DnDObserver from 'src/core/components/DnDObserver';
+import EventResizer, { EventResizerProps } from 'src/core/components/EventResizer';
 import Header from 'src/core/components/Header';
 import ResourceEventsList from 'src/core/components/ResourceEventsList';
 import { SchedulerData } from 'src/core/models/SchedulerData';
@@ -50,6 +51,8 @@ export interface SchedulerProps {
   getHoverAreaStyle?: (hoverParams: any) => any;
   showBody?: boolean;
   renderResource?: (...args: any[]) => React.ReactElement;
+  renderStartResizer?: (DefaultResizer: typeof EventResizer, props: EventResizerProps) => JSX.Element;
+  renderEndResizer?: (DefaultResizer: typeof EventResizer, props: EventResizerProps) => JSX.Element;
 }
 
 interface SchedulerState {

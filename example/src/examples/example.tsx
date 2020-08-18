@@ -85,6 +85,11 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     }, 1000);
   };
 
+  renderStartResizer = (DefaultResizer: any, props: any) => {
+    const className = `${props.className} test-class`;
+    return <DefaultResizer {...props} className={className} style={{ left: '10px' }} />;
+  }
+
   render() {
     const { viewModel, taskDndSource, resourceDndSource, showBody } = this.state;
     const dndList = viewModel.isEventPerspective ? (
@@ -182,6 +187,7 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               renderEvent={this.renderEvent}
               eventItemClick={console.log}
               showBody={showBody}
+              renderStartResizer={this.renderStartResizer}
             />
           </div>
         </div>
