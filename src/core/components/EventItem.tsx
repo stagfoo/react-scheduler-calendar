@@ -35,6 +35,8 @@ interface EventItemProps {
     connectDragSource: DragElementWrapper<DragSourceOptions>,
     renderResizer: (fragment: any) => JSX.Element,
   ) => React.ReactElement;
+  onResizeStart?: () => void;
+  onResizeEnd?: () => void;
 }
 
 interface EventItemState {
@@ -85,7 +87,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
   }
 
   initStartDrag = (ev: MouseEvent | TouchEvent) => {
-    const { schedulerData, eventItem } = this.props;
+    const { schedulerData, eventItem, onResizeStart } = this.props;
     const slotId = schedulerData._getEventSlotId(eventItem);
     const slot = schedulerData.getSlotById(slotId);
     if (!!slot && !!slot.groupOnly) {
@@ -114,6 +116,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       startX: clientX,
     });
     schedulerData.startResizing();
+    onResizeStart && onResizeStart();
     if (supportTouch) {
       this.startResizer!.addEventListener('touchmove', this.doStartDrag, false);
       this.startResizer!.addEventListener('touchend', this.stopStartDrag, false);
@@ -219,8 +222,10 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       eventItem,
       updateEventStart,
       conflictOccurred,
+      onResizeEnd,
     } = this.props;
     schedulerData._stopResizing();
+    onResizeEnd && onResizeEnd();
     if (this.state.width === width) {
       return;
     }
@@ -409,7 +414,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
   };
 
   initEndDrag = (ev: MouseEvent | TouchEvent) => {
-    const { schedulerData, eventItem } = this.props;
+    const { schedulerData, eventItem, onResizeStart } = this.props;
     const slotId = schedulerData._getEventSlotId(eventItem);
     const slot = schedulerData.getSlotById(slotId);
     if (!!slot && !!slot.groupOnly) {
@@ -438,6 +443,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       endX: clientX,
     });
     schedulerData.startResizing();
+    onResizeStart && onResizeStart();
     if (supportTouch) {
       this.endResizer!.addEventListener('touchmove', this.doEndDrag, false);
       this.endResizer!.addEventListener('touchend', this.stopEndDrag, false);
@@ -536,8 +542,10 @@ class EventItem extends Component<EventItemProps, EventItemState> {
       eventItem,
       updateEventEnd,
       conflictOccurred,
+      onResizeEnd,
     } = this.props;
     schedulerData._stopResizing();
+    onResizeEnd && onResizeEnd();
     if (this.state.width === width) {
       return;
     }

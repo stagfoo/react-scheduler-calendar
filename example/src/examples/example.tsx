@@ -22,7 +22,7 @@ interface CalendarSchedulerState {
   showBody: boolean;
 }
 
-class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
+class CalendarScheduler extends Component<Record<string, unknown>, CalendarSchedulerState> {
   private events = DemoData.eventsOfOverlap;
 
   constructor(props: any) {
@@ -97,6 +97,14 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       this.setState({ showBody: true });
     }, 1000);
   };
+
+  handleResizeStart = () => {
+    console.log('resize start');
+  }
+
+  handleResizeEnd = () => {
+    console.log('resize end');
+  }
 
   render() {
     const { viewModel, taskDndSource, resourceDndSource, showBody } = this.state;
@@ -195,6 +203,8 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               renderEvent={this.renderEvent}
               eventItemClick={console.log}
               showBody={showBody}
+              onResizeStart={this.handleResizeStart}
+              onResizeEnd={this.handleResizeEnd}
             />
           </div>
         </div>
