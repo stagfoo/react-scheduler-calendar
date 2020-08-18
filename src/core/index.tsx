@@ -47,12 +47,14 @@ export interface SchedulerProps {
   onScrollRight?: (...args: any[]) => any;
   onScrollTop?: (...args: any[]) => any;
   onScrollBottom?: (...args: any[]) => any;
-  renderEvent?: (eventItem: any, connectDragSource: DragElementWrapper<DragSourceOptions>) => any;
+  renderEvent?: (
+    eventItem: any,
+    connectDragSource: DragElementWrapper<DragSourceOptions>,
+    renderResizer: (fragment: React.ReactElement) => JSX.Element,
+  ) => any;
   getHoverAreaStyle?: (hoverParams: any) => any;
   showBody?: boolean;
   renderResource?: (...args: any[]) => React.ReactElement;
-  renderStartResizer?: (DefaultResizer: typeof EventResizer, props: EventResizerProps) => JSX.Element;
-  renderEndResizer?: (DefaultResizer: typeof EventResizer, props: EventResizerProps) => JSX.Element;
 }
 
 interface SchedulerState {

@@ -71,8 +71,21 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     }, 1000);
   }
 
-  renderEvent = (eventItem: any, connectDragSource: DragElementWrapper<DragSourceOptions>) => {
-    return connectDragSource(<div className='event'>render event<span>{eventItem.id}</span></div>);
+  renderEvent = (
+    eventItem: any,
+    connectDragSource: DragElementWrapper<DragSourceOptions>,
+    renderResizer: (fragment: any) => JSX.Element,
+  ) => {
+    return (
+      <>
+        {renderResizer(connectDragSource(
+          <div className='event'>
+            render event
+            <span>{eventItem.id}</span>
+          </div>,
+        ))}
+      </>
+    );
   };
 
   renderResource = (resource: any) => <span>{resource.slotName}</span>;
@@ -84,11 +97,6 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
       this.setState({ showBody: true });
     }, 1000);
   };
-
-  renderStartResizer = (DefaultResizer: any, props: any) => {
-    const className = `${props.className} test-class`;
-    return <DefaultResizer {...props} className={className} style={{ left: '10px' }} />;
-  }
 
   render() {
     const { viewModel, taskDndSource, resourceDndSource, showBody } = this.state;
@@ -187,7 +195,6 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
               renderEvent={this.renderEvent}
               eventItemClick={console.log}
               showBody={showBody}
-              renderStartResizer={this.renderStartResizer}
             />
           </div>
         </div>
