@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { Component } from 'react';
+import { DragElementWrapper, DragSourceOptions } from 'react-dnd';
 import Scheduler, { DnDSource, SchedulerData, ViewTypes } from 'src';
 import DemoData, { todayDate } from 'src/_mockData/DemoData';
 import styles from './index.module.scss';
@@ -70,7 +71,9 @@ class CalendarScheduler extends Component<{}, CalendarSchedulerState> {
     }, 1000);
   }
 
-  renderEvent = (eventItem: any) => <div className='event'>render event<span>{eventItem.id}</span></div>;
+  renderEvent = (eventItem: any, connectDragSource: DragElementWrapper<DragSourceOptions>) => {
+    return connectDragSource(<div className='event'>render event<span>{eventItem.id}</span></div>);
+  };
 
   renderResource = (resource: any) => <span>{resource.slotName}</span>;
 

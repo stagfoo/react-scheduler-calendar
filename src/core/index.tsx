@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import moment from 'moment';
 import React, { Component, ReactNode } from 'react';
+import { DragElementWrapper, DragSourceOptions } from 'react-dnd';
 
 import Background from 'src/core/components/background';
 import DnDObserver from 'src/core/components/DnDObserver';
@@ -45,7 +46,7 @@ export interface SchedulerProps {
   onScrollRight?: (...args: any[]) => any;
   onScrollTop?: (...args: any[]) => any;
   onScrollBottom?: (...args: any[]) => any;
-  renderEvent?: (eventItem: any, isDragging: boolean) => any;
+  renderEvent?: (eventItem: any, connectDragSource: DragElementWrapper<DragSourceOptions>) => any;
   getHoverAreaStyle?: (hoverParams: any) => any;
   showBody?: boolean;
   renderResource?: (...args: any[]) => React.ReactElement;

@@ -1,6 +1,7 @@
 import { Popover } from 'antd';
 import classNames from 'classnames';
 import React, { Component } from 'react';
+import { DragElementWrapper, DragSourceOptions } from 'react-dnd';
 import { CellUnits, DATETIME_FORMAT, SchedulerData } from 'src/core';
 import { DnDTypes } from 'src/lib/DnDTypes';
 import EventItemPopover from './EventItemPopover';
@@ -28,7 +29,7 @@ interface EventItemProps {
   eventItemClick?: (...args: any[]) => any;
   conflictOccurred?: (...args: any[]) => any;
   eventItemTemplateResolver?: (...args: any[]) => any;
-  renderEvent?: (...args: any[]) => React.ReactElement;
+  renderEvent?: (eventItem: any, connectDragSource: DragElementWrapper<DragSourceOptions>) => React.ReactElement;
 }
 
 interface EventItemState {
@@ -732,7 +733,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
     }
     let eventItemTemplate = (
       <div key={eventItem.id} style={{ height: config.eventItemHeight }}>
-        {renderEvent!(eventItem, isDragging)}
+        {renderEvent!(eventItem, connectDragSource)}
       </div>
     );
     if (eventItemTemplateResolver) {
