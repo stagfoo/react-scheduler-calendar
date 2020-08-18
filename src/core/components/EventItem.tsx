@@ -758,7 +758,7 @@ class EventItem extends Component<EventItemProps, EventItemState> {
           }
         }}
       >
-        {connectDragSource(eventItemTemplate)}
+        {eventItemTemplate}
         {startResizeDiv}
         {endResizeDiv}
       </div>
