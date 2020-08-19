@@ -54,8 +54,6 @@ export interface SchedulerProps {
   getHoverAreaStyle?: (hoverParams: any) => any;
   showBody?: boolean;
   renderResource?: (...args: any[]) => React.ReactElement;
-  onResizeStart?: () => void;
-  onResizeEnd?: () => void;
 }
 
 interface SchedulerState {
