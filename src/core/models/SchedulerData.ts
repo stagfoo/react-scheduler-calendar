@@ -764,6 +764,7 @@ export class SchedulerData {
         hasChildren: false,
         expanded: true,
         render: true,
+        ...slot,
       };
       const id = slot.id;
       let value;
